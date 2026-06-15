@@ -90,19 +90,49 @@ function render() {
 }
 
 function renderBook(book) {
+  const publication = book.publication
+    ? `<p class="card-summary">원제: ${escapeHtml(book.publication.originalTitle || "")} · 출판 정보: ${escapeHtml(book.publication.originalPublisher || "확인 필요")}</p>`
+    : "";
+
+  const researchUse = book.researchUse
+    ? `<p class="research-use"><strong>연구 활용:</strong> ${escapeHtml(book.researchUse)}</p>`
+    : "";
+
   const chapters = Array.isArray(book.chapters)
-    ? `<ul class="detail-list">${book.chapters.slice(0, 5).map((chapter) => `<li>${escapeHtml(chapter.title)} — ${escapeHtml(chapter.summary)}</li>`).join("")}</ul>`
+    ? `<div class="chapter-list">${book.chapters.map(renderChapterSummary).join("")}</div>`
     : "";
 
   return `
-    <article class="result-card">
+    <article class="result-card full-width">
       <div class="card-meta">${escapeHtml(book.category)} · ${escapeHtml(book.tradition)} · ${escapeHtml(book.language)}</div>
       <h3>${escapeHtml(book.title)}</h3>
       <p class="card-summary">${escapeHtml(book.author)} · ${escapeHtml(book.originalAuthor || "")}</p>
+      ${publication}
       <p>${escapeHtml(book.summary)}</p>
+      ${researchUse}
       ${renderTags(book.topics)}
       ${chapters}
     </article>
+  `;
+}
+
+function renderChapterSummary(chapter) {
+  const keyClaims = Array.isArray(chapter.keyClaims) && chapter.keyClaims.length
+    ? `<ul class="detail-list compact">${chapter.keyClaims.map((claim) => `<li>${escapeHtml(claim)}</li>`).join("")}</ul>`
+    : "";
+
+  const quotePointers = Array.isArray(chapter.quotePointers) && chapter.quotePointers.length
+    ? `<p class="quote-pointer"><strong>인용 위치:</strong> ${chapter.quotePointers.map((item) => `${escapeHtml(item.location || item.page || "위치 확인 필요")} — ${escapeHtml(item.note || "")}`).join(" / ")}</p>`
+    : "";
+
+  return `
+    <section class="chapter-item">
+      <h4>${escapeHtml(chapter.title)}</h4>
+      <p>${escapeHtml(chapter.summary)}</p>
+      ${keyClaims}
+      ${renderTags(chapter.topics)}
+      ${quotePointers}
+    </section>
   `;
 }
 
