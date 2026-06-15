@@ -28,6 +28,10 @@ input {
   font: inherit;
 }
 
+a {
+  color: var(--accent-dark);
+}
+
 .container {
   width: min(1120px, calc(100% - 32px));
   margin: 0 auto;
@@ -182,7 +186,8 @@ h4 {
   gap: 10px;
 }
 
-.workflow-links a {
+.workflow-links a,
+.card-actions a {
   display: block;
   padding: 12px 14px;
   border: 1px solid var(--line);
@@ -194,9 +199,23 @@ h4 {
 }
 
 .workflow-links a:hover,
-.workflow-links a:focus {
+.workflow-links a:focus,
+.card-actions a:hover,
+.card-actions a:focus {
   border-color: var(--accent);
   outline: none;
+}
+
+.card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.card-actions a {
+  display: inline-flex;
+  align-items: center;
 }
 
 .tabs {
