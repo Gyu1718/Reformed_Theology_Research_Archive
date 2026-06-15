@@ -15,6 +15,40 @@
     "status": "draft",
     "createdAt": "2026-06-15",
     "body": "칼빈은 예정론을 구원의 은혜와 목회적 위로의 맥락에서 다루고, 벌코프는 하나님의 작정 교리 안에서 체계적으로 분류한다. 바빙크 자료를 추가할 때 신론, 계시론, 구속사적 맥락을 함께 연결할 필요가 있다.",
-    "tags": ["예정론", "칼빈", "벌코프", "바빙크", "구원론"]
+    "tags": ["예정론", "칼빈", "벌코프", "바빙크", "구원론"],
+    "relatedBooks": ["calvin-institutes", "berkhof-systematic-theology", "bavinck-reformed-dogmatics"],
+    "relatedTopics": ["predestination", "doctrine-of-god", "soteriology"]
+  },
+  {
+    "id": "note-berkhof-ecclesiology-thesis-link",
+    "title": "벌코프 교회론과 탈교회 시대 공동체성 연구 연결",
+    "type": "thesis-note",
+    "status": "draft",
+    "createdAt": "2026-06-15",
+    "body": "벌코프의 교회론은 가시적 교회와 비가시적 교회, 교회의 표지, 말씀과 성례라는 전통적 개혁파 교회론의 기본 좌표를 제공한다. 탈교회 시대 공동체성 연구에서는 이 틀을 그대로 반복하기보다, 제도 교회 밖 신앙 실천을 평가할 기준과 제도 교회가 여전히 고유하게 수행해야 할 은혜의 방편을 구분하는 데 활용할 수 있다.",
+    "tags": ["벌코프", "교회론", "탈교회", "공동체성", "은혜의 방편"],
+    "relatedBooks": ["berkhof-systematic-theology"],
+    "relatedTopics": ["ecclesiology", "covenant-theology"]
+  },
+  {
+    "id": "note-berkhof-soteriology-sermon-use",
+    "title": "벌코프 구원론의 설교 활용 방향",
+    "type": "sermon-note",
+    "status": "draft",
+    "createdAt": "2026-06-15",
+    "body": "벌코프의 구원의 적용 구조는 소명, 중생, 회심, 믿음, 칭의, 양자, 성화, 견인, 영화의 관계를 정리하는 데 유용하다. 청소년이나 새신자 교육에서는 순서를 외우게 하기보다, 구원이 하나님의 은혜로 시작되고 그리스도 안에서 성취되며 성령 안에서 삶으로 적용된다는 흐름을 보여주는 방식이 적절하다.",
+    "tags": ["벌코프", "구원론", "구원의 서정", "설교", "교리교육"],
+    "relatedBooks": ["berkhof-systematic-theology"],
+    "relatedTopics": ["soteriology"]
+  },
+  {
+    "id": "note-berkhof-next-input-tasks",
+    "title": "벌코프 조직신학 다음 입력 과제",
+    "type": "reading-log",
+    "status": "active",
+    "createdAt": "2026-06-15",
+    "body": "다음 입력에서는 실제 한국어판 목차와 페이지를 확인해 publication.translator, publication.koreanPublisher, 각 장의 quotePointers.location을 보강해야 한다. 현재 데이터는 공개용 연구 색인 초안이며 원문 대체물이 아니다.",
+    "tags": ["벌코프", "작업로그", "목차확인", "페이지확인", "데이터보강"],
+    "relatedBooks": ["berkhof-systematic-theology"]
   }
 ]
