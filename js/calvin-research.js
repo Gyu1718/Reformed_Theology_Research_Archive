@@ -1,6 +1,7 @@
 const CALVIN_RESEARCH_URLS = [
   "data/books/calvin-chapter-research.json",
-  "data/books/calvin-book2-chapter-research.json"
+  "data/books/calvin-book2-chapter-research.json",
+  "data/books/calvin-book4-chapter-research.json"
 ];
 const CALVIN_INDEX_URL = "data/books/calvin-80-chapter-index.json";
 const CALVIN_CLUSTERS_URL = "data/books/calvin-priority-clusters.json";
