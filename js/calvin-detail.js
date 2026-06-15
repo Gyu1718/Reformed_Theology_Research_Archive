@@ -1,24 +1,18 @@
 const CALVIN_DATA_URL = "data/books/calvin-institutes.json";
-const CALVIN_SOURCE_TITLES_URL = "data/books/calvin-source-titles.json";
-const CALVIN_SOURCE_FILES = {
-  1: { part: "상", file: "기독교 강요(상) (존 칼빈).txt", contains: "제1권·제2권" },
-  2: { part: "상", file: "기독교 강요(상) (존 칼빈).txt", contains: "제1권·제2권" },
-  3: { part: "중", file: "기독교 강요(중) (존 칼빈).txt", contains: "제3권" },
-  4: { part: "하", file: "기독교 강요 (하) (존 칼빈).txt", contains: "제4권" },
-};
+const CALVIN_THEMES_URL = "data/books/calvin-book-themes.json";
 
 const CALVIN_TOPIC_SLUGS = {
-  "신학서론": "prolegomena",
-  "성경론": "scripture",
-  "삼위일체": "trinity",
+  "하나님 지식": "knowledge-of-god",
+  "성경론": "revelation-scripture",
+  "삼위일체": "trinity-creation",
   "섭리": "providence",
-  "원죄와 인간론": "anthropology-sin",
+  "원죄와 인간론": "sin-and-humanity",
   "율법과 복음": "law-gospel",
   "기독론": "christology",
   "그리스도와의 연합": "union-with-christ",
   "칭의": "justification",
   "그리스도인의 삶": "christian-life",
-  "예정론": "predestination",
+  "예정론": "predestination-prayer-resurrection",
   "교회론": "ecclesiology",
   "성례론": "sacraments",
   "정치신학": "political-theology",
@@ -26,32 +20,30 @@ const CALVIN_TOPIC_SLUGS = {
 
 const calvinState = {
   data: null,
-  sourceTitles: { chapters: {} },
+  themes: { books: {} },
   query: "",
 };
 
 document.addEventListener("DOMContentLoaded", async () => {
-  const [data, sourceTitles] = await Promise.all([loadCalvinData(), loadCalvinSourceTitles()]);
+  const [data, themes] = await Promise.all([loadJson(CALVIN_DATA_URL), loadOptionalJson(CALVIN_THEMES_URL)]);
   calvinState.data = data;
-  calvinState.sourceTitles = sourceTitles;
+  calvinState.themes = themes || { books: {} };
   bindCalvinSearch();
   renderCalvinPage();
 });
 
-async function loadCalvinData() {
-  const response = await fetch(CALVIN_DATA_URL);
-  if (!response.ok) throw new Error(`Failed to load ${CALVIN_DATA_URL}`);
+async function loadJson(url) {
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(`Failed to load ${url}`);
   return response.json();
 }
 
-async function loadCalvinSourceTitles() {
+async function loadOptionalJson(url) {
   try {
-    const response = await fetch(CALVIN_SOURCE_TITLES_URL);
-    if (!response.ok) throw new Error(`Failed to load ${CALVIN_SOURCE_TITLES_URL}`);
-    return response.json();
+    return await loadJson(url);
   } catch (error) {
-    console.warn("Calvin source title map was not loaded.", error);
-    return { chapters: {} };
+    console.warn(`${url} was not loaded.`, error);
+    return null;
   }
 }
 
@@ -76,29 +68,12 @@ function getParams() {
   return new URLSearchParams(window.location.search);
 }
 
-function sourceInfo(bookNumber) {
-  return CALVIN_SOURCE_FILES[Number(bookNumber)] || { part: "확인 필요", file: "확인 필요", contains: "확인 필요" };
-}
-
-function applySourceTitle(chapter, bookNumber) {
-  const source = sourceInfo(bookNumber || chapter.bookNumber);
-  const sourceOverride = calvinState.sourceTitles.chapters?.[chapter.ref] || {};
-  return {
-    ...chapter,
-    ...sourceOverride,
-    bookNumber: sourceOverride.bookNumber || bookNumber || chapter.bookNumber,
-    sourcePart: sourceOverride.sourcePart || chapter.sourcePart || source.part,
-    sourceFile: sourceOverride.sourceFile || chapter.sourceFile || source.file,
-    sourceTitle: sourceOverride.sourceTitle || chapter.sourceTitle || chapter.title,
-    sourceSubtitle: sourceOverride.sourceSubtitle || chapter.sourceSubtitle || "",
-  };
-}
-
 function flattenChapters() {
   return calvinState.data.books.flatMap((book, index) => {
     const bookNumber = index + 1;
     return book.chapters.map((chapter) => ({
-      ...applySourceTitle(chapter, bookNumber),
+      ...chapter,
+      bookNumber,
       bookTitle: book.title,
       bookRange: book.range,
     }));
@@ -117,37 +92,20 @@ function matchesQuery(item) {
 function renderCalvinOverviewPage() {
   const root = document.querySelector("#calvin-root");
   const data = calvinState.data;
-  const books = data.books.filter((book, index) => matchesQuery({ ...book, source: sourceInfo(index + 1) }));
-  const topics = (data.strategicTopics || []).filter(matchesQuery);
+  const books = data.books.filter(matchesQuery);
+  const allThemes = Object.entries(calvinState.themes.books || {}).flatMap(([bookNumber, book]) =>
+    (book.themes || []).map((theme) => ({ ...theme, bookNumber, bookTitle: book.title }))
+  ).filter(matchesQuery);
 
   root.innerHTML = `
     <section class="results">
       <article class="result-card full-width">
-        <div class="card-meta">${escapeHtml(data.category)} · ${escapeHtml(data.status)}</div>
+        <div class="card-meta">${escapeHtml(data.category)} · Core Reference</div>
         <h2>${escapeHtml(data.title)}</h2>
         <p class="card-summary">${escapeHtml(data.originalTitle)} · ${escapeHtml(data.originalAuthor)}</p>
         <p>${escapeHtml(data.summary)}</p>
-        <p class="research-use"><strong>연구 활용:</strong> ${escapeHtml(data.researchUse)}</p>
-        <p class="quote-pointer"><strong>공개 원칙:</strong> ${escapeHtml(data.publicNote)}</p>
-      </article>
-    </section>
-
-    <section class="results">
-      <article class="result-card full-width">
-        <h2>TXT 분권 구조</h2>
-        <div class="chapter-list">
-          ${Object.values({
-            upper: { part: "상", file: "기독교 강요(상) (존 칼빈).txt", contains: "제1권·제2권" },
-            middle: { part: "중", file: "기독교 강요(중) (존 칼빈).txt", contains: "제3권" },
-            lower: { part: "하", file: "기독교 강요 (하) (존 칼빈).txt", contains: "제4권" },
-          }).map((item) => `
-            <section class="chapter-item">
-              <div class="card-meta">${escapeHtml(item.part)}권 TXT · ${escapeHtml(item.contains)}</div>
-              <h4>${escapeHtml(item.file)}</h4>
-              <p>원문 전문은 공개 저장소에 올리지 않고, 이 파일에서 확인한 권·장 위치와 공개용 연구 색인만 사용합니다.</p>
-            </section>
-          `).join("")}
-        </div>
+        <p class="research-use"><strong>아카이브에서의 역할:</strong> ${escapeHtml(data.researchUse)}</p>
+        <p class="quote-pointer"><strong>운영 원칙:</strong> 원문 전문은 공개하지 않고, 개념 색인·요약·짧은 인용·위치 정보 중심으로 운영합니다.</p>
       </article>
     </section>
 
@@ -157,9 +115,10 @@ function renderCalvinOverviewPage() {
 
     <section class="results">
       <article class="result-card full-width">
-        <h2>전략 주제 색인</h2>
+        <h2>개념별 진입</h2>
+        <p class="card-summary">책을 장 번호로만 보지 않고, 개혁신학과 신정통주의 비교가 가능한 개념 단위로 이동합니다.</p>
         <div class="chapter-list">
-          ${topics.map(renderTopicCard).join("")}
+          ${allThemes.map(renderThemeCard).join("")}
         </div>
       </article>
     </section>
@@ -167,30 +126,28 @@ function renderCalvinOverviewPage() {
 }
 
 function renderBookCard(book, bookNumber) {
-  const source = sourceInfo(bookNumber);
   return `
     <article class="result-card">
-      <div class="card-meta">${escapeHtml(book.range)} · ${escapeHtml(source.part)}권 TXT</div>
+      <div class="card-meta">${escapeHtml(book.range)} · ${book.chapters.length}개 장</div>
       <h3>${escapeHtml(book.title)}</h3>
-      <p class="card-summary">원천 파일: ${escapeHtml(source.file)}</p>
       <p>${escapeHtml(book.summary)}</p>
       ${renderTags(book.majorTopics)}
       <div class="card-actions">
-        <a href="calvin-book.html?book=${bookNumber}">제${bookNumber}권 보기</a>
+        <a href="calvin-book.html?book=${bookNumber}">대주제 보기</a>
       </div>
     </article>
   `;
 }
 
-function renderTopicCard(topic) {
-  const slug = topic.slug || topicSlug(topic.topic);
+function renderThemeCard(theme) {
   return `
     <section class="chapter-item">
-      <div class="card-meta">${escapeHtml((topic.locations || []).join(" · "))}</div>
-      <h4>${escapeHtml(topic.topic)}</h4>
-      <p>${escapeHtml(topic.note)}</p>
+      <div class="card-meta">${escapeHtml(theme.bookTitle || "기독교 강요")} · ${escapeHtml((theme.chapters || []).join(" · "))}</div>
+      <h4>${escapeHtml(theme.title)}</h4>
+      <p>${escapeHtml(theme.summary)}</p>
+      ${renderTags(theme.subtopics)}
       <div class="card-actions">
-        <a href="calvin-topic.html?topic=${encodeURIComponent(slug)}">주제 보기</a>
+        <a href="calvin-topic.html?topic=${encodeURIComponent(theme.concept || theme.id)}">개념 상세 보기</a>
       </div>
     </section>
   `;
@@ -200,47 +157,78 @@ function renderCalvinBookPage() {
   const root = document.querySelector("#calvin-root");
   const bookNumber = Number(getParams().get("book") || 1);
   const book = calvinState.data.books[bookNumber - 1];
-  const source = sourceInfo(bookNumber);
+  const themeBook = calvinState.themes.books?.[String(bookNumber)];
 
   if (!book) {
     root.innerHTML = `<div class="empty-state">해당 권을 찾을 수 없습니다.</div>`;
     return;
   }
 
-  const chapters = book.chapters
-    .map((chapter) => applySourceTitle(chapter, bookNumber))
-    .filter(matchesQuery);
+  const themes = (themeBook?.themes || []).filter(matchesQuery);
+  const chapterMap = Object.fromEntries(book.chapters.map((chapter) => [chapter.ref, chapter]));
 
   root.innerHTML = `
     <section class="results">
       <article class="result-card full-width">
-        <div class="card-meta">${escapeHtml(book.range)} · ${escapeHtml(source.part)}권 TXT</div>
+        <div class="card-meta">${escapeHtml(book.range)} · ${book.chapters.length}개 장</div>
         <h2>${escapeHtml(book.title)}</h2>
-        <p class="card-summary">원천 파일: ${escapeHtml(source.file)}</p>
         <p>${escapeHtml(book.summary)}</p>
-        <p class="quote-pointer"><strong>원문 처리:</strong> ${escapeHtml(book.sourceHandling || "원문 전문은 공개하지 않고 위치와 요약만 표시합니다.")}</p>
         ${renderTags(book.majorTopics)}
       </article>
     </section>
 
     <section class="results">
-      ${chapters.map((chapter) => renderChapterCard(chapter, bookNumber)).join("") || `<div class="empty-state">검색 결과가 없습니다.</div>`}
+      <article class="result-card full-width">
+        <h2>대주제–소주제 카드</h2>
+        <p class="card-summary">각 대주제는 관련 장으로 이어지며, 장 상세 페이지에서 더 깊은 연구 메모와 짧은 인용을 확인합니다.</p>
+        <div class="chapter-list">
+          ${themes.map((theme) => renderBookThemeWithChapters(theme, chapterMap)).join("") || `<div class="empty-state">검색 결과가 없습니다.</div>`}
+        </div>
+      </article>
     </section>
   `;
 }
 
-function renderChapterCard(chapter, bookNumber) {
-  const source = sourceInfo(bookNumber || chapter.bookNumber);
+function renderBookThemeWithChapters(theme, chapterMap) {
+  const chapters = (theme.chapters || []).map((ref) => chapterMap[ref]).filter(Boolean);
+  return `
+    <section class="chapter-item">
+      <div class="card-meta">${escapeHtml((theme.chapters || []).join(" · "))}</div>
+      <h3>${escapeHtml(theme.title)}</h3>
+      <p>${escapeHtml(theme.summary)}</p>
+      ${renderTags(theme.subtopics)}
+      <div class="card-actions">
+        <a href="calvin-topic.html?topic=${encodeURIComponent(theme.concept || theme.id)}">개념 상세 보기</a>
+      </div>
+      <div class="chapter-list">
+        ${chapters.map(renderCompactChapterLink).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function renderCompactChapterLink(chapter) {
+  return `
+    <section class="chapter-item">
+      <div class="card-meta">${escapeHtml(chapter.ref)}</div>
+      <h4>${escapeHtml(chapter.title)}</h4>
+      <p>${escapeHtml(chapter.summary)}</p>
+      <div class="card-actions">
+        <a href="calvin-chapter.html?ref=${encodeURIComponent(chapter.ref)}">장 상세 보기</a>
+      </div>
+    </section>
+  `;
+}
+
+function renderChapterCard(chapter) {
   return `
     <article class="result-card">
-      <div class="card-meta">${escapeHtml(chapter.ref)} · ${escapeHtml(chapter.priority || "")}</div>
-      <h3>${escapeHtml(chapter.sourceTitle || chapter.title)}</h3>
-      ${chapter.sourceSubtitle ? `<p class="card-summary">${escapeHtml(chapter.sourceSubtitle)}</p>` : ""}
+      <div class="card-meta">${escapeHtml(chapter.bookTitle || "기독교 강요")} · ${escapeHtml(chapter.ref)} · ${escapeHtml(chapter.priority || "")}</div>
+      <h3>${escapeHtml(chapter.title)}</h3>
       <p>${escapeHtml(chapter.summary)}</p>
-      <p class="quote-pointer"><strong>TXT:</strong> ${escapeHtml(chapter.sourceFile || source.file)}</p>
       ${renderTags(chapter.topics)}
       <div class="card-actions">
-        <a href="calvin-chapter.html?ref=${encodeURIComponent(chapter.ref)}">상세 보기</a>
+        <a href="calvin-chapter.html?ref=${encodeURIComponent(chapter.ref)}">장 상세 보기</a>
       </div>
     </article>
   `;
@@ -256,56 +244,26 @@ function renderCalvinChapterPage() {
     return;
   }
 
-  const relatedTopics = (calvinState.data.strategicTopics || []).filter((topic) =>
-    (topic.locations || []).some((location) => locationRangeContains(location, chapter.ref)) ||
-    (chapter.topics || []).includes(topic.topic)
+  const relatedThemes = Object.entries(calvinState.themes.books || {}).flatMap(([bookNumber, book]) =>
+    (book.themes || []).filter((theme) => (theme.chapters || []).includes(chapter.ref)).map((theme) => ({ ...theme, bookNumber, bookTitle: book.title }))
   );
 
   root.innerHTML = `
     <section class="results">
       <article class="result-card full-width">
-        <div class="card-meta">${escapeHtml(chapter.bookTitle)} · ${escapeHtml(chapter.ref)} · ${escapeHtml(chapter.sourcePart)}권 TXT</div>
-        <h2>${escapeHtml(chapter.sourceTitle || chapter.title)}</h2>
-        ${chapter.sourceSubtitle ? `<p class="card-summary">${escapeHtml(chapter.sourceSubtitle)}</p>` : ""}
+        <div class="card-meta">${escapeHtml(chapter.bookTitle)} · ${escapeHtml(chapter.ref)}</div>
+        <h2>${escapeHtml(chapter.title)}</h2>
         <p>${escapeHtml(chapter.summary)}</p>
-        <p class="research-use"><strong>원천 파일:</strong> ${escapeHtml(chapter.sourceFile)}</p>
         ${renderTags(chapter.topics)}
       </article>
     </section>
 
-    <section class="results">
-      <article class="result-card full-width">
-        <h2>파일 기반 장 정보</h2>
-        <ul class="detail-list">
-          <li>위치: ${escapeHtml(chapter.ref)}</li>
-          <li>TXT 분권: ${escapeHtml(chapter.sourcePart)}권</li>
-          <li>원천 파일: ${escapeHtml(chapter.sourceFile)}</li>
-          <li>실제 장 제목: ${escapeHtml(chapter.sourceTitle || chapter.title)}</li>
-          ${chapter.sourceSubtitle ? `<li>소제목 묶음: ${escapeHtml(chapter.sourceSubtitle)}</li>` : ""}
-        </ul>
-      </article>
-    </section>
-
-    <section class="results">
-      <article class="result-card">
-        <h3>같은 권에서 보기</h3>
-        <p>${escapeHtml(chapter.bookRange)}</p>
-        <div class="card-actions">
-          <a href="calvin-book.html?book=${chapter.bookNumber}">제${chapter.bookNumber}권으로 이동</a>
-        </div>
-      </article>
-      <article class="result-card">
-        <h3>연결 주제</h3>
-        ${renderTags(chapter.topics)}
-      </article>
-    </section>
-
-    ${relatedTopics.length ? `
+    ${relatedThemes.length ? `
       <section class="results">
         <article class="result-card full-width">
-          <h2>관련 전략 주제</h2>
+          <h2>연결된 대주제</h2>
           <div class="chapter-list">
-            ${relatedTopics.map(renderTopicCard).join("")}
+            ${relatedThemes.map(renderThemeCard).join("")}
           </div>
         </article>
       </section>
@@ -316,48 +274,26 @@ function renderCalvinChapterPage() {
 function renderCalvinTopicPage() {
   const root = document.querySelector("#calvin-root");
   const topicParam = decodeURIComponent(getParams().get("topic") || "");
-  const strategicTopic = (calvinState.data.strategicTopics || []).find((topic) =>
-    topic.slug === topicParam || topicSlug(topic.topic) === topicParam || topic.topic === topicParam
+  const allThemes = Object.entries(calvinState.themes.books || {}).flatMap(([bookNumber, book]) =>
+    (book.themes || []).map((theme) => ({ ...theme, bookNumber, bookTitle: book.title }))
   );
-  const topicName = strategicTopic ? strategicTopic.topic : topicParam;
+  const theme = allThemes.find((item) => item.concept === topicParam || item.id === topicParam || topicSlug(item.title) === topicParam);
   const chapters = flattenChapters().filter((chapter) =>
-    (chapter.topics || []).includes(topicName) ||
-    (strategicTopic && JSON.stringify(chapter).includes(topicName)) ||
-    (strategicTopic && (strategicTopic.locations || []).some((location) => locationRangeContains(location, chapter.ref)))
+    theme ? (theme.chapters || []).includes(chapter.ref) : (chapter.topics || []).some((topic) => topicSlug(topic) === topicParam || topic === topicParam)
   ).filter(matchesQuery);
 
   root.innerHTML = `
     <section class="results">
       <article class="result-card full-width">
-        <div class="card-meta">전략 주제</div>
-        <h2>${escapeHtml(topicName || "주제")}</h2>
-        <p>${escapeHtml(strategicTopic ? strategicTopic.note : "이 주제와 연결된 장을 표시합니다.")}</p>
-        ${strategicTopic ? renderTags(strategicTopic.locations) : ""}
+        <div class="card-meta">Concept View</div>
+        <h2>${escapeHtml(theme ? theme.title : topicParam)}</h2>
+        <p>${escapeHtml(theme ? theme.summary : "이 개념과 연결된 장들을 표시합니다.")}</p>
+        ${theme ? renderTags(theme.subtopics) : ""}
       </article>
     </section>
 
     <section class="results">
-      ${chapters.map((chapter) => renderChapterCard(chapter, chapter.bookNumber)).join("") || `<div class="empty-state">연결된 장을 찾지 못했습니다.</div>`}
+      ${chapters.map(renderChapterCard).join("") || `<div class="empty-state">연결된 장을 찾지 못했습니다.</div>`}
     </section>
   `;
-}
-
-function locationRangeContains(location, ref) {
-  if (!location || !ref) return false;
-  if (location === ref) return true;
-  if (!location.includes("-")) return location.includes(ref);
-
-  const [start, end] = location.split("-").map((value) => value.trim());
-  const parsedRef = parseRef(ref);
-  const parsedStart = parseRef(start);
-  const parsedEnd = parseRef(end.includes(".") ? end : `${parsedStart.roman}.${end.replace(/^[IVX]+\./, "")}`);
-  if (!parsedRef || !parsedStart || !parsedEnd) return false;
-  if (parsedRef.roman !== parsedStart.roman || parsedRef.roman !== parsedEnd.roman) return false;
-  return parsedRef.num >= parsedStart.num && parsedRef.num <= parsedEnd.num;
-}
-
-function parseRef(ref) {
-  const match = String(ref).match(/^([IVX]+)\.(\d+)/);
-  if (!match) return null;
-  return { roman: match[1], num: Number(match[2]) };
 }
