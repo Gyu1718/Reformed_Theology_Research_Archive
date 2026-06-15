@@ -1,0 +1,20 @@
+[
+  {
+    "id": "note-public-index-principle",
+    "title": "공개 저장소 운영 원칙",
+    "type": "policy",
+    "status": "active",
+    "createdAt": "2026-06-15",
+    "body": "이 저장소에는 책 원문 전문을 올리지 않는다. 공개 범위는 서지정보, 목차, 장별 요약, 주제 태그, 성경 본문 색인, 짧은 인용 위치, 연구 메모로 제한한다.",
+    "tags": ["저작권", "GitHub Pages", "공개 저장소", "연구 색인"]
+  },
+  {
+    "id": "note-predestination-comparison",
+    "title": "예정론 비교 연구 방향",
+    "type": "research-note",
+    "status": "draft",
+    "createdAt": "2026-06-15",
+    "body": "칼빈은 예정론을 구원의 은혜와 목회적 위로의 맥락에서 다루고, 벌코프는 하나님의 작정 교리 안에서 체계적으로 분류한다. 바빙크 자료를 추가할 때 신론, 계시론, 구속사적 맥락을 함께 연결할 필요가 있다.",
+    "tags": ["예정론", "칼빈", "벌코프", "바빙크", "구원론"]
+  }
+]
