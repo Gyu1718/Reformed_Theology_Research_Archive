@@ -36,15 +36,32 @@ function renderResearchDetail(target, ref, detail) {
       <article class="result-card full-width">
         <div class="card-meta">Research Layer · ${escapeHtml(ref)}</div>
         <h2>연구 보강</h2>
-        <p class="card-summary">업로드 TXT의 장 구조를 바탕으로 만든 공개용 연구 메모입니다. 원문 전문은 포함하지 않습니다.</p>
+        <p class="card-summary">장 구조와 연구 메모를 바탕으로 만든 공개용 상세 페이지입니다. 원문 전문은 포함하지 않습니다.</p>
       </article>
     </section>
 
     <section class="results">
-      ${renderListCard("파일 기반 소제목", detail.sourceSectionHeadings)}
+      ${renderListCard("장 내 소제목", detail.sourceSectionHeadings)}
       ${renderListCard("핵심 질문", detail.keyQuestions)}
       ${renderListCard("핵심 주장", detail.keyClaims)}
       ${renderListCard("관련 성경 본문", detail.bibleReferences)}
+    </section>
+
+    <section class="results">
+      <article class="result-card full-width">
+        <h3>짧은 인용</h3>
+        ${Array.isArray(detail.shortQuotes) && detail.shortQuotes.length ? `
+          <div class="chapter-list">
+            ${detail.shortQuotes.map((item) => `
+              <section class="chapter-item">
+                <div class="card-meta">${escapeHtml(item.location || ref)}</div>
+                <p>“${escapeHtml(item.text)}”</p>
+                ${item.note ? `<p class="card-summary">${escapeHtml(item.note)}</p>` : ""}
+              </section>
+            `).join("")}
+          </div>
+        ` : `<p class="card-summary">이 장에는 아직 공개용 짧은 인용이 입력되지 않았습니다.</p>`}
+      </article>
     </section>
 
     <section class="results">
