@@ -1,4 +1,5 @@
 const CALVIN_DATA_URL = "data/books/calvin-institutes.json";
+const CALVIN_SOURCE_TITLES_URL = "data/books/calvin-source-titles.json";
 const CALVIN_SOURCE_FILES = {
   1: { part: "상", file: "기독교 강요(상) (존 칼빈).txt", contains: "제1권·제2권" },
   2: { part: "상", file: "기독교 강요(상) (존 칼빈).txt", contains: "제1권·제2권" },
@@ -25,11 +26,14 @@ const CALVIN_TOPIC_SLUGS = {
 
 const calvinState = {
   data: null,
+  sourceTitles: { chapters: {} },
   query: "",
 };
 
 document.addEventListener("DOMContentLoaded", async () => {
-  calvinState.data = await loadCalvinData();
+  const [data, sourceTitles] = await Promise.all([loadCalvinData(), loadCalvinSourceTitles()]);
+  calvinState.data = data;
+  calvinState.sourceTitles = sourceTitles;
   bindCalvinSearch();
   renderCalvinPage();
 });
@@ -38,6 +42,17 @@ async function loadCalvinData() {
   const response = await fetch(CALVIN_DATA_URL);
   if (!response.ok) throw new Error(`Failed to load ${CALVIN_DATA_URL}`);
   return response.json();
+}
+
+async function loadCalvinSourceTitles() {
+  try {
+    const response = await fetch(CALVIN_SOURCE_TITLES_URL);
+    if (!response.ok) throw new Error(`Failed to load ${CALVIN_SOURCE_TITLES_URL}`);
+    return response.json();
+  } catch (error) {
+    console.warn("Calvin source title map was not loaded.", error);
+    return { chapters: {} };
+  }
 }
 
 function bindCalvinSearch() {
@@ -61,25 +76,33 @@ function getParams() {
   return new URLSearchParams(window.location.search);
 }
 
+function sourceInfo(bookNumber) {
+  return CALVIN_SOURCE_FILES[Number(bookNumber)] || { part: "확인 필요", file: "확인 필요", contains: "확인 필요" };
+}
+
+function applySourceTitle(chapter, bookNumber) {
+  const source = sourceInfo(bookNumber || chapter.bookNumber);
+  const sourceOverride = calvinState.sourceTitles.chapters?.[chapter.ref] || {};
+  return {
+    ...chapter,
+    ...sourceOverride,
+    bookNumber: sourceOverride.bookNumber || bookNumber || chapter.bookNumber,
+    sourcePart: sourceOverride.sourcePart || chapter.sourcePart || source.part,
+    sourceFile: sourceOverride.sourceFile || chapter.sourceFile || source.file,
+    sourceTitle: sourceOverride.sourceTitle || chapter.sourceTitle || chapter.title,
+    sourceSubtitle: sourceOverride.sourceSubtitle || chapter.sourceSubtitle || "",
+  };
+}
+
 function flattenChapters() {
   return calvinState.data.books.flatMap((book, index) => {
     const bookNumber = index + 1;
-    const source = sourceInfo(bookNumber);
     return book.chapters.map((chapter) => ({
-      ...chapter,
-      bookNumber,
+      ...applySourceTitle(chapter, bookNumber),
       bookTitle: book.title,
       bookRange: book.range,
-      sourcePart: chapter.sourcePart || book.sourcePart || source.part,
-      sourceFile: chapter.sourceFile || book.sourceFile || source.file,
-      sourceTitle: chapter.sourceTitle || chapter.title,
-      sourceSubtitle: chapter.sourceSubtitle || "",
     }));
   });
-}
-
-function sourceInfo(bookNumber) {
-  return CALVIN_SOURCE_FILES[Number(bookNumber)] || { part: "확인 필요", file: "확인 필요", contains: "확인 필요" };
 }
 
 function topicSlug(topic) {
@@ -94,7 +117,7 @@ function matchesQuery(item) {
 function renderCalvinOverviewPage() {
   const root = document.querySelector("#calvin-root");
   const data = calvinState.data;
-  const books = data.books.filter(matchesQuery);
+  const books = data.books.filter((book, index) => matchesQuery({ ...book, source: sourceInfo(index + 1) }));
   const topics = (data.strategicTopics || []).filter(matchesQuery);
 
   root.innerHTML = `
@@ -185,7 +208,7 @@ function renderCalvinBookPage() {
   }
 
   const chapters = book.chapters
-    .map((chapter) => ({ ...chapter, bookNumber, sourcePart: source.part, sourceFile: source.file }))
+    .map((chapter) => applySourceTitle(chapter, bookNumber))
     .filter(matchesQuery);
 
   root.innerHTML = `
@@ -234,7 +257,7 @@ function renderCalvinChapterPage() {
   }
 
   const relatedTopics = (calvinState.data.strategicTopics || []).filter((topic) =>
-    (topic.locations || []).some((location) => chapter.ref.startsWith(location.split("-")[0]) || location.includes(chapter.ref)) ||
+    (topic.locations || []).some((location) => locationRangeContains(location, chapter.ref)) ||
     (chapter.topics || []).includes(topic.topic)
   );
 
@@ -252,13 +275,14 @@ function renderCalvinChapterPage() {
 
     <section class="results">
       <article class="result-card full-width">
-        <h2>파일 기반 소제목</h2>
-        ${Array.isArray(chapter.sourceSectionHeadings) && chapter.sourceSectionHeadings.length ? `
-          <p class="card-summary">TXT에서 확인한 소제목 일부입니다. 원문 전문은 표시하지 않습니다.</p>
-          <ul class="detail-list">
-            ${chapter.sourceSectionHeadings.map((heading) => `<li>${escapeHtml(heading)}</li>`).join("")}
-          </ul>
-        ` : `<p class="card-summary">아직 이 장의 소제목 추출 정보가 연결되지 않았습니다.</p>`}
+        <h2>파일 기반 장 정보</h2>
+        <ul class="detail-list">
+          <li>위치: ${escapeHtml(chapter.ref)}</li>
+          <li>TXT 분권: ${escapeHtml(chapter.sourcePart)}권</li>
+          <li>원천 파일: ${escapeHtml(chapter.sourceFile)}</li>
+          <li>실제 장 제목: ${escapeHtml(chapter.sourceTitle || chapter.title)}</li>
+          ${chapter.sourceSubtitle ? `<li>소제목 묶음: ${escapeHtml(chapter.sourceSubtitle)}</li>` : ""}
+        </ul>
       </article>
     </section>
 
