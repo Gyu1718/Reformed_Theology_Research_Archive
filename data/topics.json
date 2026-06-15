@@ -12,9 +12,28 @@
         "note": "하나님 지식과 성경의 필요성을 연결한다."
       },
       {
+        "bookId": "berkhof-systematic-theology",
+        "location": "조직신학 서론",
+        "note": "계시와 성경을 조직신학의 규범적 원리와 연결한다."
+      },
+      {
         "bookId": "bavinck-reformed-dogmatics",
         "location": "계시와 신학",
         "note": "계시를 신학의 원리로 다룬다."
+      }
+    ]
+  },
+  {
+    "id": "doctrine-of-god",
+    "name": "신론",
+    "category": "신론",
+    "summary": "하나님의 존재, 이름, 속성, 삼위일체, 작정, 창조, 섭리를 다루는 조직신학의 중심 주제.",
+    "relatedTopics": ["하나님의 존재", "하나님의 속성", "삼위일체", "작정", "섭리", "창조"],
+    "references": [
+      {
+        "bookId": "berkhof-systematic-theology",
+        "location": "신론: 하나님의 존재, 이름, 속성 / 삼위일체론 / 창조와 섭리",
+        "note": "벌코프 조직신학의 신론은 속성론, 삼위일체론, 작정, 창조, 섭리를 하나의 체계 안에서 정리한다."
       }
     ]
   },
@@ -23,7 +42,7 @@
     "name": "예정론",
     "category": "신론 / 구원론",
     "summary": "하나님의 영원한 작정 안에서 선택, 구원, 은혜의 문제를 다루는 교리 주제.",
-    "relatedTopics": ["작정", "선택", "섭리", "은혜", "구원론"],
+    "relatedTopics": ["작정", "선택", "유기", "섭리", "은혜", "구원론"],
     "references": [
       {
         "bookId": "calvin-institutes",
@@ -32,8 +51,50 @@
       },
       {
         "bookId": "berkhof-systematic-theology",
-        "location": "하나님의 작정",
+        "location": "하나님의 작정과 예정",
         "note": "작정 교리 안에서 예정론을 체계적으로 분류한다."
+      }
+    ]
+  },
+  {
+    "id": "anthropology-and-sin",
+    "name": "인간론과 죄론",
+    "category": "인간론 / 죄론",
+    "summary": "인간의 창조, 하나님의 형상, 타락, 원죄, 실제 죄, 언약적 관계 파괴를 다루는 주제.",
+    "relatedTopics": ["하나님의 형상", "행위언약", "타락", "원죄", "실제 죄", "은혜언약"],
+    "references": [
+      {
+        "bookId": "berkhof-systematic-theology",
+        "location": "인간론, 하나님의 형상, 죄, 언약",
+        "note": "인간론과 죄론을 행위언약, 타락, 원죄, 은혜언약의 구조 안에서 연결한다."
+      }
+    ]
+  },
+  {
+    "id": "christology",
+    "name": "기독론",
+    "category": "기독론",
+    "summary": "그리스도의 인격과 사역, 성육신, 양성론, 삼중직, 속죄를 다루는 주제.",
+    "relatedTopics": ["성육신", "양성론", "삼중직", "속죄론", "중보자"],
+    "references": [
+      {
+        "bookId": "berkhof-systematic-theology",
+        "location": "그리스도의 인격과 사역",
+        "note": "기독론을 구원론의 객관적 근거로 배치하고, 인격과 사역의 통일성을 강조한다."
+      }
+    ]
+  },
+  {
+    "id": "soteriology",
+    "name": "구원론",
+    "category": "구원론",
+    "summary": "그리스도의 구속 사역이 성령 안에서 신자에게 적용되는 방식을 다루는 주제.",
+    "relatedTopics": ["소명", "중생", "회심", "믿음", "칭의", "양자", "성화", "견인", "영화"],
+    "references": [
+      {
+        "bookId": "berkhof-systematic-theology",
+        "location": "구원의 적용",
+        "note": "구원의 서정을 통해 구원의 적용을 교리적 관계 안에서 정리한다."
       }
     ]
   },
@@ -42,7 +103,7 @@
     "name": "교회론",
     "category": "교회론",
     "summary": "교회의 본질, 속성, 표지, 직분, 권징, 성례, 은혜의 방편을 다루는 주제.",
-    "relatedTopics": ["가시적 교회", "비가시적 교회", "교회의 표지", "성례론", "직분"],
+    "relatedTopics": ["가시적 교회", "비가시적 교회", "교회의 표지", "성례론", "직분", "은혜의 방편"],
     "references": [
       {
         "bookId": "calvin-institutes",
@@ -51,8 +112,8 @@
       },
       {
         "bookId": "berkhof-systematic-theology",
-        "location": "교회론",
-        "note": "교회의 본질과 표지를 조직신학적으로 정리한다."
+        "location": "교회와 은혜의 방편",
+        "note": "교회의 본질, 가시적·비가시적 교회, 교회의 표지, 말씀과 성례를 조직신학적으로 정리한다."
       }
     ]
   },
@@ -62,6 +123,26 @@
     "category": "성경신학 / 조직신학",
     "summary": "하나님의 구속 경륜을 언약의 구조 안에서 이해하는 개혁신학의 핵심 주제.",
     "relatedTopics": ["행위언약", "은혜언약", "구속언약", "성례", "하나님 나라"],
-    "references": []
+    "references": [
+      {
+        "bookId": "berkhof-systematic-theology",
+        "location": "인간론, 하나님의 형상, 죄, 언약",
+        "note": "행위언약과 은혜언약을 인간론과 구원론의 연결 지점으로 다룬다."
+      }
+    ]
+  },
+  {
+    "id": "eschatology",
+    "name": "종말론",
+    "category": "종말론",
+    "summary": "개인 종말과 역사 종말, 재림, 부활, 심판, 새 창조를 다루는 주제.",
+    "relatedTopics": ["죽음", "중간상태", "재림", "부활", "최후심판", "새 하늘과 새 땅"],
+    "references": [
+      {
+        "bookId": "berkhof-systematic-theology",
+        "location": "종말론",
+        "note": "개인 종말과 일반 종말을 구분하고, 구속사의 완성으로 종말론을 정리한다."
+      }
+    ]
   }
 ]
