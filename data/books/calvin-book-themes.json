@@ -1,0 +1,138 @@
+{
+  "id": "calvin-book-themes",
+  "description": "『기독교 강요』를 권-장 단순 목록이 아니라 대주제와 소주제 중심으로 탐색하기 위한 공개용 연구 구조입니다.",
+  "books": {
+    "1": {
+      "title": "제1권: 창조주 하나님을 아는 지식",
+      "themes": [
+        {
+          "id": "knowledge-of-god-and-self",
+          "title": "하나님 지식과 자기 지식",
+          "summary": "칼빈 신학의 입구다. 인간은 하나님 앞에서 자신을 알고, 자신을 바르게 알 때 하나님 앞의 비참과 은혜의 필요를 깨닫는다.",
+          "subtopics": ["하나님 지식", "자기 인식", "경건", "인간의 한계"],
+          "chapters": ["I.1", "I.2"],
+          "concept": "knowledge-of-god"
+        },
+        {
+          "id": "revelation-and-scripture",
+          "title": "계시와 성경",
+          "summary": "창조 세계에 나타난 하나님 인식의 흔적과 성경이라는 특별한 안내자의 필요를 함께 다룬다.",
+          "subtopics": ["일반계시", "특별계시", "성경 권위", "성령의 내적 증거"],
+          "chapters": ["I.3", "I.4", "I.5", "I.6", "I.7", "I.8", "I.9", "I.10"],
+          "concept": "revelation-scripture"
+        },
+        {
+          "id": "trinity-and-creation",
+          "title": "삼위일체와 창조",
+          "summary": "한 본질 안에 계신 삼위 하나님과 그분의 창조 사역을 다룬다. 신론, 삼위일체론, 창조론의 기초가 된다.",
+          "subtopics": ["삼위일체", "성자", "성령", "창조", "하나님의 형상"],
+          "chapters": ["I.11", "I.12", "I.13", "I.14", "I.15"],
+          "concept": "trinity-creation"
+        },
+        {
+          "id": "providence",
+          "title": "섭리와 하나님의 통치",
+          "summary": "하나님은 창조 세계를 보존하고 다스리신다. 섭리는 운명론도 우연론도 아니며 신자의 신뢰와 인내를 형성한다.",
+          "subtopics": ["섭리", "보존", "통치", "악의 문제", "신앙의 적용"],
+          "chapters": ["I.16", "I.17", "I.18"],
+          "concept": "providence"
+        }
+      ]
+    },
+    "2": {
+      "title": "제2권: 구속주 하나님, 곧 그리스도를 아는 지식",
+      "themes": [
+        {
+          "id": "fall-and-sin",
+          "title": "타락, 원죄, 자유의지의 무능",
+          "summary": "아담의 타락 이후 인간의 부패와 무능을 다루며, 구속주 그리스도의 필요를 드러낸다.",
+          "subtopics": ["타락", "원죄", "자유의지", "전적 부패"],
+          "chapters": ["II.1", "II.2", "II.3", "II.4", "II.5"],
+          "concept": "sin-and-humanity"
+        },
+        {
+          "id": "law-gospel-covenant",
+          "title": "율법, 복음, 언약의 연속성과 차이",
+          "summary": "율법은 그리스도께 인도하고, 구약과 신약은 동일한 구원 실재 안에서 경륜의 차이를 가진다.",
+          "subtopics": ["율법", "복음", "십계명", "구약과 신약", "언약"],
+          "chapters": ["II.6", "II.7", "II.8", "II.9", "II.10", "II.11"],
+          "concept": "law-gospel"
+        },
+        {
+          "id": "christ-person-work",
+          "title": "그리스도의 인격과 사역",
+          "summary": "성육신, 두 본성, 삼중직, 죽음·부활·승천, 그리스도의 공로를 중심으로 구속의 객관적 근거를 다룬다.",
+          "subtopics": ["성육신", "양성론", "삼중직", "속죄", "부활", "승천", "공로"],
+          "chapters": ["II.12", "II.13", "II.14", "II.15", "II.16", "II.17"],
+          "concept": "christology"
+        }
+      ]
+    },
+    "3": {
+      "title": "제3권: 그리스도의 은혜를 받는 길과 그 유익",
+      "themes": [
+        {
+          "id": "union-faith-repentance",
+          "title": "성령, 그리스도와의 연합, 믿음과 회개",
+          "summary": "성령께서 신자를 그리스도와 연합시키시며, 믿음과 회개는 그 연합의 유익이 삶에 드러나는 방식이다.",
+          "subtopics": ["성령", "그리스도와의 연합", "믿음", "중생", "회개"],
+          "chapters": ["III.1", "III.2", "III.3", "III.4", "III.5"],
+          "concept": "union-with-christ"
+        },
+        {
+          "id": "christian-life",
+          "title": "그리스도인의 삶",
+          "summary": "자기 부인, 십자가, 영생 묵상, 현세 사용을 통해 신자의 삶을 형성하는 경건의 구조를 다룬다.",
+          "subtopics": ["자기 부인", "십자가", "영생 묵상", "절제", "청지기직"],
+          "chapters": ["III.6", "III.7", "III.8", "III.9", "III.10"],
+          "concept": "christian-life"
+        },
+        {
+          "id": "justification",
+          "title": "칭의와 은혜의 복음",
+          "summary": "칭의는 인간의 공로가 아니라 그리스도의 의에 근거하며, 믿음은 그 의를 받는 수단이다.",
+          "subtopics": ["칭의", "믿음", "그리스도의 의", "공로 비판", "구원의 확신"],
+          "chapters": ["III.11", "III.12", "III.13", "III.14", "III.15", "III.16", "III.17", "III.18"],
+          "concept": "justification"
+        },
+        {
+          "id": "freedom-prayer-election",
+          "title": "자유, 기도, 예정, 부활",
+          "summary": "그리스도인의 자유와 기도, 예정론과 부활 소망을 통해 구원의 유익이 신자의 삶과 종말론으로 확장된다.",
+          "subtopics": ["그리스도인의 자유", "기도", "예정", "선택", "부활"],
+          "chapters": ["III.19", "III.20", "III.21", "III.22", "III.23", "III.24", "III.25"],
+          "concept": "predestination-prayer-resurrection"
+        }
+      ]
+    },
+    "4": {
+      "title": "제4권: 교회와 외적 수단",
+      "themes": [
+        {
+          "id": "church-ministry-discipline",
+          "title": "교회, 직분, 권위, 권징",
+          "summary": "교회는 신자를 양육하는 어머니이며, 말씀 사역과 직분, 교회 권위와 권징은 그리스도께서 주신 외적 수단이다.",
+          "subtopics": ["교회", "직분", "교회 권위", "공의회", "권징", "양심"],
+          "chapters": ["IV.1", "IV.2", "IV.3", "IV.4", "IV.5", "IV.6", "IV.7", "IV.8", "IV.9", "IV.10", "IV.11", "IV.12", "IV.13"],
+          "concept": "ecclesiology"
+        },
+        {
+          "id": "sacraments",
+          "title": "성례, 세례, 성찬",
+          "summary": "성례는 말씀과 결합된 표징이며, 세례와 성찬은 신자의 믿음을 세우고 그리스도와의 교제를 확증한다.",
+          "subtopics": ["성례", "세례", "유아 세례", "성찬", "그리스도와의 연합"],
+          "chapters": ["IV.14", "IV.15", "IV.16", "IV.17", "IV.18", "IV.19"],
+          "concept": "sacraments"
+        },
+        {
+          "id": "civil-government",
+          "title": "시민 정부와 공적 삶",
+          "summary": "영적 통치와 시민 통치를 구별하면서도 대립시키지 않고, 국가 권위와 그리스도인의 공적 책임을 다룬다.",
+          "subtopics": ["시민 정부", "정치신학", "공공신학", "질서", "정의"],
+          "chapters": ["IV.20"],
+          "concept": "political-theology"
+        }
+      ]
+    }
+  }
+}
