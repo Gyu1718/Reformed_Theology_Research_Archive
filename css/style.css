@@ -62,7 +62,8 @@ h1 {
 }
 
 h2,
-h3 {
+h3,
+h4 {
   line-height: 1.2;
   margin: 0 0 10px;
 }
@@ -245,6 +246,40 @@ h3 {
 .card-summary {
   color: var(--muted);
   margin: 8px 0 14px;
+}
+
+.research-use {
+  padding: 14px 16px;
+  border-left: 4px solid var(--accent);
+  border-radius: 14px;
+  background: var(--surface-soft);
+  color: var(--muted);
+}
+
+.chapter-list {
+  display: grid;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.chapter-item {
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--surface-soft);
+}
+
+.chapter-item p {
+  margin: 8px 0;
+}
+
+.detail-list.compact {
+  margin-top: 8px;
+}
+
+.quote-pointer {
+  color: var(--muted);
+  font-size: 0.92rem;
 }
 
 .tag-list {
