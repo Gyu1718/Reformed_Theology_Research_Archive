@@ -1,0 +1,67 @@
+[
+  {
+    "id": "revelation",
+    "name": "계시론",
+    "category": "신학서론",
+    "summary": "하나님이 자신과 뜻을 인간에게 알리시는 방식과 그 계시가 신학의 원리로 기능하는 방식을 다루는 주제.",
+    "relatedTopics": ["성경론", "신학방법론", "일반계시", "특별계시"],
+    "references": [
+      {
+        "bookId": "calvin-institutes",
+        "location": "제1권",
+        "note": "하나님 지식과 성경의 필요성을 연결한다."
+      },
+      {
+        "bookId": "bavinck-reformed-dogmatics",
+        "location": "계시와 신학",
+        "note": "계시를 신학의 원리로 다룬다."
+      }
+    ]
+  },
+  {
+    "id": "predestination",
+    "name": "예정론",
+    "category": "신론 / 구원론",
+    "summary": "하나님의 영원한 작정 안에서 선택, 구원, 은혜의 문제를 다루는 교리 주제.",
+    "relatedTopics": ["작정", "선택", "섭리", "은혜", "구원론"],
+    "references": [
+      {
+        "bookId": "calvin-institutes",
+        "location": "제3권 예정론 관련 논의",
+        "note": "예정론을 구원의 은혜와 목회적 위로의 맥락에서 다룬다."
+      },
+      {
+        "bookId": "berkhof-systematic-theology",
+        "location": "하나님의 작정",
+        "note": "작정 교리 안에서 예정론을 체계적으로 분류한다."
+      }
+    ]
+  },
+  {
+    "id": "ecclesiology",
+    "name": "교회론",
+    "category": "교회론",
+    "summary": "교회의 본질, 속성, 표지, 직분, 권징, 성례, 은혜의 방편을 다루는 주제.",
+    "relatedTopics": ["가시적 교회", "비가시적 교회", "교회의 표지", "성례론", "직분"],
+    "references": [
+      {
+        "bookId": "calvin-institutes",
+        "location": "제4권",
+        "note": "교회, 성례, 교회 정치의 문제를 폭넓게 다룬다."
+      },
+      {
+        "bookId": "berkhof-systematic-theology",
+        "location": "교회론",
+        "note": "교회의 본질과 표지를 조직신학적으로 정리한다."
+      }
+    ]
+  },
+  {
+    "id": "covenant-theology",
+    "name": "언약신학",
+    "category": "성경신학 / 조직신학",
+    "summary": "하나님의 구속 경륜을 언약의 구조 안에서 이해하는 개혁신학의 핵심 주제.",
+    "relatedTopics": ["행위언약", "은혜언약", "구속언약", "성례", "하나님 나라"],
+    "references": []
+  }
+]
