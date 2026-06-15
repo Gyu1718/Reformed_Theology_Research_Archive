@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Reformed Theology Research Archive</title>
+  <meta name="description" content="개혁신학 문헌을 책, 학자, 주제, 성경 본문, 연구 메모 단위로 연결해 정리하는 연구 아카이브" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-grid">
+      <div>
+        <p class="eyebrow">개혁신학 연구 색인</p>
+        <h1>Reformed Theology Research Archive</h1>
+        <p class="lead">책, 학자, 교리 주제, 성경 본문, 연구 메모를 한 번에 연결해 보는 개인 연구용 HTML 아카이브입니다.</p>
+      </div>
+      <div class="status-card" aria-label="archive status">
+        <span class="status-label">Archive Mode</span>
+        <strong>Public Index</strong>
+        <p>원문 전문이 아니라 연구 색인과 메모를 공개합니다.</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="search-panel" aria-labelledby="search-title">
+      <div>
+        <h2 id="search-title">통합 검색</h2>
+        <p>책 제목, 학자, 주제, 성경 본문, 연구 메모를 검색합니다.</p>
+      </div>
+      <label class="search-box">
+        <span class="sr-only">검색어</span>
+        <input id="global-search" type="search" placeholder="예: 예정론, 칼빈, 로마서 9장, 교회론" autocomplete="off" />
+      </label>
+    </section>
+
+    <section class="dashboard" aria-label="archive dashboard">
+      <article class="metric-card">
+        <span id="book-count">0</span>
+        <p>Books</p>
+      </article>
+      <article class="metric-card">
+        <span id="author-count">0</span>
+        <p>Authors</p>
+      </article>
+      <article class="metric-card">
+        <span id="topic-count">0</span>
+        <p>Topics</p>
+      </article>
+      <article class="metric-card">
+        <span id="passage-count">0</span>
+        <p>Bible Passages</p>
+      </article>
+    </section>
+
+    <nav class="tabs" aria-label="archive sections">
+      <button class="tab is-active" data-view="books">책별 보기</button>
+      <button class="tab" data-view="authors">학자별 보기</button>
+      <button class="tab" data-view="topics">주제별 보기</button>
+      <button class="tab" data-view="passages">본문별 보기</button>
+      <button class="tab" data-view="notes">연구 메모</button>
+    </nav>
+
+    <section id="results" class="results" aria-live="polite"></section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>이 사이트는 저작권 있는 원문 전문을 공개하지 않고, 연구 색인·요약·짧은 인용 위치·메모 중심으로 운영합니다.</p>
+    </div>
+  </footer>
+
+  <script src="js/search.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
