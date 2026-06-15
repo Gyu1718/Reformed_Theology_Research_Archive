@@ -1,0 +1,76 @@
+[
+  {
+    "id": "calvin-institutes",
+    "title": "기독교 강요",
+    "author": "존 칼빈",
+    "originalAuthor": "John Calvin",
+    "tradition": "Reformed",
+    "category": "Systematic Theology / Reformation Theology",
+    "language": "Korean",
+    "summary": "개혁신학의 고전적 체계를 형성한 핵심 문헌. 하나님 지식, 성경, 삼위일체, 구원론, 교회론, 성례론을 포괄한다.",
+    "topics": ["신학서론", "신론", "예정론", "구원론", "교회론", "성례론"],
+    "chapters": [
+      {
+        "chapterId": "calvin-inst-1",
+        "title": "제1권: 창조주 하나님을 아는 지식",
+        "summary": "하나님 지식, 인간 지식, 성경, 삼위일체, 창조와 섭리를 다룬다.",
+        "topics": ["계시론", "성경론", "삼위일체", "섭리"],
+        "bibleReferences": ["창세기 1장", "시편 19편"]
+      },
+      {
+        "chapterId": "calvin-inst-3-predestination",
+        "title": "제3권: 예정론 관련 논의",
+        "summary": "예정론을 구원의 은혜와 목회적 위로의 맥락에서 다룬다.",
+        "topics": ["예정론", "구원론", "은혜"],
+        "bibleReferences": ["로마서 8:29-30", "로마서 9장", "에베소서 1:4-5"]
+      }
+    ]
+  },
+  {
+    "id": "berkhof-systematic-theology",
+    "title": "조직신학",
+    "author": "루이스 벌코프",
+    "originalAuthor": "Louis Berkhof",
+    "tradition": "Reformed",
+    "category": "Systematic Theology",
+    "language": "Korean",
+    "summary": "개혁파 조직신학의 교육용 체계를 명료하게 정리한 문헌. 신론, 인간론, 기독론, 구원론, 교회론, 종말론을 체계적으로 다룬다.",
+    "topics": ["신론", "작정", "예정론", "인간론", "기독론", "구원론", "교회론", "종말론"],
+    "chapters": [
+      {
+        "chapterId": "berkhof-decrees",
+        "title": "하나님의 작정",
+        "summary": "하나님의 영원하고 불변한 계획 안에서 작정, 예정, 섭리를 설명한다.",
+        "topics": ["신론", "작정", "예정론", "섭리"],
+        "bibleReferences": ["에베소서 1:11", "로마서 9장"]
+      },
+      {
+        "chapterId": "berkhof-church",
+        "title": "교회론",
+        "summary": "교회의 본질, 속성, 표지, 정치, 은혜의 방편을 조직신학적으로 정리한다.",
+        "topics": ["교회론", "성례론", "은혜의 방편"],
+        "bibleReferences": ["마태복음 16:18", "에베소서 4장"]
+      }
+    ]
+  },
+  {
+    "id": "bavinck-reformed-dogmatics",
+    "title": "개혁교의학",
+    "author": "헤르만 바빙크",
+    "originalAuthor": "Herman Bavinck",
+    "tradition": "Reformed",
+    "category": "Dogmatics",
+    "language": "Korean",
+    "summary": "계시와 신앙, 삼위일체, 창조, 죄, 그리스도, 구원, 교회, 종말을 폭넓은 역사신학적·철학적 지평에서 다루는 개혁파 교의학의 대표 문헌.",
+    "topics": ["계시론", "삼위일체", "창조", "죄론", "기독론", "구원론", "교회론", "종말론"],
+    "chapters": [
+      {
+        "chapterId": "bavinck-revelation",
+        "title": "계시와 신학",
+        "summary": "계시가 신학의 원리이며, 신앙과 지식의 관계를 규정한다는 점을 다룬다.",
+        "topics": ["계시론", "신학방법론", "성경론"],
+        "bibleReferences": ["히브리서 1:1-2", "디모데후서 3:16"]
+      }
+    ]
+  }
+]
