@@ -40,20 +40,41 @@
 │  ├─ authors.json
 │  ├─ topics.json
 │  ├─ passages.json
-│  └─ notes.json
+│  ├─ notes.json
+│  └─ taxonomy.json
+├─ templates/
+│  ├─ book-entry.template.json
+│  ├─ topic-entry.template.json
+│  └─ note-entry.template.json
 └─ docs/
    ├─ project-plan.md
    ├─ data-schema.md
+   ├─ input-workflow.md
    └─ copyright-policy.md
 ```
 
 ## 업데이트 방식
 
-1. 새 책을 추가할 때 `data/books.json`에 기본 정보를 입력합니다.
-2. 학자 정보가 필요하면 `data/authors.json`에 추가합니다.
-3. 주제 연결은 `data/topics.json`에 추가합니다.
-4. 성경 본문 연결은 `data/passages.json`에 추가합니다.
-5. 연구 메모는 `data/notes.json`에 추가합니다.
+1. 새 책을 추가할 때 `templates/book-entry.template.json`을 복사해 구조를 잡습니다.
+2. 책 기본 정보와 장별 요약은 `data/books.json`에 입력합니다.
+3. 학자 정보가 필요하면 `data/authors.json`에 추가합니다.
+4. 주제 연결은 `data/topics.json`에 추가합니다.
+5. 표준 주제 분류는 `data/taxonomy.json`을 기준으로 관리합니다.
+6. 성경 본문 연결은 `data/passages.json`에 추가합니다.
+7. 연구 메모는 `data/notes.json`에 추가합니다.
+
+## 작업 문서
+
+- [`docs/project-plan.md`](docs/project-plan.md): 전체 기획서
+- [`docs/data-schema.md`](docs/data-schema.md): JSON 데이터 입력 규칙
+- [`docs/input-workflow.md`](docs/input-workflow.md): 책 한 권을 추가할 때 따르는 실제 작업 순서
+- [`docs/copyright-policy.md`](docs/copyright-policy.md): 공개 저장소 운영 원칙
+
+## 입력 템플릿
+
+- [`templates/book-entry.template.json`](templates/book-entry.template.json): 책 데이터 입력 양식
+- [`templates/topic-entry.template.json`](templates/topic-entry.template.json): 주제 데이터 입력 양식
+- [`templates/note-entry.template.json`](templates/note-entry.template.json): 연구 메모 입력 양식
 
 ## 1차 개발 범위
 
