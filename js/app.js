@@ -105,10 +105,13 @@ function chapterHTML(ch) {
   const ref = `<span class="cref">${ch.ref || "·"}</span>`;
   const head = `${ref}<div class="chap-head"><b>${ch.title}</b>${ch.summary ? `<p>${ch.summary}</p>` : ""}</div>`;
   const tags = (ch.concepts && ch.concepts.length) ? `<div class="tags">${ch.concepts.map(x => `<span class="tag">${x}</span>`).join("")}</div>` : "";
-  const hasDetail = ch.detail || (ch.keyPoints && ch.keyPoints.length);
+  const hasQuotes = ch.quotes && ch.quotes.length;
+  const hasDetail = ch.detail || (ch.keyPoints && ch.keyPoints.length) || hasQuotes;
   if (!hasDetail) return `<div class="chap">${head}</div>${tags ? `<div class="chap-tagrow">${tags}</div>` : ""}`;
   const kp = (ch.keyPoints && ch.keyPoints.length) ? `<ul class="keypoints">${ch.keyPoints.map(k => `<li>${k}</li>`).join("")}</ul>` : "";
-  return `<details class="chap-x"><summary class="chap chap-sum">${head}</summary><div class="chap-detail">${ch.detail ? `<p class="chap-body">${ch.detail}</p>` : ""}${kp}${tags}</div></details>`;
+  const quotes = hasQuotes ? `<div class="quotes">${ch.quotes.filter(q => q.text && q.source).map(q =>
+    `<blockquote class="chap-quote">${q.text}<cite>— ${q.source}${q.ref ? ` · ${q.ref}` : ""}</cite></blockquote>`).join("")}</div>` : "";
+  return `<details class="chap-x"><summary class="chap chap-sum">${head}</summary><div class="chap-detail">${ch.detail ? `<p class="chap-body">${ch.detail}</p>` : ""}${kp}${quotes}${tags}</div></details>`;
 }
 function bookStructure(b) {
   if (b.parts && b.parts.length) {

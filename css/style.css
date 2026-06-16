@@ -93,6 +93,9 @@ main{padding-bottom:80px;min-height:50vh;}
 .keypoints li{font-size:.9rem;color:var(--muted);margin:4px 0;}
 .keypoints li::marker{color:var(--neo);}
 .chap-detail .tags .tag{font-size:.72rem;padding:2px 7px;}
+.quotes{margin:0 0 12px;}
+.chap-quote{margin:0 0 10px;padding:10px 0 10px 16px;border-left:3px solid var(--neo);background:var(--neo-soft);border-radius:0 8px 8px 0;padding-right:14px;font-size:.92rem;color:var(--ink);line-height:1.7;}
+.chap-quote cite{display:block;margin-top:7px;font-style:normal;font-family:var(--font-mono);font-size:.72rem;color:var(--muted);}
 
 .compare{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);margin-top:24px;overflow:hidden;}
 .compare-head{padding:22px 26px 18px;border-bottom:1px solid var(--line);background:linear-gradient(90deg,var(--ref-soft) 0%,transparent 38%,transparent 62%,var(--neo-soft) 100%);}
