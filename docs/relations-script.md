@@ -19,6 +19,7 @@
 다음 스크립트는 역할이 다르기 때문에 아직 분리해 둡니다.
 
 - `js/history-nav-enhance.js`: 역사 상세 페이지의 이전/다음 이동
+- `js/compact-related-passages.js`: 책 카드 목록에서 관련 본문을 대표 3개 칩으로 축약
 - `js/passage-depth-enhance.js`: 본문 카드 목록에서 본문 연구 노트 표시
 - `js/ui-polish.js`: 검색 초기화, 카드 접힘, 모바일/시각 정리
 
@@ -60,7 +61,7 @@ data/neo-orthodoxy-doctrine-history.json
 
 ### 책 카드/책 상세
 
-책 카드와 책 상세 페이지에 관련 성경 본문을 붙입니다.
+책 카드와 책 상세 페이지에 관련 성경 본문을 붙입니다. 책 카드 목록에서 관련 본문이 너무 많아질 경우, `compact-related-passages.js`가 대표 본문 3개와 상세 페이지 이동 버튼으로 축약합니다.
 
 ### 본문 상세 라우트
 
