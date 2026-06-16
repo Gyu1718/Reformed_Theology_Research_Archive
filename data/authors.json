@@ -4,30 +4,61 @@
     "name": "John Calvin",
     "koreanName": "존 칼빈",
     "period": "16세기 종교개혁",
-    "tradition": "Reformed",
+    "tradition": "개혁파 정통",
     "summary": "제네바 종교개혁을 이끌며 개혁신학의 교리적·목회적 체계를 정립한 신학자.",
-    "keyTopics": ["하나님 지식", "성경론", "예정론", "교회론", "성례론"],
-    "majorWorks": ["기독교 강요", "성경 주석", "설교"]
+    "keyTopics": [
+      "하나님 지식",
+      "성경론",
+      "예정론",
+      "교회론",
+      "성례론"
+    ],
+    "majorWorks": [
+      "기독교 강요",
+      "성경 주석",
+      "설교"
+    ],
+    "traditionKey": "ref"
   },
   {
     "id": "herman-bavinck",
     "name": "Herman Bavinck",
     "koreanName": "헤르만 바빙크",
     "period": "19-20세기 네덜란드 개혁파",
-    "tradition": "Reformed",
+    "tradition": "개혁파 정통",
     "summary": "개혁파 교의학을 역사신학, 철학, 근대 사상과의 대화 속에서 종합한 신학자.",
-    "keyTopics": ["계시론", "삼위일체", "창조", "은혜", "교회론"],
-    "majorWorks": ["개혁교의학", "하나님의 큰일"]
+    "keyTopics": [
+      "계시론",
+      "삼위일체",
+      "창조",
+      "은혜",
+      "교회론"
+    ],
+    "majorWorks": [
+      "개혁교의학",
+      "하나님의 큰일"
+    ],
+    "traditionKey": "ref"
   },
   {
     "id": "louis-berkhof",
     "name": "Louis Berkhof",
     "koreanName": "루이스 벌코프",
     "period": "20세기 미국 개혁파",
-    "tradition": "Reformed",
+    "tradition": "개혁파 정통",
     "summary": "개혁파 조직신학을 교육용 체계로 간명하게 정리한 신학자.",
-    "keyTopics": ["조직신학", "신론", "구원론", "교회론", "종말론"],
-    "majorWorks": ["조직신학", "조직신학 서론"]
+    "keyTopics": [
+      "조직신학",
+      "신론",
+      "구원론",
+      "교회론",
+      "종말론"
+    ],
+    "majorWorks": [
+      "조직신학",
+      "조직신학 서론"
+    ],
+    "traditionKey": "ref"
   },
   {
     "id": "thomas-watson",
@@ -36,7 +67,34 @@
     "period": "17세기 청교도",
     "tradition": "Puritan / Reformed",
     "summary": "청교도 경건과 교리교육을 목회적 언어로 풀어낸 신학자이자 설교자.",
-    "keyTopics": ["교리교육", "소요리문답", "경건", "회개", "성화"],
-    "majorWorks": ["웨스트민스터 소요리문답 해설"]
+    "keyTopics": [
+      "교리교육",
+      "소요리문답",
+      "경건",
+      "회개",
+      "성화"
+    ],
+    "majorWorks": [
+      "웨스트민스터 소요리문답 해설"
+    ],
+    "traditionKey": "ref"
+  },
+  {
+    "id": "karl-barth",
+    "name": "Karl Barth",
+    "koreanName": "칼 바르트",
+    "period": "20세기 스위스",
+    "tradition": "신정통주의",
+    "traditionKey": "neo",
+    "summary": "변증법적·신정통주의 신학의 중심 인물. 자연신학 거부와 그리스도 중심 선택론으로 개혁파 정통과 갈라진다.",
+    "keyTopics": [
+      "계시론",
+      "예정론",
+      "자연신학"
+    ],
+    "majorWorks": [
+      "교회교의학",
+      "로마서 강해"
+    ]
   }
 ]

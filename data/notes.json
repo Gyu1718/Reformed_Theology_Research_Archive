@@ -6,7 +6,12 @@
     "status": "active",
     "createdAt": "2026-06-15",
     "body": "이 저장소에는 책 원문 전문을 올리지 않는다. 공개 범위는 서지정보, 목차, 장별 요약, 주제 태그, 성경 본문 색인, 짧은 인용 위치, 연구 메모로 제한한다.",
-    "tags": ["저작권", "GitHub Pages", "공개 저장소", "연구 색인"]
+    "tags": [
+      "저작권",
+      "GitHub Pages",
+      "공개 저장소",
+      "연구 색인"
+    ]
   },
   {
     "id": "note-calvin-core-axis",
@@ -15,9 +20,23 @@
     "status": "active",
     "createdAt": "2026-06-15",
     "body": "이 아카이브는 칼빈 『기독교 강요』를 먼저 탄탄하게 세운 뒤, 벌코프와 바빙크를 그 구조와 비교하는 방식으로 확장한다. 칼빈은 4권 구조 안에서 계시론, 신론, 기독론, 구원론, 교회론, 성례론, 시민 정부를 연결하므로 전체 색인의 기준 좌표가 된다.",
-    "tags": ["칼빈", "기독교 강요", "기준문헌", "개혁신학", "연구구조"],
-    "relatedBooks": ["calvin-institutes"],
-    "relatedTopics": ["revelation", "doctrine-of-god", "christology", "soteriology", "ecclesiology"]
+    "tags": [
+      "칼빈",
+      "기독교 강요",
+      "기준문헌",
+      "개혁신학",
+      "연구구조"
+    ],
+    "relatedBooks": [
+      "calvin-institutes"
+    ],
+    "relatedTopics": [
+      "revelation",
+      "doctrine-of-god",
+      "christology",
+      "soteriology",
+      "ecclesiology"
+    ]
   },
   {
     "id": "note-calvin-thesis-ecclesiology",
@@ -26,9 +45,19 @@
     "status": "draft",
     "createdAt": "2026-06-15",
     "body": "『기독교 강요』 IV.1-IV.3은 교회를 신자의 어머니, 참 교회, 직분과 사역의 질서 안에서 다룬다. 탈교회 시대 공동체성 연구에서는 칼빈의 교회론을 제도주의로 단순화하지 말고, 말씀·성례·권징·공동체적 양육이 신앙 형성에 어떤 필수성을 갖는지 묻는 기준으로 삼을 필요가 있다.",
-    "tags": ["칼빈", "교회론", "탈교회", "공동체성", "교회의 어머니"],
-    "relatedBooks": ["calvin-institutes"],
-    "relatedTopics": ["ecclesiology"]
+    "tags": [
+      "칼빈",
+      "교회론",
+      "탈교회",
+      "공동체성",
+      "교회의 어머니"
+    ],
+    "relatedBooks": [
+      "calvin-institutes"
+    ],
+    "relatedTopics": [
+      "ecclesiology"
+    ]
   },
   {
     "id": "note-calvin-union-with-christ",
@@ -37,9 +66,20 @@
     "status": "draft",
     "createdAt": "2026-06-15",
     "body": "『기독교 강요』 III.1은 성령께서 신자를 그리스도와 연합시키는 끈이 되신다는 구원론의 출발점을 제공한다. 이 축을 따라 믿음, 칭의, 성화, 성찬을 연결하면 칼빈 구원론이 단순한 법정적 칭의론으로 축소되지 않고, 그리스도와의 실제적 참여와 교회적 은혜의 방편까지 이어진다.",
-    "tags": ["칼빈", "그리스도와의 연합", "성령론", "칭의", "성찬"],
-    "relatedBooks": ["calvin-institutes"],
-    "relatedTopics": ["soteriology", "ecclesiology"]
+    "tags": [
+      "칼빈",
+      "그리스도와의 연합",
+      "성령론",
+      "칭의",
+      "성찬"
+    ],
+    "relatedBooks": [
+      "calvin-institutes"
+    ],
+    "relatedTopics": [
+      "soteriology",
+      "ecclesiology"
+    ]
   },
   {
     "id": "note-predestination-comparison",
@@ -48,9 +88,23 @@
     "status": "draft",
     "createdAt": "2026-06-15",
     "body": "칼빈은 예정론을 『기독교 강요』 III.21-III.24에서 구원의 적용 이후에 다룬다. 벌코프는 예정론을 하나님의 작정 교리 안에서 체계적으로 분류한다. 따라서 비교표에서는 위치 차이부터 확인해야 한다. 칼빈은 목회적·성경적 접근을, 벌코프는 교리 분류와 정의를 더 강하게 보여준다.",
-    "tags": ["예정론", "칼빈", "벌코프", "바빙크", "구원론"],
-    "relatedBooks": ["calvin-institutes", "berkhof-systematic-theology", "bavinck-reformed-dogmatics"],
-    "relatedTopics": ["predestination", "doctrine-of-god", "soteriology"]
+    "tags": [
+      "예정론",
+      "칼빈",
+      "벌코프",
+      "바빙크",
+      "구원론"
+    ],
+    "relatedBooks": [
+      "calvin-institutes",
+      "berkhof-systematic-theology",
+      "bavinck-reformed-dogmatics"
+    ],
+    "relatedTopics": [
+      "predestination",
+      "doctrine-of-god",
+      "soteriology"
+    ]
   },
   {
     "id": "note-berkhof-ecclesiology-thesis-link",
@@ -59,9 +113,20 @@
     "status": "draft",
     "createdAt": "2026-06-15",
     "body": "벌코프의 교회론은 가시적 교회와 비가시적 교회, 교회의 표지, 말씀과 성례라는 전통적 개혁파 교회론의 기본 좌표를 제공한다. 탈교회 시대 공동체성 연구에서는 이 틀을 그대로 반복하기보다, 제도 교회 밖 신앙 실천을 평가할 기준과 제도 교회가 여전히 고유하게 수행해야 할 은혜의 방편을 구분하는 데 활용할 수 있다.",
-    "tags": ["벌코프", "교회론", "탈교회", "공동체성", "은혜의 방편"],
-    "relatedBooks": ["berkhof-systematic-theology"],
-    "relatedTopics": ["ecclesiology", "covenant-theology"]
+    "tags": [
+      "벌코프",
+      "교회론",
+      "탈교회",
+      "공동체성",
+      "은혜의 방편"
+    ],
+    "relatedBooks": [
+      "berkhof-systematic-theology"
+    ],
+    "relatedTopics": [
+      "ecclesiology",
+      "covenant-theology"
+    ]
   },
   {
     "id": "note-berkhof-soteriology-sermon-use",
@@ -70,9 +135,19 @@
     "status": "draft",
     "createdAt": "2026-06-15",
     "body": "벌코프의 구원의 적용 구조는 소명, 중생, 회심, 믿음, 칭의, 양자, 성화, 견인, 영화의 관계를 정리하는 데 유용하다. 청소년이나 새신자 교육에서는 순서를 외우게 하기보다, 구원이 하나님의 은혜로 시작되고 그리스도 안에서 성취되며 성령 안에서 삶으로 적용된다는 흐름을 보여주는 방식이 적절하다.",
-    "tags": ["벌코프", "구원론", "구원의 서정", "설교", "교리교육"],
-    "relatedBooks": ["berkhof-systematic-theology"],
-    "relatedTopics": ["soteriology"]
+    "tags": [
+      "벌코프",
+      "구원론",
+      "구원의 서정",
+      "설교",
+      "교리교육"
+    ],
+    "relatedBooks": [
+      "berkhof-systematic-theology"
+    ],
+    "relatedTopics": [
+      "soteriology"
+    ]
   },
   {
     "id": "note-berkhof-next-input-tasks",
@@ -81,7 +156,15 @@
     "status": "active",
     "createdAt": "2026-06-15",
     "body": "다음 입력에서는 실제 한국어판 목차와 페이지를 확인해 publication.translator, publication.koreanPublisher, 각 장의 quotePointers.location을 보강해야 한다. 현재 데이터는 공개용 연구 색인 초안이며 원문 대체물이 아니다.",
-    "tags": ["벌코프", "작업로그", "목차확인", "페이지확인", "데이터보강"],
-    "relatedBooks": ["berkhof-systematic-theology"]
+    "tags": [
+      "벌코프",
+      "작업로그",
+      "목차확인",
+      "페이지확인",
+      "데이터보강"
+    ],
+    "relatedBooks": [
+      "berkhof-systematic-theology"
+    ]
   }
 ]

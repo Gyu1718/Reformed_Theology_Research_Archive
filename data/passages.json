@@ -5,8 +5,16 @@
     "book": "창세기",
     "testament": "Old Testament",
     "summary": "창조, 하나님의 주권, 인간의 하나님의 형상 교리와 연결된다.",
-    "topics": ["창조", "신론", "인간론", "하나님의 형상"],
-    "relatedBooks": ["calvin-institutes", "bavinck-reformed-dogmatics"]
+    "topics": [
+      "창조",
+      "신론",
+      "인간론",
+      "하나님의 형상"
+    ],
+    "relatedBooks": [
+      "calvin-institutes",
+      "bavinck-reformed-dogmatics"
+    ]
   },
   {
     "id": "romans-8-29-30",
@@ -14,8 +22,16 @@
     "book": "로마서",
     "testament": "New Testament",
     "summary": "미리 아심, 예정, 부르심, 칭의, 영화의 구원 서정과 연결된다.",
-    "topics": ["예정론", "구원론", "칭의", "영화"],
-    "relatedBooks": ["calvin-institutes", "berkhof-systematic-theology"]
+    "topics": [
+      "예정론",
+      "구원론",
+      "칭의",
+      "영화"
+    ],
+    "relatedBooks": [
+      "calvin-institutes",
+      "berkhof-systematic-theology"
+    ]
   },
   {
     "id": "romans-9",
@@ -23,8 +39,16 @@
     "book": "로마서",
     "testament": "New Testament",
     "summary": "하나님의 선택, 긍휼, 주권, 이스라엘 문제와 예정론 논의에서 핵심 본문으로 다루어진다.",
-    "topics": ["예정론", "선택", "하나님의 주권", "구원론"],
-    "relatedBooks": ["calvin-institutes", "berkhof-systematic-theology"]
+    "topics": [
+      "예정론",
+      "선택",
+      "하나님의 주권",
+      "구원론"
+    ],
+    "relatedBooks": [
+      "calvin-institutes",
+      "berkhof-systematic-theology"
+    ]
   },
   {
     "id": "ephesians-1-4-5",
@@ -32,8 +56,16 @@
     "book": "에베소서",
     "testament": "New Testament",
     "summary": "그리스도 안에서의 선택과 예정, 양자됨의 은혜를 다루는 본문.",
-    "topics": ["예정론", "그리스도 안에서", "은혜", "양자"],
-    "relatedBooks": ["calvin-institutes", "berkhof-systematic-theology"]
+    "topics": [
+      "예정론",
+      "그리스도 안에서",
+      "은혜",
+      "양자"
+    ],
+    "relatedBooks": [
+      "calvin-institutes",
+      "berkhof-systematic-theology"
+    ]
   },
   {
     "id": "matthew-16-18",
@@ -41,7 +73,14 @@
     "book": "마태복음",
     "testament": "New Testament",
     "summary": "교회의 기초, 그리스도의 교회 세우심, 교회론 논의와 연결된다.",
-    "topics": ["교회론", "그리스도", "교회의 기초"],
-    "relatedBooks": ["calvin-institutes", "berkhof-systematic-theology"]
+    "topics": [
+      "교회론",
+      "그리스도",
+      "교회의 기초"
+    ],
+    "relatedBooks": [
+      "calvin-institutes",
+      "berkhof-systematic-theology"
+    ]
   }
 ]
