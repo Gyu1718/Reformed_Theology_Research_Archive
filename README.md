@@ -13,6 +13,7 @@
 - 본문 연구 노트: 본문별 핵심 질문, 전통별 활용, 설교 활용, 연구 활용 정리
 - 관계 연결: 주제-역사, 학자-역사, 본문-주제/역사, 책-본문 연결을 `relations.js`에서 통합 처리
 - 본문 상세 라우트: `#passage=romans-9`처럼 특정 본문 상세 페이지로 직접 이동
+- 모바일 탭 보강: 작은 화면에서 탭을 pill 형태로 표시하고 활성 탭을 자동으로 시야에 맞춤
 - 개혁전통·신정통주의 역사: 종교개혁, 개혁파, 장로교, 도르트, 웨스트민스터, 개혁파 정통주의, 근대 자유주의 신학, 변증법적 신학, 바르트와 신정통주의 흐름 정리
 - 통합 검색: 책, 학자, 주제, 본문, 역사 항목을 한 번에 검색
 
@@ -34,7 +35,8 @@
 .
 ├─ index.html
 ├─ css/
-│  └─ style.css
+│  ├─ style.css
+│  └─ mobile-tabs.css
 ├─ js/
 │  ├─ app.js
 │  ├─ preload-data.js
@@ -86,10 +88,11 @@
 9. 책과 성경 본문의 양방향 연결은 `data/passages.json`의 `relatedBooks`를 기준으로 자동 생성됩니다.
 10. 자료 사이의 화면 연결은 `js/relations.js`가 담당합니다.
 11. 책 카드의 관련 본문 축약 표시는 `js/compact-related-passages.js`가 담당합니다.
-12. 개혁전통의 역사 항목은 `data/tradition-history.json`에 추가합니다.
-13. 신정통주의 역사 항목은 `data/neo-orthodoxy-history.json`에 추가합니다.
-14. 신정통주의 세부 교리사 항목은 `data/neo-orthodoxy-doctrine-history.json`에 추가합니다.
-15. 표준 주제 분류는 `data/taxonomy.json`을 기준으로 관리합니다.
+12. 모바일 탭 동작은 `js/ui-polish.js`, 시각 규칙은 `css/mobile-tabs.css`가 담당합니다.
+13. 개혁전통의 역사 항목은 `data/tradition-history.json`에 추가합니다.
+14. 신정통주의 역사 항목은 `data/neo-orthodoxy-history.json`에 추가합니다.
+15. 신정통주의 세부 교리사 항목은 `data/neo-orthodoxy-doctrine-history.json`에 추가합니다.
+16. 표준 주제 분류는 `data/taxonomy.json`을 기준으로 관리합니다.
 
 ## 작업 문서
 
