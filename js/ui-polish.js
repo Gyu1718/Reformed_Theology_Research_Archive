@@ -1,7 +1,10 @@
 /* UI polish layer.
-   Adds search reset and compact relation sections without rewriting the core app renderer.
-   CSS rules live in css/style.css. Passage detail routing is handled by relations.js. */
+   Adds search reset, compact relation sections, and mobile tab navigation support
+   without rewriting the core app renderer.
+   CSS rules live in CSS files. Passage detail routing is handled by relations.js. */
 (function () {
+  var tabScrollTicking = false;
+
   function loadJson(path, fallback) {
     try {
       var xhr = new XMLHttpRequest();
@@ -21,7 +24,7 @@
   });
 
   function ensureStyles() {
-    // Styles for this layer are maintained in css/style.css.
+    // Styles for this layer are maintained in CSS files.
   }
 
   function ensureSearchClear() {
@@ -114,6 +117,67 @@
     document.querySelectorAll("#view .card .topic-history-section").forEach(function (section) { collapseSection(section, "관련 역사", false); });
   }
 
+  function updateTabOverflow() {
+    var tabs = document.querySelector(".tabs");
+    if (!tabs) return;
+    var hasOverflow = tabs.scrollWidth > tabs.clientWidth + 4;
+    var hasLeft = tabs.scrollLeft > 4;
+    var hasRight = tabs.scrollLeft + tabs.clientWidth < tabs.scrollWidth - 4;
+    tabs.classList.toggle("tab-overflow-left", hasOverflow && hasLeft);
+    tabs.classList.toggle("tab-overflow-right", hasOverflow && hasRight);
+    tabs.classList.toggle("has-tab-overflow", hasOverflow);
+    var hint = document.querySelector(".tabs-scroll-hint");
+    if (hint) hint.hidden = !hasOverflow;
+  }
+
+  function centerActiveTab() {
+    var tabs = document.querySelector(".tabs");
+    var active = tabs && tabs.querySelector(".tab.is-active");
+    if (!tabs || !active) return;
+    if (tabs.scrollWidth <= tabs.clientWidth + 4) return;
+    active.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    setTimeout(updateTabOverflow, 180);
+  }
+
+  function ensureMobileTabNavigation() {
+    var tabs = document.querySelector(".tabs");
+    if (!tabs) return;
+    tabs.classList.add("tabs-polished");
+
+    var hint = document.querySelector(".tabs-scroll-hint");
+    if (!hint) {
+      hint = document.createElement("p");
+      hint.className = "tabs-scroll-hint";
+      hint.textContent = "탭은 좌우로 밀어 더 볼 수 있습니다.";
+      tabs.insertAdjacentElement("afterend", hint);
+    }
+
+    if (tabs.dataset.mobileTabWired !== "true") {
+      tabs.dataset.mobileTabWired = "true";
+      tabs.addEventListener("scroll", function () {
+        if (tabScrollTicking) return;
+        tabScrollTicking = true;
+        requestAnimationFrame(function () {
+          updateTabOverflow();
+          tabScrollTicking = false;
+        });
+      });
+      tabs.addEventListener("click", function (event) {
+        if (!event.target.closest(".tab")) return;
+        setTimeout(centerActiveTab, 80);
+      });
+      window.addEventListener("resize", function () {
+        setTimeout(function () {
+          updateTabOverflow();
+          centerActiveTab();
+        }, 120);
+      });
+    }
+
+    updateTabOverflow();
+    setTimeout(centerActiveTab, 0);
+  }
+
   function applyPassageRoute() {
     if (window.__RELATIONS_HANDLES_PASSAGE_ROUTE__) return;
     var raw = decodeURIComponent((location.hash || "").replace(/^#/, ""));
@@ -146,6 +210,7 @@
     updateSearchClear();
     ensureFilterNotice();
     compactRelationSections();
+    ensureMobileTabNavigation();
     applyPassageRoute();
   }
 
@@ -154,7 +219,12 @@
     var observer = new MutationObserver(function () { install(); });
     observer.observe(view, { childList: true, subtree: true });
   }
-  window.addEventListener("hashchange", function () { setTimeout(install, 0); });
+  window.addEventListener("hashchange", function () {
+    setTimeout(function () {
+      install();
+      centerActiveTab();
+    }, 0);
+  });
   document.addEventListener("DOMContentLoaded", install);
   setTimeout(install, 0);
 })();
