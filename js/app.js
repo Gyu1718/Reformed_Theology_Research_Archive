@@ -101,16 +101,20 @@ function renderCompare() {
 }
 
 /* ---------------- books ---------------- */
+function quotesHTML(arr) {
+  if (!arr || !arr.length) return "";
+  const items = arr.filter(q => q.text && q.source).map(q =>
+    `<blockquote class="chap-quote">${q.text}<cite>— ${q.source}${q.ref ? ` · ${q.ref}` : ""}</cite></blockquote>`).join("");
+  return items ? `<div class="quotes">${items}</div>` : "";
+}
 function chapterHTML(ch) {
   const ref = `<span class="cref">${ch.ref || "·"}</span>`;
   const head = `${ref}<div class="chap-head"><b>${ch.title}</b>${ch.summary ? `<p>${ch.summary}</p>` : ""}</div>`;
   const tags = (ch.concepts && ch.concepts.length) ? `<div class="tags">${ch.concepts.map(x => `<span class="tag">${x}</span>`).join("")}</div>` : "";
-  const hasQuotes = ch.quotes && ch.quotes.length;
-  const hasDetail = ch.detail || (ch.keyPoints && ch.keyPoints.length) || hasQuotes;
+  const quotes = quotesHTML(ch.quotes);
+  const hasDetail = ch.detail || (ch.keyPoints && ch.keyPoints.length) || quotes;
   if (!hasDetail) return `<div class="chap">${head}</div>${tags ? `<div class="chap-tagrow">${tags}</div>` : ""}`;
   const kp = (ch.keyPoints && ch.keyPoints.length) ? `<ul class="keypoints">${ch.keyPoints.map(k => `<li>${k}</li>`).join("")}</ul>` : "";
-  const quotes = hasQuotes ? `<div class="quotes">${ch.quotes.filter(q => q.text && q.source).map(q =>
-    `<blockquote class="chap-quote">${q.text}<cite>— ${q.source}${q.ref ? ` · ${q.ref}` : ""}</cite></blockquote>`).join("")}</div>` : "";
   return `<details class="chap-x"><summary class="chap chap-sum">${head}</summary><div class="chap-detail">${ch.detail ? `<p class="chap-body">${ch.detail}</p>` : ""}${kp}${quotes}${tags}</div></details>`;
 }
 function bookStructure(b) {
@@ -120,6 +124,7 @@ function bookStructure(b) {
       <div class="part">
         <h4 class="part-h">${p.title}</h4>
         ${p.summary ? `<p class="part-sum">${p.summary}</p>` : ""}
+        ${quotesHTML(p.quotes)}
         ${(p.chapters || []).map(chapterHTML).join("")}
       </div>`).join("");
     return `<details class="structure"><summary>전체 구조 — ${b.parts.length}권 ${total}장 펼치기</summary>${parts}</details>`;
