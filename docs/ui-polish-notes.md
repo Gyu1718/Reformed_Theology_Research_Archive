@@ -10,6 +10,7 @@
 - 검색 후 복귀 어려움
 - 버튼 스타일 파편화
 - 본문 카드의 시각적 식별성 부족
+- 모바일 탭 탐색의 불명확성
 
 ## 2. 구현 파일
 
@@ -18,9 +19,10 @@ js/ui-polish.js
 js/compact-related-passages.js
 js/passage-depth-enhance.js
 css/style.css
+css/mobile-tabs.css
 ```
 
-관계 연결과 본문 상세 라우팅은 `js/relations.js`가 담당합니다. `ui-polish.js`는 검색 초기화, 필터 안내, 카드 접힘 동작을 담당합니다. `compact-related-passages.js`는 책 카드의 관련 본문을 대표 칩으로 축약하고, `passage-depth-enhance.js`는 본문 연구 노트를 카드에 붙입니다. 관련 시각 규칙과 모바일 보강 스타일은 `css/style.css`에서 관리합니다.
+관계 연결과 본문 상세 라우팅은 `js/relations.js`가 담당합니다. `ui-polish.js`는 검색 초기화, 필터 안내, 카드 접힘 동작, 모바일 탭 보조 동작을 담당합니다. `compact-related-passages.js`는 책 카드의 관련 본문을 대표 칩으로 축약하고, `passage-depth-enhance.js`는 본문 연구 노트를 카드에 붙입니다. 기본 시각 규칙은 `css/style.css`에서, 모바일 탭 전용 규칙은 `css/mobile-tabs.css`에서 관리합니다.
 
 ## 3. 주요 기능
 
@@ -55,14 +57,19 @@ css/style.css
 
 이 색상 변수는 `css/style.css`의 `:root`에 정의합니다.
 
+### 모바일 탭 네비게이션
+
+작은 화면에서는 탭을 pill 형태로 표시합니다. 탭 목록이 가로로 넘칠 때는 좌우 페이드 마스크와 안내 문구를 보여 주고, 활성 탭은 자동으로 시야 중앙에 오도록 보정합니다.
+
 ## 4. CSS 관리 원칙
 
 - 보조 스크립트는 DOM 생성과 이벤트 처리만 담당합니다.
 - 검색 초기화, 카드 접힘, 관계 버튼, 본문 상세, 관련 본문 축약, 본문 연구 노트의 시각 규칙은 `css/style.css`에서 관리합니다.
+- 모바일 탭 전용 시각 규칙은 `css/mobile-tabs.css`에서 관리합니다.
 - 새 UI 보조 스크립트를 추가할 때도 가능하면 `<style>` 태그를 직접 만들지 않습니다.
 
 ## 5. 다음 개선 후보
 
-- 모바일 탭 네비게이션 개선
 - 검색 상태를 URL 쿼리 또는 해시에 보존
 - `css/style.css`를 기능별 섹션으로 더 나누어 정리
+- 모바일에서 본문 상세 페이지의 관련 주제/역사/책 버튼 밀도 추가 조정
