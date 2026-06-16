@@ -125,7 +125,8 @@
   var book = buildBerkhofBook(map);
   window.__DATA__ = upsertBook(window.__DATA__, book);
   var quotePacks = [
-    loadJson("./data/quotes/berkhof-systematic-theology-quotes-v1.json", null)
+    loadJson("./data/quotes/berkhof-systematic-theology-quotes-v1.json", null),
+    loadJson("./data/quotes/berkhof-systematic-theology-quotes-v2.json", null)
   ].filter(Boolean);
   window.__DATA__ = attachBerkhofQuotes(window.__DATA__, quotePacks);
 })();
