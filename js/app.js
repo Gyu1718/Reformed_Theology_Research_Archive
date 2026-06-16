@@ -7,7 +7,7 @@ const TRAD = {
 };
 const REF = "개혁파 정통", NEO = "신정통주의";
 
-const DATA = { books: [], authors: [], topics: [], passages: [], notes: [], taxonomy: {} };
+const DATA = { books: [], authors: [], topics: [], passages: [], notes: [], history: [], taxonomy: {} };
 let state = { view: "compare", trad: "all", q: "", concept: null, route: null };
 
 const el = s => document.querySelector(s);
@@ -15,14 +15,16 @@ const view = el("#view");
 const tradClass = t => (TRAD[t] ? TRAD[t].key : "");
 const tradTag = t => `<span class="trad-tag ${tradClass(t)}">${t}</span>`;
 const matchTrad = t => state.trad === "all" || t === state.trad;
-const matchQ = h => !state.q || h.toLowerCase().includes(state.q.toLowerCase());
+const matchQ = h => !state.q || String(h || "").toLowerCase().includes(state.q.toLowerCase());
 const bookTitle = id => { const b = DATA.books.find(x => x.id === id); return b ? b.title : id; };
+const authorTitle = id => { const a = DATA.authors.find(x => x.id === id || x.name === id || x.koreanName === id); return a ? (a.koreanName || a.name) : id; };
+const arr = x => Array.isArray(x) ? x : [];
 
 function parseHash() {
   const raw = decodeURIComponent((location.hash || "").replace(/^#/, ""));
   if (!raw) return null;
   const [type, id] = raw.split("=");
-  if ((type === "book" || type === "topic") && id) return { type, id };
+  if ((type === "book" || type === "topic" || type === "history") && id) return { type, id };
   return null;
 }
 function setRoute(type, id) { location.hash = `${type}=${encodeURIComponent(id)}`; }
@@ -33,6 +35,9 @@ function clearRoute(targetView) {
   render();
 }
 function syncRoute() { state.route = parseHash(); }
+function setActiveTab(viewName) {
+  document.querySelectorAll(".tab").forEach(tab => tab.classList.toggle("is-active", tab.dataset.view === viewName));
+}
 
 function ensureDetailStyles() {
   if (document.querySelector("#detail-page-styles")) return;
@@ -45,7 +50,8 @@ function ensureDetailStyles() {
     .topic-detail-body{padding:22px 28px 30px}.topic-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.topic-panel{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--surface-2)}.topic-panel h4{margin:0 0 10px;font-family:var(--font-display)}
     .topic-section{margin-top:18px;border:1px solid var(--line);border-radius:14px;background:var(--surface-2);padding:18px}.topic-section h4{margin:0 0 12px;font-family:var(--font-display);font-size:1.02rem}.topic-section .muted{color:var(--muted)}.topic-meta-tags{margin-top:14px;display:flex;gap:7px;flex-wrap:wrap}.topic-meta-tags .tag{background:var(--surface);border-color:var(--line-strong)}
     .axis-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.axis-card{border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--surface)}.axis-card b{display:block;margin-bottom:8px}.axis-card p{margin:8px 0;color:var(--muted);font-size:.92rem}.axis-card .axis-label{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.08em;color:var(--muted);display:block;margin-bottom:2px}.topic-list{margin:0;padding-left:19px}.topic-list li{margin:7px 0;color:var(--muted)}.reading-path{display:flex;gap:8px;flex-wrap:wrap}.reading-path span{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 10px;font-size:.85rem;color:var(--muted)}
-    @media(max-width:1020px){.axis-grid{grid-template-columns:1fr}}
+    .history-card .history-period{font-family:var(--font-mono);font-size:.78rem;color:var(--muted);letter-spacing:.04em}.history-card .sum{min-height:72px}.history-detail-body{padding:22px 28px 30px}.history-section{margin-top:18px;border:1px solid var(--line);border-radius:14px;background:var(--surface-2);padding:18px}.history-section h4{margin:0 0 12px;font-family:var(--font-display);font-size:1.04rem}.history-list{margin:0;padding-left:19px}.history-list li{margin:7px 0;color:var(--muted)}.history-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.history-mini{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:14px}.history-mini b{display:block;margin-bottom:6px}.history-mini p,.history-mini span{color:var(--muted);font-size:.9rem}.history-relations{display:flex;gap:8px;flex-wrap:wrap}.history-relations button,.history-relations span{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 10px;font-size:.85rem;color:var(--muted)}.history-relations button{cursor:pointer}.history-relations button:hover{color:var(--ink);border-color:var(--ink)}
+    @media(max-width:1020px){.axis-grid{grid-template-columns:1fr}.history-grid{grid-template-columns:1fr}}
     @media(max-width:860px){.detail-layout{grid-template-columns:1fr}.detail-toc{position:relative;top:auto;max-height:none;border-right:0;border-bottom:1px solid var(--line)}.topic-grid{grid-template-columns:1fr}}
   `;
   document.head.appendChild(style);
@@ -66,6 +72,7 @@ function applyTopicGuides() {
 function afterLoad() {
   ensureDetailStyles();
   applyTopicGuides();
+  if (!Array.isArray(DATA.history)) DATA.history = [];
   const both = DATA.topics.find(hasBoth);
   state.concept = (both || DATA.topics[0] || {}).id || null;
   syncRoute();
@@ -75,15 +82,23 @@ function afterLoad() {
 async function boot() {
   if (window.__DATA__) { Object.assign(DATA, window.__DATA__); afterLoad(); return; }
   view.innerHTML = `<div class="loading">데이터를 불러오는 중…</div>`;
-  const files = ["books", "authors", "topics", "passages", "notes", "taxonomy"];
+  const files = [
+    { key: "books", file: "books" },
+    { key: "authors", file: "authors" },
+    { key: "topics", file: "topics" },
+    { key: "passages", file: "passages" },
+    { key: "notes", file: "notes" },
+    { key: "taxonomy", file: "taxonomy" },
+    { key: "history", file: "tradition-history" }
+  ];
   try {
     const results = await Promise.all(
-      files.map(f => fetch(`./data/${f}.json`, { cache: "no-cache" }).then(r => {
-        if (!r.ok) throw new Error(`${f}.json (${r.status})`);
+      files.map(item => fetch(`./data/${item.file}.json`, { cache: "no-cache" }).then(r => {
+        if (!r.ok) throw new Error(`${item.file}.json (${r.status})`);
         return r.json();
       }))
     );
-    files.forEach((f, i) => { DATA[f] = results[i]; });
+    files.forEach((item, i) => { DATA[item.key] = results[i]; });
     afterLoad();
   } catch (e) {
     view.innerHTML = `<div class="empty"><b>데이터를 불러오지 못했습니다.</b><br>
@@ -104,11 +119,11 @@ const hasNeoPos = t => (t.positions || []).some(p => p.tradition === NEO);
 const hasBoth = t => hasRefPos(t) && hasNeoPos(t);
 
 /* ---------------- shared book rendering ---------------- */
-function quotesHTML(arr) {
-  if (!arr || !arr.length) return "";
-  const items = arr.filter(q => q.text && q.source).map(q =>
+function quotesHTML(items) {
+  if (!items || !items.length) return "";
+  const html = items.filter(q => q.text && q.source).map(q =>
     `<blockquote class="chap-quote">${q.text}<cite>— ${q.source}${q.ref ? ` · ${q.ref}` : ""}</cite></blockquote>`).join("");
-  return items ? `<div class="quotes">${items}</div>` : "";
+  return html ? `<div class="quotes">${html}</div>` : "";
 }
 function chapterHTML(ch) {
   const ref = `<span class="cref">${ch.ref || "·"}</span>`;
@@ -167,7 +182,7 @@ function renderTopicDetail(id) {
   if (!c) { view.innerHTML = `<div class="empty">개념을 찾지 못했습니다.<br><button class="back-btn" data-back="compare">개념 비교로</button></div>`; wireBackButtons(); return; }
   const side = trad => (c.positions || []).filter(p => p.tradition === trad).map(p => `<div class="position"><span class="holder">${p.holder}</span><p class="claim">${p.claim}</p><span class="loc">${p.loc || ""}</span></div>`).join("") || `<p class="pole-empty">입장이 아직 없습니다.</p>`;
   const refs = (c.references || []).map(r => `<div class="ref-item"><b>${bookTitle(r.bookId)}</b> <span class="loc">${r.location || ""}</span><br>${r.note || ""}</div>`).join("");
-  const tags = arr => (arr && arr.length) ? `<div class="topic-meta-tags">${arr.map(x => `<span class="tag">${x}</span>`).join("")}</div>` : "";
+  const tags = items => (items && items.length) ? `<div class="topic-meta-tags">${items.map(x => `<span class="tag">${x}</span>`).join("")}</div>` : "";
   const axes = (c.comparisonAxes || []).map(a => `<div class="axis-card"><b>${a.axis}</b><p><span class="axis-label">개혁파 정통</span>${a.ref}</p><p><span class="axis-label">신정통주의</span>${a.neo}</p></div>`).join("");
   const questions = (c.researchQuestions || []).map(q => `<li>${q}</li>`).join("");
   const reading = (c.readingPath || []).map(x => `<span>${x}</span>`).join("");
@@ -195,7 +210,47 @@ function renderTopicDetail(id) {
     </article>`;
   wireBackButtons();
 }
+function renderHistoryDetail(id) {
+  const h = DATA.history.find(x => x.id === id);
+  if (!h) { view.innerHTML = `<div class="empty">역사 항목을 찾지 못했습니다.<br><button class="back-btn" data-back="history">역사 목록으로</button></div>`; wireBackButtons(); return; }
+  const list = items => arr(items).length ? `<ul class="history-list">${arr(items).map(x => `<li>${x}</li>`).join("")}</ul>` : "";
+  const mini = (items, titleKey, subKey, noteKey) => arr(items).map(item => `<div class="history-mini"><b>${item[titleKey] || item.name || item.title || "항목"}</b>${item[subKey] ? `<span>${item[subKey]}</span>` : ""}${item[noteKey] ? `<p>${item[noteKey]}</p>` : ""}</div>`).join("");
+  const relatedTopics = arr(h.relatedTopics).map(t => `<button type="button" data-topic-jump="${t}">${t}</button>`).join("");
+  const relatedBooks = arr(h.relatedBooks).map(id => `<button type="button" data-book-jump="${id}">📖 ${bookTitle(id)}</button>`).join("");
+  const relatedAuthors = arr(h.relatedAuthors).map(id => `<span>${authorTitle(id)}</span>`).join("");
+  const relatedPassages = arr(h.relatedPassages).map(p => `<span>${p}</span>`).join("");
+  const pointers = arr(h.quotePointers).map(p => `<div class="history-mini"><b>${p.source || "인용 위치"}</b>${p.location ? `<span>${p.location}</span>` : ""}${p.note ? `<p>${p.note}</p>` : ""}</div>`).join("");
+  view.innerHTML = `
+    <article class="detail-page">
+      <header class="detail-hero">
+        <button class="back-btn" data-back="history">← 역사 목록</button>
+        <span class="loci-label" style="display:block;margin-top:14px">HISTORY · ${h.category || "개혁전통의 역사"}</span>
+        <h2>${h.title}</h2>
+        <p class="by">${h.period || ""}</p>
+        ${h.summary ? `<p class="sum">${h.summary}</p>` : ""}
+        ${h.definition ? `<p class="diverge"><b>정의</b>${h.definition}</p>` : ""}
+      </header>
+      <div class="history-detail-body">
+        ${h.historicalBackground ? `<section class="history-section"><h4>역사적 배경</h4><p class="muted">${h.historicalBackground}</p></section>` : ""}
+        ${arr(h.keyQuestions).length ? `<section class="history-section"><h4>핵심 질문</h4>${list(h.keyQuestions)}</section>` : ""}
+        ${arr(h.keyFigures).length ? `<section class="history-section"><h4>주요 인물</h4><div class="history-grid">${mini(h.keyFigures, "name", "", "role")}</div></section>` : ""}
+        ${arr(h.keyDocuments).length ? `<section class="history-section"><h4>주요 문헌</h4><div class="history-grid">${mini(h.keyDocuments, "title", "year", "note")}</div></section>` : ""}
+        ${arr(h.theologicalIssues).length ? `<section class="history-section"><h4>핵심 신학 쟁점</h4><div class="history-relations">${arr(h.theologicalIssues).map(x => `<span>${x}</span>`).join("")}</div></section>` : ""}
+        ${(relatedTopics || relatedBooks || relatedAuthors || relatedPassages) ? `<section class="history-section"><h4>연결 색인</h4><div class="history-relations">${relatedTopics}${relatedBooks}${relatedAuthors}${relatedPassages}</div></section>` : ""}
+        ${arr(h.misunderstandings).length ? `<section class="history-section"><h4>자주 생기는 오해</h4>${list(h.misunderstandings)}</section>` : ""}
+        ${arr(h.researchUses).length ? `<section class="history-section"><h4>연구 활용</h4>${list(h.researchUses)}</section>` : ""}
+        ${pointers ? `<section class="history-section"><h4>인용 위치 메모</h4><div class="history-grid">${pointers}</div></section>` : ""}
+        ${h.personalNote ? `<section class="history-section"><h4>개인 연구 메모</h4><p class="muted">${h.personalNote}</p></section>` : ""}
+      </div>
+    </article>`;
+  wireBackButtons();
+  wireHistoryActions();
+}
 function wireBackButtons() { view.querySelectorAll("[data-back]").forEach(btn => btn.onclick = () => clearRoute(btn.dataset.back)); }
+function wireHistoryActions() {
+  view.querySelectorAll("[data-topic-jump]").forEach(btn => btn.onclick = () => setRoute("topic", btn.dataset.topicJump));
+  view.querySelectorAll("[data-book-jump]").forEach(btn => btn.onclick = () => setRoute("book", btn.dataset.bookJump));
+}
 
 /* ---------------- compare (개념 비교) ---------------- */
 function renderCompare() {
@@ -283,6 +338,37 @@ function renderPassages() {
     </article>`).join("") + `</div>`;
 }
 
+/* ---------------- history ---------------- */
+function historyText(h) {
+  return [
+    h.title, h.period, h.category, h.summary, h.definition, h.historicalBackground, h.personalNote,
+    arr(h.keyQuestions).join(" "),
+    arr(h.keyFigures).map(x => [x.name, x.role].join(" ")).join(" "),
+    arr(h.keyDocuments).map(x => [x.title, x.year, x.note].join(" ")).join(" "),
+    arr(h.theologicalIssues).join(" "),
+    arr(h.relatedTopics).join(" "),
+    arr(h.relatedBooks).join(" "),
+    arr(h.relatedAuthors).join(" "),
+    arr(h.relatedPassages).join(" "),
+    arr(h.misunderstandings).join(" "),
+    arr(h.researchUses).join(" "),
+    arr(h.quotePointers).map(x => [x.source, x.location, x.note].join(" ")).join(" ")
+  ].join(" ");
+}
+function renderHistory() {
+  const items = DATA.history.filter(h => matchQ(historyText(h)));
+  if (!items.length) return emptyState("개혁전통의 역사");
+  view.innerHTML = `<div class="grid">` + items.map(h => `
+    <article class="card history-card">
+      <div class="meta-row"><span class="cat-tag">${h.category || "개혁전통의 역사"}</span><span class="cat-tag history-period">${h.period || ""}</span></div>
+      <h3>${h.title}</h3>
+      <p class="sum">${h.summary || ""}</p>
+      <div class="tags">${arr(h.relatedTopics).slice(0, 10).map(t => `<span class="tag">${t}</span>`).join("")}</div>
+      <div class="card-actions"><button class="open-link" data-history-open="${h.id}">역사 항목 열기 →</button></div>
+    </article>`).join("") + `</div>`;
+  view.querySelectorAll("[data-history-open]").forEach(b => b.onclick = () => setRoute("history", b.dataset.historyOpen));
+}
+
 /* ---------------- notes ---------------- */
 function renderNotes() {
   const items = DATA.notes.filter(n => matchQ(n.title + (n.body || "") + (n.tags || []).join(" ")));
@@ -298,24 +384,26 @@ function renderNotes() {
 
 function emptyState(label) { view.innerHTML = `<div class="grid"><div class="empty"><b>${label}</b>에서 조건에 맞는 항목을 찾지 못했습니다.<br>검색어를 지우거나 전통 필터를 '전체'로 바꿔 보세요.</div></div>`; }
 
-const VIEWS = { compare: renderCompare, books: renderBooks, authors: renderAuthors, passages: renderPassages, notes: renderNotes };
+const VIEWS = { compare: renderCompare, books: renderBooks, authors: renderAuthors, passages: renderPassages, history: renderHistory, notes: renderNotes };
 function render() {
   syncRoute();
-  if (state.route?.type === "book") return renderBookDetail(state.route.id);
-  if (state.route?.type === "topic") return renderTopicDetail(state.route.id);
+  if (state.route?.type === "book") { setActiveTab("books"); return renderBookDetail(state.route.id); }
+  if (state.route?.type === "topic") { setActiveTab("compare"); return renderTopicDetail(state.route.id); }
+  if (state.route?.type === "history") { setActiveTab("history"); return renderHistoryDetail(state.route.id); }
+  setActiveTab(state.view);
   (VIEWS[state.view] || renderCompare)();
 }
 
 function renderCounts() {
   const ch = DATA.books.reduce((n, b) => n + (b.parts ? b.parts.reduce((m, p) => m + (p.chapters ? p.chapters.length : 0), 0) : (b.chapters ? b.chapters.length : 0)), 0);
   const pos = DATA.topics.reduce((n, t) => n + (t.positions ? t.positions.length : 0), 0);
-  el("#countbar").innerHTML = `<b>${DATA.books.length}</b> 책 <span class="sep">·</span><b>${ch}</b> 장 색인 <span class="sep">·</span><b>${DATA.topics.length}</b> 개념 <span class="sep">·</span><b>${pos}</b> 입장 <span class="sep">·</span><b>${DATA.passages.length}</b> 본문 <span class="sep">·</span><b>${DATA.notes.length}</b> 메모`;
+  el("#countbar").innerHTML = `<b>${DATA.books.length}</b> 책 <span class="sep">·</span><b>${ch}</b> 장 색인 <span class="sep">·</span><b>${DATA.topics.length}</b> 개념 <span class="sep">·</span><b>${pos}</b> 입장 <span class="sep">·</span><b>${DATA.passages.length}</b> 본문 <span class="sep">·</span><b>${DATA.history.length}</b> 역사 항목 <span class="sep">·</span><b>${DATA.notes.length}</b> 메모`;
 }
 
 /* ---------------- wiring ---------------- */
 document.querySelectorAll(".tab").forEach(t => t.onclick = () => {
-  document.querySelectorAll(".tab").forEach(x => x.classList.remove("is-active"));
-  t.classList.add("is-active"); state.view = t.dataset.view; clearRoute(state.view);
+  state.view = t.dataset.view;
+  clearRoute(state.view);
 });
 document.querySelectorAll(".chip").forEach(c => c.onclick = () => {
   document.querySelectorAll(".chip").forEach(x => x.setAttribute("aria-pressed", "false"));
