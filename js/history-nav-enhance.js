@@ -83,6 +83,7 @@
     loadScriptOnce("./js/wcf-index-enhance.js");
     loadScriptOnce("./js/belgic-index-enhance.js");
     loadScriptOnce("./js/dort-index-enhance.js");
+    loadScriptOnce("./js/ancient-creeds-text-enhance.js");
   }
 
   ensureStyles();
