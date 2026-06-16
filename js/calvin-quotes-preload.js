@@ -28,12 +28,19 @@
     };
   }
 
-  function attachCalvinQuotes(data, quotePack) {
-    if (!data || !Array.isArray(data.books) || !quotePack || !Array.isArray(quotePack.quotes)) return data;
+  function attachCalvinQuotes(data, quotePacks) {
+    if (!data || !Array.isArray(data.books)) return data;
+    var packs = Array.isArray(quotePacks) ? quotePacks : [quotePacks];
+    var quotes = [];
+    packs.forEach(function (pack) {
+      if (pack && Array.isArray(pack.quotes)) quotes = quotes.concat(pack.quotes);
+    });
+    if (!quotes.length) return data;
+
     var book = data.books.find(function (item) { return item && item.id === "calvin-institutes"; });
     if (!book || !Array.isArray(book.parts)) return data;
 
-    var quotes = quotePack.quotes.filter(function (quote) { return quote.book === "calvin-institutes"; });
+    quotes = quotes.filter(function (quote) { return quote.book === "calvin-institutes"; });
     book.parts.forEach(function (part) {
       (part.chapters || []).forEach(function (chapter) {
         var matched = quotes.filter(function (quote) {
@@ -54,6 +61,9 @@
     return data;
   }
 
-  var quotePack = loadJson("./data/quotes/calvin-institutes-quotes-v1.json", null);
-  window.__DATA__ = attachCalvinQuotes(window.__DATA__, quotePack);
+  var quotePacks = [
+    loadJson("./data/quotes/calvin-institutes-quotes-v1.json", null),
+    loadJson("./data/quotes/calvin-institutes-quotes-v2.json", null)
+  ].filter(Boolean);
+  window.__DATA__ = attachCalvinQuotes(window.__DATA__, quotePacks);
 })();
