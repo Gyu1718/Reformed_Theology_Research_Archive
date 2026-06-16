@@ -145,3 +145,11 @@
     taxonomy: loadJson("./data/taxonomy.json", {})
   };
 })();
+
+document.addEventListener("click", function (event) {
+  var link = event.target.closest && event.target.closest('.detail-toc a[href^="#part-"]');
+  if (!link) return;
+  event.preventDefault();
+  var target = document.querySelector(link.getAttribute("href"));
+  if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+});
