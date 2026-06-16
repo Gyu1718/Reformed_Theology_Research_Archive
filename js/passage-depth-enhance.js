@@ -1,5 +1,6 @@
 /* Passage depth enhancer.
-   Renders key questions, tradition uses, sermon uses, and research uses on passage cards. */
+   Renders key questions, tradition uses, sermon uses, and research uses on passage cards.
+   CSS rules live in css/style.css. */
 (function () {
   function loadJson(path, fallback) {
     try {
@@ -52,19 +53,7 @@
   }
 
   function ensureStyles() {
-    if (document.querySelector("#passage-depth-enhance-styles")) return;
-    var style = document.createElement("style");
-    style.id = "passage-depth-enhance-styles";
-    style.textContent = "\
-      .passage-depth-section{margin-top:14px;border-top:1px solid var(--line);padding-top:12px;}\
-      .passage-depth-section summary{cursor:pointer;font-family:var(--font-display);font-size:.96rem;color:var(--ink);} \
-      .passage-depth-body{margin-top:12px;display:grid;gap:12px;}\
-      .passage-depth-block{border:1px solid var(--line);border-radius:11px;background:var(--surface-2);padding:12px;}\
-      .passage-depth-block>b{display:block;margin-bottom:7px;font-size:.88rem;}\
-      .passage-depth-block ul{margin:0;padding-left:18px;}\
-      .passage-depth-block li{margin:6px 0;color:var(--muted);font-size:.87rem;line-height:1.55;}\
-    ";
-    document.head.appendChild(style);
+    // Styles for this layer are maintained in css/style.css.
   }
 
   ensureStyles();
