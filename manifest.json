@@ -1,0 +1,13 @@
+{
+  "id": "barth-improvement-upload-pack-v2",
+  "createdAt": "2026-06-16T07:39:50.050428",
+  "files": [
+    "data/barth-section-contexts-v2.json",
+    "js/barth-section-context-normalize-v2.js",
+    "js/quote-context-enhance-v2.js",
+    "docs/index-script-order-snippet-v2.txt",
+    "docs/barth-improvement-upload-guide-v2.md",
+    "README_APPLY.md"
+  ],
+  "notes": "v2 expands Barth section explanations from shallow summaries to structured research-oriented explanations."
+}
