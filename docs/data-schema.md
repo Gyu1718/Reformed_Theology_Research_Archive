@@ -111,7 +111,81 @@
 }
 ```
 
-## 6. 태그 관리 원칙
+## 6. tradition-history.json
+
+개혁전통의 역사 항목 데이터입니다. 전체 교회사 서술이 아니라, 개혁신학의 주요 교리 주제와 문헌을 이해하는 데 필요한 역사적 맥락을 정리합니다.
+
+```json
+{
+  "id": "reformed-orthodoxy",
+  "title": "개혁파 정통주의란 무엇인가",
+  "period": "16세기 후반-17세기",
+  "category": "개혁전통의 역사",
+  "summary": "개혁파 정통주의는 종교개혁 이후 개혁파 신학이 신앙고백, 논쟁, 교육, 조직신학의 형태로 체계화된 시기다.",
+  "definition": "핵심 용어 정의",
+  "historicalBackground": "역사적 배경 요약",
+  "keyQuestions": [
+    "이 항목이 답하려는 핵심 질문"
+  ],
+  "keyFigures": [
+    {
+      "name": "Francis Turretin",
+      "role": "개혁파 정통주의 조직신학의 대표적 체계화"
+    }
+  ],
+  "keyDocuments": [
+    {
+      "title": "웨스트민스터 신앙고백",
+      "year": "1646",
+      "note": "장로교 신앙고백 전통의 대표 문서"
+    }
+  ],
+  "theologicalIssues": [
+    "신학방법론",
+    "예정론",
+    "언약신학"
+  ],
+  "relatedTopics": [
+    "신학방법론",
+    "예정론",
+    "언약신학"
+  ],
+  "relatedBooks": [
+    "calvin-institutes"
+  ],
+  "relatedAuthors": [
+    "john-calvin",
+    "herman-bavinck"
+  ],
+  "relatedPassages": [],
+  "misunderstandings": [
+    "자주 생기는 오해를 직접 요약합니다."
+  ],
+  "researchUses": [
+    "설교, 논문, 교리교육, 글쓰기에서 활용할 수 있는 방향"
+  ],
+  "quotePointers": [
+    {
+      "source": "책 또는 문헌명",
+      "location": "권/장/절 또는 페이지",
+      "note": "긴 원문을 붙이지 않고 인용 위치와 활용 메모만 적습니다."
+    }
+  ],
+  "personalNote": "내 연구와의 연결 메모",
+  "status": "draft"
+}
+```
+
+### 필수 필드
+
+- `id`: 영문 소문자와 하이픈 사용
+- `title`: 역사 항목 제목
+- `period`: 시대 또는 연도 범위
+- `summary`: 항목 요약
+- `relatedTopics`: 주제 태그 연결
+- `status`: `draft`, `review`, `published` 중 하나로 관리
+
+## 7. 태그 관리 원칙
 
 태그는 너무 세분화하지 않고, 먼저 대주제를 고정합니다.
 
@@ -138,9 +212,10 @@
 - 성경신학
 - 신학방법론
 
-## 7. 입력 원칙
+## 8. 입력 원칙
 
 - 원문 전문을 붙여 넣지 않습니다.
 - 요약은 직접 작성합니다.
 - 인용은 짧게 제한하고, 가능하면 페이지 또는 장절 위치만 기록합니다.
 - `id`는 나중에 링크와 검색에 사용되므로 한 번 정하면 가급적 바꾸지 않습니다.
+- 역사 항목은 교리 주제, 책, 학자, 본문, 연구 메모와 연결되도록 입력합니다.
