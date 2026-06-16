@@ -1,8 +1,8 @@
 # Reformed Theology Research Archive
 
-개혁신학 연구 자료를 책, 학자, 주제, 성경 본문, 개혁전통·신정통주의 역사, 연구 메모 단위로 연결해 정리하는 정적 HTML 아카이브입니다.
+개혁신학 연구 자료를 책, 학자, 주제, 성경 본문, 본문 연구 노트, 개혁전통·신정통주의 역사 단위로 연결해 정리하는 정적 HTML 아카이브입니다.
 
-이 저장소의 목표는 저작권 있는 원문 전체를 공개하는 것이 아니라, 연구와 인용을 돕기 위한 **서지정보, 목차, 요약, 주제 색인, 성경 본문 색인, 개혁전통·신정통주의 역사 색인, 짧은 인용 위치, 연구 메모**를 체계적으로 관리하는 것입니다.
+이 저장소의 목표는 저작권 있는 원문 전체를 공개하는 것이 아니라, 연구와 인용을 돕기 위한 **서지정보, 목차, 요약, 주제 색인, 성경 본문 색인, 본문 연구 노트, 개혁전통·신정통주의 역사 색인, 짧은 인용 위치**를 체계적으로 관리하는 것입니다.
 
 ## 핵심 기능
 
@@ -15,8 +15,7 @@
 - 주제-역사 연결: 계시론, 성경론, 자연신학, 예정론 같은 개념 카드에서 관련 역사 항목으로 이동
 - 학자-역사 연결: 학자 카드에서 관련 역사 항목으로 이동
 - 본문-주제-역사 연결: 성경 본문 카드에서 관련 주제와 역사 항목으로 이동
-- 통합 검색: 책, 학자, 주제, 본문, 역사 항목, 메모를 한 번에 검색
-- 연구 메모: 설교, 논문, 글쓰기용 아이디어와 인용 위치 관리
+- 통합 검색: 책, 학자, 주제, 본문, 역사 항목을 한 번에 검색
 
 ## 공개 저장소 원칙
 
@@ -54,7 +53,6 @@
 │  ├─ topic-history-links.json
 │  ├─ passages.json
 │  ├─ passage-theology-links.json
-│  ├─ notes.json
 │  ├─ tradition-history.json
 │  ├─ neo-orthodoxy-history.json
 │  ├─ neo-orthodoxy-doctrine-history.json
@@ -62,7 +60,6 @@
 ├─ templates/
 │  ├─ book-entry.template.json
 │  ├─ topic-entry.template.json
-│  ├─ note-entry.template.json
 │  └─ history-entry.template.json
 └─ docs/
    ├─ project-plan.md
@@ -87,7 +84,6 @@
 10. 신정통주의 역사 항목은 `data/neo-orthodoxy-history.json`에 추가합니다.
 11. 신정통주의 세부 교리사 항목은 `data/neo-orthodoxy-doctrine-history.json`에 추가합니다.
 12. 표준 주제 분류는 `data/taxonomy.json`을 기준으로 관리합니다.
-13. 연구 메모는 `data/notes.json`에 추가합니다.
 
 ## 작업 문서
 
@@ -102,7 +98,6 @@
 
 - [`templates/book-entry.template.json`](templates/book-entry.template.json): 책 데이터 입력 양식
 - [`templates/topic-entry.template.json`](templates/topic-entry.template.json): 주제 데이터 입력 양식
-- [`templates/note-entry.template.json`](templates/note-entry.template.json): 연구 메모 입력 양식
 - [`templates/history-entry.template.json`](templates/history-entry.template.json): 역사 항목 입력 양식
 
 ## 1차 개발 범위
