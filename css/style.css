@@ -182,8 +182,26 @@ footer{border-top:1px solid var(--line);padding:24px 0;color:var(--faint);font-s
 .relation-collapse[open]>summary::after{content:'접기';}
 .relation-collapse-body{padding-top:11px;}
 .relation-collapse-body>section{margin-top:0;border-top:0;padding-top:0;}
-.passage-depth-section{margin-top:12px;}
 .detail-toc{top:var(--sticky-offset)!important;}
+
+/* compact related passage cards */
+#view .card .book-passage-section.is-compact{margin-top:12px;padding-top:11px;border-top:1px solid var(--line);}
+#view .card .book-passage-section.is-compact h4{margin:0 0 8px;font-family:var(--font-display);font-size:.88rem;color:var(--muted);}
+.compact-passage-row{display:flex;flex-wrap:wrap;gap:6px;}
+.compact-passage-chip{display:inline-flex;align-items:center;width:auto;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 9px;cursor:pointer;color:var(--ink);text-align:left;}
+.compact-passage-chip b{font-size:.8rem;line-height:1.2;font-weight:600;}
+.compact-passage-chip:hover{border-color:var(--ink);background:var(--surface-2);}
+.compact-more-link{display:inline-block;margin-top:8px;padding:0;border:0;background:transparent;color:var(--muted);font-size:.8rem;line-height:1.4;cursor:pointer;text-align:left;}
+.compact-more-link:hover{color:var(--ink);text-decoration:underline;}
+
+/* passage depth cards */
+.passage-depth-section{margin-top:14px;border-top:1px solid var(--line);padding-top:12px;}
+.passage-depth-section summary{cursor:pointer;font-family:var(--font-display);font-size:.96rem;color:var(--ink);}
+.passage-depth-body{margin-top:12px;display:grid;gap:12px;}
+.passage-depth-block{border:1px solid var(--line);border-radius:11px;background:var(--surface-2);padding:12px;}
+.passage-depth-block>b{display:block;margin-bottom:7px;font-size:.88rem;}
+.passage-depth-block ul{margin:0;padding-left:18px;}
+.passage-depth-block li{margin:6px 0;color:var(--muted);font-size:.87rem;line-height:1.55;}
 
 @media (max-width:900px){
   .detail-hero .book-passage-grid,.passage-detail-grid{grid-template-columns:1fr;}
