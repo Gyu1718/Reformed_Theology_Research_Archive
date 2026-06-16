@@ -146,7 +146,36 @@
 }
 ```
 
-## 7. notes.json
+## 7. passage-theology-links.json
+
+성경 본문과 주제·역사 항목을 연결하는 데이터입니다. `passages.json`의 본문 ID를 기준으로 `topics.json`의 주제 ID와 역사 항목 ID를 함께 연결합니다.
+
+```json
+{
+  "passageId": "romans-9",
+  "reference": "로마서 9장",
+  "topicIds": [
+    "predestination",
+    "doctrine-of-god"
+  ],
+  "historyIds": [
+    "synod-of-dort",
+    "reformed-orthodoxy",
+    "barth-election-doctrine"
+  ],
+  "note": "로마서 9장은 예정론, 선택과 유기, 하나님의 주권, 이스라엘 문제를 다루는 핵심 본문으로 도르트와 바르트 비교에서 반드시 함께 보아야 한다."
+}
+```
+
+### 연결 원칙
+
+- `passageId`: 가능하면 `data/passages.json`에 존재하는 본문 id를 사용합니다.
+- `reference`: 화면 카드의 본문 표기와 일치시킵니다. 예: `로마서 9장`.
+- `topicIds`: 반드시 `data/topics.json`에 존재하는 주제 id를 사용합니다.
+- `historyIds`: 세 역사 데이터 파일 중 하나에 존재하는 id를 사용합니다.
+- 아직 `passages.json`에 없는 본문도 확장 후보로 기록할 수 있지만, 화면에는 본문 카드가 생긴 뒤 표시됩니다.
+
+## 8. notes.json
 
 연구 메모 데이터입니다.
 
@@ -162,7 +191,7 @@
 }
 ```
 
-## 8. tradition-history.json / neo-orthodoxy-history.json / neo-orthodoxy-doctrine-history.json
+## 9. tradition-history.json / neo-orthodoxy-history.json / neo-orthodoxy-doctrine-history.json
 
 역사 항목 데이터입니다. `tradition-history.json`은 개혁전통의 역사 항목을, `neo-orthodoxy-history.json`은 근대 자유주의 신학·변증법적 신학·칼 바르트와 신정통주의 항목을, `neo-orthodoxy-doctrine-history.json`은 자연신학 논쟁과 바르트 예정론 같은 세부 교리사 항목을 관리합니다. 전체 교회사 서술이 아니라, 개혁신학과 신정통주의의 주요 교리 주제와 문헌을 이해하는 데 필요한 역사적 맥락을 정리합니다.
 
@@ -236,7 +265,7 @@
 - `relatedTopics`: 주제 태그 연결
 - `status`: `draft`, `review`, `published` 중 하나로 관리
 
-## 9. 태그 관리 원칙
+## 10. 태그 관리 원칙
 
 태그는 너무 세분화하지 않고, 먼저 대주제를 고정합니다.
 
@@ -267,7 +296,7 @@
 - 신정통주의
 - 변증법적 신학
 
-## 10. 입력 원칙
+## 11. 입력 원칙
 
 - 원문 전문을 붙여 넣지 않습니다.
 - 요약은 직접 작성합니다.
