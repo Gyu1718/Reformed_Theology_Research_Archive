@@ -15,7 +15,8 @@
 
   var historyItems = [].concat(
     loadJson("./data/tradition-history.json", []),
-    loadJson("./data/neo-orthodoxy-history.json", [])
+    loadJson("./data/neo-orthodoxy-history.json", []),
+    loadJson("./data/neo-orthodoxy-doctrine-history.json", [])
   ).filter(function (item) { return item && item.id; });
 
   function currentHistoryId() {
