@@ -58,7 +58,33 @@
 }
 ```
 
-## 3. topics.json
+## 3. author-history-links.json
+
+학자와 역사 항목을 연결하는 데이터입니다. `authors.json`의 학자 ID와 세 역사 데이터 파일의 역사 항목 ID를 연결합니다.
+
+```json
+{
+  "authorId": "karl-barth",
+  "authorName": "칼 바르트",
+  "historyIds": [
+    "modern-liberal-theology-background",
+    "dialectical-theology",
+    "barth-and-neo-orthodoxy",
+    "natural-theology-debate",
+    "barth-election-doctrine"
+  ],
+  "note": "바르트는 신정통주의의 중심 인물이며 계시론, 자연신학, 예정론, 개혁파 정통과의 비교에서 핵심 허브가 된다."
+}
+```
+
+### 연결 원칙
+
+- `authorId`: 반드시 `data/authors.json`에 존재하는 학자 id를 사용합니다.
+- `historyIds`: `tradition-history.json`, `neo-orthodoxy-history.json`, `neo-orthodoxy-doctrine-history.json` 중 하나에 존재하는 id를 사용합니다.
+- 직접 관련이 약한 경우에는 억지로 연결하지 않습니다.
+- 아직 세부 역사 항목이 없는 학자는 임시로 `history-index`에 연결할 수 있으나, 추후 별도 항목을 만들면 교체합니다.
+
+## 4. topics.json
 
 교리와 연구 주제 단위 데이터입니다.
 
@@ -79,7 +105,7 @@
 }
 ```
 
-## 4. topic-history-links.json
+## 5. topic-history-links.json
 
 주제와 역사 항목을 연결하는 데이터입니다. `topics.json`의 주제 ID와 세 역사 데이터 파일의 역사 항목 ID를 연결합니다.
 
@@ -104,7 +130,7 @@
 - 연결은 주제를 설명하는 데 실제 역사적 배경을 제공할 때만 추가합니다.
 - 한 주제에 너무 많은 역사 항목을 붙이지 않고, 핵심 허브 중심으로 연결합니다.
 
-## 5. passages.json
+## 6. passages.json
 
 성경 본문 단위 데이터입니다.
 
@@ -120,7 +146,7 @@
 }
 ```
 
-## 6. notes.json
+## 7. notes.json
 
 연구 메모 데이터입니다.
 
@@ -136,7 +162,7 @@
 }
 ```
 
-## 7. tradition-history.json / neo-orthodoxy-history.json / neo-orthodoxy-doctrine-history.json
+## 8. tradition-history.json / neo-orthodoxy-history.json / neo-orthodoxy-doctrine-history.json
 
 역사 항목 데이터입니다. `tradition-history.json`은 개혁전통의 역사 항목을, `neo-orthodoxy-history.json`은 근대 자유주의 신학·변증법적 신학·칼 바르트와 신정통주의 항목을, `neo-orthodoxy-doctrine-history.json`은 자연신학 논쟁과 바르트 예정론 같은 세부 교리사 항목을 관리합니다. 전체 교회사 서술이 아니라, 개혁신학과 신정통주의의 주요 교리 주제와 문헌을 이해하는 데 필요한 역사적 맥락을 정리합니다.
 
@@ -210,7 +236,7 @@
 - `relatedTopics`: 주제 태그 연결
 - `status`: `draft`, `review`, `published` 중 하나로 관리
 
-## 8. 태그 관리 원칙
+## 9. 태그 관리 원칙
 
 태그는 너무 세분화하지 않고, 먼저 대주제를 고정합니다.
 
@@ -241,7 +267,7 @@
 - 신정통주의
 - 변증법적 신학
 
-## 9. 입력 원칙
+## 10. 입력 원칙
 
 - 원문 전문을 붙여 넣지 않습니다.
 - 요약은 직접 작성합니다.
