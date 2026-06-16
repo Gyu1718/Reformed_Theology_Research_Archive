@@ -1,5 +1,5 @@
 /* Supplemental data preloader.
-   Loads default archive data plus Barth structure and quote files before app.js starts. */
+   Loads default archive data plus Barth and Calvin structure/quote files before app.js starts. */
 (function () {
   function loadJson(path, fallback) {
     try {
@@ -113,11 +113,61 @@
     return books;
   }
 
+  function calvinChapterFromString(raw, partTitle) {
+    var m = String(raw).match(/^([IVX]+\.\d+)\s+(.+)$/);
+    var ref = m ? m[1] : String(raw);
+    var title = m ? m[2] : String(raw);
+    var concepts = ["개혁파 정통", "기독교 강요"];
+    if (/성경|성령의 증거|계시/.test(title)) concepts.push("성경론");
+    if (/삼위/.test(title)) concepts.push("삼위일체");
+    if (/섭리|창조/.test(title)) concepts.push("창조론", "섭리");
+    if (/그리스도|중보자|성육신|공로/.test(title)) concepts.push("기독론");
+    if (/믿음|칭의|회개|중생|자유|기도|예정|부활/.test(title)) concepts.push("구원론");
+    if (/교회|직분|권징|성례|세례|성찬|국가/.test(title)) concepts.push("교회론");
+    return {
+      ref: ref,
+      title: title,
+      summary: "칼빈은 『기독교 강요』 " + ref + "에서 ‘" + title + "’을 개혁파 교리 체계 안에서 다룹니다.",
+      detail: "이 장은 " + partTitle + "에 속합니다. 칼빈은 이 주제를 성경의 증언, 경건의 목적, 교회의 가르침이라는 축 안에서 배열하며, 사변적 논의가 아니라 하나님을 아는 지식과 그리스도 안의 구원에 이르는 실천적 교리를 세우고자 합니다.",
+      keyPoints: ["성경적 근거", "경건과 교리의 결합", "개혁파 정통 교리 체계 안의 위치"],
+      concepts: concepts.filter(function (v, i, a) { return a.indexOf(v) === i; })
+    };
+  }
+  function applyCalvinStructureMap(books, calvinMap) {
+    if (!calvinMap || !Array.isArray(calvinMap.parts)) return books;
+    var parts = calvinMap.parts.map(function (part) {
+      return {
+        title: part.title,
+        summary: part.summary,
+        chapters: (part.chapters || []).map(function (chapter) { return calvinChapterFromString(chapter, part.title); })
+      };
+    });
+    books.forEach(function (book) {
+      if (book && book.id === "calvin-institutes") {
+        book.title = "기독교 강요";
+        book.author = "존 칼빈";
+        book.originalAuthor = "John Calvin";
+        book.tradition = "개혁파 정통";
+        book.traditionKey = "ref";
+        book.category = "Systematic Theology / Reformation Theology";
+        book.language = "Korean";
+        book.summary = "칼빈의 『기독교 강요』는 창조주 하나님 지식, 구속주 그리스도 지식, 성령을 통한 은혜의 적용, 교회와 성례와 시민 정부를 4권 80장 구조로 배열한 개혁파 신학의 대표 문헌입니다.";
+        book.researchUse = "바르트 『교회교의학』과 비교할 때, 칼빈은 성경의 권위, 그리스도와의 연합, 칭의와 성화, 예정, 교회와 성례를 개혁파 정통의 고전적 질서 안에서 제시합니다.";
+        book.topics = ["신학서론", "성경론", "삼위일체", "신론", "기독론", "구원론", "칭의", "성화", "예정론", "교회론", "성례론", "국가론"];
+        book.parts = parts;
+        book.edition = "『기독교 강요』 4권 80장 한국어 구조 색인";
+      }
+    });
+    return books;
+  }
+
   var books = loadJson("./data/books.json", []);
   var extraBooks = loadJson("./data/books-barth.json", []);
   var combinedBooks = dedupeBooks(books.concat(Array.isArray(extraBooks) ? extraBooks : []));
   var barthStructure = loadJson("./data/books-barth-structure-map.json", null);
   combinedBooks = dedupeBooks(applyBarthStructureMap(combinedBooks, barthStructure));
+  var calvinStructure = loadJson("./data/books-calvin-structure-map.json", null);
+  combinedBooks = dedupeBooks(applyCalvinStructureMap(combinedBooks, calvinStructure));
   var quotePacks = [
     loadJson("./data/quotes/barth-translated-sentence-quotes-v1.json", null),
     loadJson("./data/quotes/barth-translated-sentence-quotes-v4.json", null),
