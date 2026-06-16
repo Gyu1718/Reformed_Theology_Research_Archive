@@ -31,7 +31,22 @@
     if (number <= 11) return "제4주일";
     if (number <= 15) return "제5주일";
     if (number <= 19) return "제6주일";
-    if (number <= 25) return "제7주일";
+    if (number <= 23) return "제7주일";
+    if (number <= 25) return "제8주일";
+    if (number <= 26) return "제9주일";
+    if (number <= 28) return "제10주일";
+    if (number <= 30) return "제11주일";
+    if (number <= 32) return "제12주일";
+    if (number <= 34) return "제13주일";
+    if (number <= 36) return "제14주일";
+    if (number <= 39) return "제15주일";
+    if (number <= 44) return "제16주일";
+    if (number <= 45) return "제17주일";
+    if (number <= 49) return "제18주일";
+    if (number <= 52) return "제19주일";
+    if (number <= 53) return "제20주일";
+    if (number <= 56) return "제21주일";
+    if (number <= 58) return "제22주일";
     return "추후 수록";
   }
 
@@ -107,10 +122,11 @@
     var page = document.querySelector(".confession-page");
     if (!page || page.querySelector(".heidelberg-text-section")) return;
     ensureStyles();
-    var groups = ["전체", "제1주일", "제2주일", "제3주일", "제4주일", "제5주일", "제6주일", "제7주일"];
+    var groups = ["전체"];
+    for (var i = 1; i <= 22; i += 1) groups.push("제" + i + "주일");
     var section = document.createElement("section");
     section.className = "heidelberg-text-section";
-    section.innerHTML = '<div class="heidelberg-text-head"><div><h4>하이델베르크 요리문답 자체 번역</h4><p>현재 제1–7주일, 문 1–25까지 수록했습니다. 기존 한국어 번역본을 복사하지 않은 공개 저장소용 자체 번역입니다.</p></div><span class="tag"><b class="heidelberg-text-count">0</b> 문답</span></div><div class="heidelberg-text-tools">' + groups.map(function (group, index) { return '<button type="button" class="heidelberg-filter ' + (index === 0 ? 'is-active' : '') + '" data-heidelberg-filter="' + esc(group === "전체" ? "" : group) + '">' + esc(group) + '</button>'; }).join("") + '</div><div class="heidelberg-qa-grid"></div>';
+    section.innerHTML = '<div class="heidelberg-text-head"><div><h4>하이델베르크 요리문답 자체 번역</h4><p>현재 제1–22주일, 문 1–58까지 수록했습니다. 기존 한국어 번역본을 복사하지 않은 공개 저장소용 자체 번역입니다.</p></div><span class="tag"><b class="heidelberg-text-count">0</b> 문답</span></div><div class="heidelberg-text-tools">' + groups.map(function (group, index) { return '<button type="button" class="heidelberg-filter ' + (index === 0 ? 'is-active' : '') + '" data-heidelberg-filter="' + esc(group === "전체" ? "" : group) + '">' + esc(group) + '</button>'; }).join("") + '</div><div class="heidelberg-qa-grid"></div>';
     page.appendChild(section);
     renderCards(section, "");
     section.querySelectorAll("[data-heidelberg-filter]").forEach(function (button) {
