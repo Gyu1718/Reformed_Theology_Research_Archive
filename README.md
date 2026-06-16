@@ -68,6 +68,7 @@
    ├─ project-plan.md
    ├─ history-plan.md
    ├─ data-schema.md
+   ├─ passage-depth-schema.md
    ├─ input-workflow.md
    └─ copyright-policy.md
 ```
@@ -93,6 +94,7 @@
 - [`docs/project-plan.md`](docs/project-plan.md): 전체 기획서
 - [`docs/history-plan.md`](docs/history-plan.md): 역사 파트 설계안
 - [`docs/data-schema.md`](docs/data-schema.md): JSON 데이터 입력 규칙
+- [`docs/passage-depth-schema.md`](docs/passage-depth-schema.md): 본문 연구 노트 입력 규칙
 - [`docs/input-workflow.md`](docs/input-workflow.md): 책 한 권을 추가할 때 따르는 실제 작업 순서
 - [`docs/copyright-policy.md`](docs/copyright-policy.md): 공개 저장소 운영 원칙
 
