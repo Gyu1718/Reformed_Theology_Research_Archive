@@ -1,5 +1,5 @@
 /* History data preloader.
-   Adds tradition-history.json to the preloaded DATA object before app.js starts. */
+   Adds Reformed tradition and neo-orthodox history data to the preloaded DATA object before app.js starts. */
 (function () {
   function loadJson(path, fallback) {
     try {
@@ -14,5 +14,7 @@
   }
 
   if (!window.__DATA__) window.__DATA__ = {};
-  window.__DATA__.history = loadJson("./data/tradition-history.json", []);
+  var reformedHistory = loadJson("./data/tradition-history.json", []);
+  var neoOrthodoxHistory = loadJson("./data/neo-orthodoxy-history.json", []);
+  window.__DATA__.history = [].concat(reformedHistory || [], neoOrthodoxHistory || []);
 })();
