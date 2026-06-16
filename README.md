@@ -1,8 +1,8 @@
 # Reformed Theology Research Archive
 
-개혁신학 연구 자료를 책, 학자, 주제, 성경 본문, 연구 메모 단위로 연결해 정리하는 정적 HTML 아카이브입니다.
+개혁신학 연구 자료를 책, 학자, 주제, 성경 본문, 개혁전통의 역사, 연구 메모 단위로 연결해 정리하는 정적 HTML 아카이브입니다.
 
-이 저장소의 목표는 저작권 있는 원문 전체를 공개하는 것이 아니라, 연구와 인용을 돕기 위한 **서지정보, 목차, 요약, 주제 색인, 성경 본문 색인, 짧은 인용 위치, 연구 메모**를 체계적으로 관리하는 것입니다.
+이 저장소의 목표는 저작권 있는 원문 전체를 공개하는 것이 아니라, 연구와 인용을 돕기 위한 **서지정보, 목차, 요약, 주제 색인, 성경 본문 색인, 개혁전통의 역사 색인, 짧은 인용 위치, 연구 메모**를 체계적으로 관리하는 것입니다.
 
 ## 핵심 기능
 
@@ -10,7 +10,8 @@
 - 학자별 보기: 칼빈, 바빙크, 벌코프 등 학자 중심 색인
 - 주제별 보기: 계시론, 신론, 예정론, 언약신학, 교회론 등 교리 주제 정리
 - 성경 본문별 보기: 특정 본문이 어느 책과 주제에서 다루어지는지 추적
-- 통합 검색: 책, 학자, 주제, 본문, 메모를 한 번에 검색
+- 개혁전통의 역사: 종교개혁, 개혁파, 장로교, 도르트, 웨스트민스터, 개혁파 정통주의 흐름 정리
+- 통합 검색: 책, 학자, 주제, 본문, 역사 항목, 메모를 한 번에 검색
 - 연구 메모: 설교, 논문, 글쓰기용 아이디어와 인용 위치 관리
 
 ## 공개 저장소 원칙
@@ -34,6 +35,8 @@
 │  └─ style.css
 ├─ js/
 │  ├─ app.js
+│  ├─ preload-data.js
+│  ├─ history-preload.js
 │  └─ search.js
 ├─ data/
 │  ├─ books.json
@@ -41,13 +44,16 @@
 │  ├─ topics.json
 │  ├─ passages.json
 │  ├─ notes.json
+│  ├─ tradition-history.json
 │  └─ taxonomy.json
 ├─ templates/
 │  ├─ book-entry.template.json
 │  ├─ topic-entry.template.json
-│  └─ note-entry.template.json
+│  ├─ note-entry.template.json
+│  └─ history-entry.template.json
 └─ docs/
    ├─ project-plan.md
+   ├─ history-plan.md
    ├─ data-schema.md
    ├─ input-workflow.md
    └─ copyright-policy.md
@@ -59,13 +65,15 @@
 2. 책 기본 정보와 장별 요약은 `data/books.json`에 입력합니다.
 3. 학자 정보가 필요하면 `data/authors.json`에 추가합니다.
 4. 주제 연결은 `data/topics.json`에 추가합니다.
-5. 표준 주제 분류는 `data/taxonomy.json`을 기준으로 관리합니다.
-6. 성경 본문 연결은 `data/passages.json`에 추가합니다.
-7. 연구 메모는 `data/notes.json`에 추가합니다.
+5. 개혁전통의 역사 항목은 `data/tradition-history.json`에 추가합니다.
+6. 표준 주제 분류는 `data/taxonomy.json`을 기준으로 관리합니다.
+7. 성경 본문 연결은 `data/passages.json`에 추가합니다.
+8. 연구 메모는 `data/notes.json`에 추가합니다.
 
 ## 작업 문서
 
 - [`docs/project-plan.md`](docs/project-plan.md): 전체 기획서
+- [`docs/history-plan.md`](docs/history-plan.md): 개혁전통의 역사 파트 설계안
 - [`docs/data-schema.md`](docs/data-schema.md): JSON 데이터 입력 규칙
 - [`docs/input-workflow.md`](docs/input-workflow.md): 책 한 권을 추가할 때 따르는 실제 작업 순서
 - [`docs/copyright-policy.md`](docs/copyright-policy.md): 공개 저장소 운영 원칙
@@ -75,6 +83,7 @@
 - [`templates/book-entry.template.json`](templates/book-entry.template.json): 책 데이터 입력 양식
 - [`templates/topic-entry.template.json`](templates/topic-entry.template.json): 주제 데이터 입력 양식
 - [`templates/note-entry.template.json`](templates/note-entry.template.json): 연구 메모 입력 양식
+- [`templates/history-entry.template.json`](templates/history-entry.template.json): 개혁전통의 역사 항목 입력 양식
 
 ## 1차 개발 범위
 
