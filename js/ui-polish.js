@@ -1,9 +1,7 @@
 /* UI polish layer.
-   Adds search reset, compact relation sections, common button styling, and #passage routing
-   without rewriting the core app renderer. */
+   Adds search reset, compact relation sections, and common button/card styling
+   without rewriting the core app renderer. Passage detail routing is handled by relations.js. */
 (function () {
-  var isRoutingPassage = false;
-
   function loadJson(path, fallback) {
     try {
       var xhr = new XMLHttpRequest();
@@ -34,14 +32,14 @@
       .search input.has-clear{padding-right:48px;}\
       .filter-notice{margin-top:12px;border:1px solid var(--line);border-radius:999px;background:var(--surface-2);display:inline-flex;align-items:center;gap:8px;padding:7px 11px;color:var(--muted);font-size:.85rem;}\
       .filter-notice button{border:0;background:transparent;cursor:pointer;color:var(--ref-ink);font-weight:600;padding:0;}\
-      .card.passage::before{background:var(--scripture);}\
-      .card.passage .cat-tag:first-child{color:var(--scripture-ink);}\
+      .card.passage::before{background:var(--scripture);} \
+      .card.passage .cat-tag:first-child{color:var(--scripture-ink);} \
       .link-btn,.open-link,.back-btn,.topic-history-btn,.author-history-btn,.passage-link-btn,.passage-book-btn,.book-passage-btn,.history-relations button{border:1px solid var(--line-strong);background:var(--surface);border-radius:11px;padding:10px 12px;text-align:left;cursor:pointer;color:var(--ink);transition:border-color .15s,background .15s,transform .15s;}\
-      .link-btn:hover,.open-link:hover,.back-btn:hover,.topic-history-btn:hover,.author-history-btn:hover,.passage-link-btn:hover,.passage-book-btn:hover,.book-passage-btn:hover,.history-relations button:hover{border-color:var(--ink);background:var(--surface-2);}\
+      .link-btn:hover,.open-link:hover,.back-btn:hover,.topic-history-btn:hover,.author-history-btn:hover,.passage-link-btn:hover,.passage-book-btn:hover,.book-passage-btn:hover,.history-relations button:hover{border-color:var(--ink);background:var(--surface-2);} \
       .card .relation-collapse{margin-top:12px;border-top:1px solid var(--line);padding-top:11px;}\
       .relation-collapse>summary{cursor:pointer;list-style:none;font-family:var(--font-display);font-size:.95rem;color:var(--ink);display:flex;align-items:center;justify-content:space-between;gap:8px;}\
       .relation-collapse>summary::-webkit-details-marker{display:none;}\
-      .relation-collapse>summary::after{content:'펼치기';font-family:var(--font-mono);font-size:.64rem;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:2px 8px;background:var(--surface-2);}\
+      .relation-collapse>summary::after{content:'펼치기';font-family:var(--font-mono);font-size:.64rem;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:2px 8px;background:var(--surface-2);} \
       .relation-collapse[open]>summary::after{content:'접기';}\
       .relation-collapse-body{padding-top:11px;}\
       .relation-collapse-body>section{margin-top:0;border-top:0;padding-top:0;}\
@@ -143,14 +141,14 @@
   }
 
   function applyPassageRoute() {
+    if (window.__RELATIONS_HANDLES_PASSAGE_ROUTE__) return;
     var raw = decodeURIComponent((location.hash || "").replace(/^#/, ""));
-    if (raw.indexOf("passage=") !== 0 || isRoutingPassage) return;
+    if (raw.indexOf("passage=") !== 0) return;
     var id = raw.split("=")[1];
     var passage = passageById[id];
     if (!passage) return;
     var input = document.querySelector("#q");
     if (!input) return;
-    isRoutingPassage = true;
     input.value = passage.reference;
     input.dispatchEvent(new Event("input", { bubbles: true }));
     var tab = document.querySelector('.tab[data-view="passages"]');
@@ -163,7 +161,6 @@
         return title && title.textContent.trim() === passage.reference;
       });
       if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
-      isRoutingPassage = false;
       updateSearchClear();
       ensureFilterNotice();
     }, 120);
