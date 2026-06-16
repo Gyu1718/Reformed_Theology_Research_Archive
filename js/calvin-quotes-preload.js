@@ -24,7 +24,11 @@
       text: completeSentence(quote.textKo || quote.text || ""),
       source: quote.source || "존 칼빈, 『기독교 강요』 한국어판",
       ref: quote.ref || [quote.section, quote.chapter, quote.subtopic].filter(Boolean).join(" — "),
-      topic: quote.topic || quote.subtopic || quote.chapter || "기독교 강요"
+      topic: quote.topic || quote.subtopic || quote.chapter || "기독교 강요",
+      context: quote.context || "",
+      purpose: quote.purpose || "",
+      placement: quote.placement || "quote-block",
+      priority: quote.priority || ""
     };
   }
 
