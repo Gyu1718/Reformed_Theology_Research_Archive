@@ -63,7 +63,8 @@
 
   var quotePacks = [
     loadJson("./data/quotes/bavinck-reformed-dogmatics-quotes-v1.json", null),
-    loadJson("./data/quotes/bavinck-reformed-dogmatics-quotes-v2.json", null)
+    loadJson("./data/quotes/bavinck-reformed-dogmatics-quotes-v2.json", null),
+    loadJson("./data/quotes/bavinck-reformed-dogmatics-quotes-v3.json", null)
   ].filter(Boolean);
   window.__DATA__ = attachBavinckQuotes(window.__DATA__, quotePacks);
 })();
