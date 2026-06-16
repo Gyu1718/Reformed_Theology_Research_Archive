@@ -111,9 +111,9 @@
 }
 ```
 
-## 6. tradition-history.json / neo-orthodoxy-history.json
+## 6. tradition-history.json / neo-orthodoxy-history.json / neo-orthodoxy-doctrine-history.json
 
-역사 항목 데이터입니다. `tradition-history.json`은 개혁전통의 역사 항목을, `neo-orthodoxy-history.json`은 근대 자유주의 신학·변증법적 신학·칼 바르트와 신정통주의 항목을 관리합니다. 전체 교회사 서술이 아니라, 개혁신학과 신정통주의의 주요 교리 주제와 문헌을 이해하는 데 필요한 역사적 맥락을 정리합니다.
+역사 항목 데이터입니다. `tradition-history.json`은 개혁전통의 역사 항목을, `neo-orthodoxy-history.json`은 근대 자유주의 신학·변증법적 신학·칼 바르트와 신정통주의 항목을, `neo-orthodoxy-doctrine-history.json`은 자연신학 논쟁과 바르트 예정론 같은 세부 교리사 항목을 관리합니다. 전체 교회사 서술이 아니라, 개혁신학과 신정통주의의 주요 교리 주제와 문헌을 이해하는 데 필요한 역사적 맥락을 정리합니다.
 
 ```json
 {
