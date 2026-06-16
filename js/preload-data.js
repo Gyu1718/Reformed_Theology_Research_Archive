@@ -118,7 +118,10 @@
   var combinedBooks = dedupeBooks(books.concat(Array.isArray(extraBooks) ? extraBooks : []));
   var barthStructure = loadJson("./data/books-barth-structure-map.json", null);
   combinedBooks = dedupeBooks(applyBarthStructureMap(combinedBooks, barthStructure));
-  var quotePacks = [loadJson("./data/quotes/barth-translated-sentence-quotes-v1.json", null)].filter(Boolean);
+  var quotePacks = [
+    loadJson("./data/quotes/barth-translated-sentence-quotes-v1.json", null),
+    loadJson("./data/quotes/barth-translated-sentence-quotes-v4.json", null)
+  ].filter(Boolean);
 
   window.__DATA__ = { books: ensureBarthCoverage(attachQuotesToBooks(combinedBooks, quotePacks)), authors: loadJson("./data/authors.json", []), topics: loadJson("./data/topics.json", []), passages: loadJson("./data/passages.json", []), notes: loadJson("./data/notes.json", []), taxonomy: loadJson("./data/taxonomy.json", {}) };
 })();
