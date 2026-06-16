@@ -46,6 +46,7 @@
 │  ├─ notes.json
 │  ├─ tradition-history.json
 │  ├─ neo-orthodoxy-history.json
+│  ├─ neo-orthodoxy-doctrine-history.json
 │  └─ taxonomy.json
 ├─ templates/
 │  ├─ book-entry.template.json
@@ -68,9 +69,10 @@
 4. 주제 연결은 `data/topics.json`에 추가합니다.
 5. 개혁전통의 역사 항목은 `data/tradition-history.json`에 추가합니다.
 6. 신정통주의 역사 항목은 `data/neo-orthodoxy-history.json`에 추가합니다.
-7. 표준 주제 분류는 `data/taxonomy.json`을 기준으로 관리합니다.
-8. 성경 본문 연결은 `data/passages.json`에 추가합니다.
-9. 연구 메모는 `data/notes.json`에 추가합니다.
+7. 신정통주의 세부 교리사 항목은 `data/neo-orthodoxy-doctrine-history.json`에 추가합니다.
+8. 표준 주제 분류는 `data/taxonomy.json`을 기준으로 관리합니다.
+9. 성경 본문 연결은 `data/passages.json`에 추가합니다.
+10. 연구 메모는 `data/notes.json`에 추가합니다.
 
 ## 작업 문서
 
