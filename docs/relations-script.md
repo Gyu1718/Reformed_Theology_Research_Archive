@@ -77,5 +77,5 @@ data/neo-orthodoxy-doctrine-history.json
 
 - 관계 데이터는 가능하면 JSON에 넣고, 화면 로직은 `relations.js`가 읽어 붙입니다.
 - `app.js`는 핵심 렌더러로 두고, 관계 확장은 별도 레이어에서 처리합니다.
-- UI 스타일 정리는 `ui-polish.js`가 담당합니다.
-- 추후 안정화되면 `relations.js`의 일부 스타일을 `css/style.css`로 이동할 수 있습니다.
+- 관계 연결과 UI 정리의 스타일 규칙은 `css/style.css`에서 관리합니다.
+- `relations.js`는 화면 구조와 라우팅만 담당하고, `<style>` 태그를 직접 만들지 않습니다.
