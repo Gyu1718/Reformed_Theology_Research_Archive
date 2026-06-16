@@ -4,16 +4,58 @@
     "reference": "창세기 1장",
     "book": "창세기",
     "testament": "Old Testament",
-    "summary": "창조, 하나님의 주권, 인간의 하나님의 형상 교리와 연결된다.",
+    "summary": "창조, 하나님의 주권, 인간의 하나님의 형상 교리와 연결된다. 일반계시와 자연신학 논쟁을 다룰 때도 중요한 배경 본문이다.",
     "topics": [
       "창조",
       "신론",
       "인간론",
-      "하나님의 형상"
+      "하나님의 형상",
+      "계시론",
+      "자연신학"
     ],
     "relatedBooks": [
       "calvin-institutes",
-      "bavinck-reformed-dogmatics"
+      "bavinck-reformed-dogmatics",
+      "berkhof-systematic-theology"
+    ]
+  },
+  {
+    "id": "psalm-19",
+    "reference": "시편 19편",
+    "book": "시편",
+    "testament": "Old Testament",
+    "summary": "하늘과 궁창이 하나님의 영광을 선포한다는 일반계시의 대표 본문이며, 이어지는 여호와의 율법 찬양은 일반계시와 특별계시의 관계를 함께 보여 준다.",
+    "topics": [
+      "계시론",
+      "일반계시",
+      "특별계시",
+      "성경론",
+      "자연신학"
+    ],
+    "relatedBooks": [
+      "calvin-institutes",
+      "bavinck-reformed-dogmatics",
+      "berkhof-systematic-theology"
+    ]
+  },
+  {
+    "id": "romans-1-18-23",
+    "reference": "로마서 1:18-23",
+    "book": "로마서",
+    "testament": "New Testament",
+    "summary": "창조 세계를 통해 알려진 하나님 지식과 인간의 죄로 인한 억압을 다루는 본문으로, 일반계시와 자연신학 논쟁에서 핵심적으로 다루어진다.",
+    "topics": [
+      "계시론",
+      "일반계시",
+      "자연신학",
+      "죄론",
+      "신론"
+    ],
+    "relatedBooks": [
+      "calvin-institutes",
+      "bavinck-reformed-dogmatics",
+      "berkhof-systematic-theology",
+      "barth-church-dogmatics"
     ]
   },
   {
@@ -30,7 +72,9 @@
     ],
     "relatedBooks": [
       "calvin-institutes",
-      "berkhof-systematic-theology"
+      "berkhof-systematic-theology",
+      "bavinck-reformed-dogmatics",
+      "barth-church-dogmatics"
     ]
   },
   {
@@ -47,7 +91,9 @@
     ],
     "relatedBooks": [
       "calvin-institutes",
-      "berkhof-systematic-theology"
+      "berkhof-systematic-theology",
+      "bavinck-reformed-dogmatics",
+      "barth-church-dogmatics"
     ]
   },
   {
@@ -60,11 +106,74 @@
       "예정론",
       "그리스도 안에서",
       "은혜",
-      "양자"
+      "양자",
+      "기독론"
     ],
     "relatedBooks": [
       "calvin-institutes",
-      "berkhof-systematic-theology"
+      "berkhof-systematic-theology",
+      "bavinck-reformed-dogmatics",
+      "barth-church-dogmatics"
+    ]
+  },
+  {
+    "id": "john-1-14",
+    "reference": "요한복음 1:14",
+    "book": "요한복음",
+    "testament": "New Testament",
+    "summary": "말씀이 육신이 되어 우리 가운데 거하셨다는 성육신 본문으로, 계시론, 기독론, 삼위일체론, 바르트의 그리스도 중심 신학을 연결하는 핵심 본문이다.",
+    "topics": [
+      "계시론",
+      "성육신",
+      "기독론",
+      "삼위일체론",
+      "하나님의 말씀"
+    ],
+    "relatedBooks": [
+      "calvin-institutes",
+      "bavinck-reformed-dogmatics",
+      "berkhof-systematic-theology",
+      "barth-church-dogmatics"
+    ]
+  },
+  {
+    "id": "acts-17",
+    "reference": "사도행전 17장",
+    "book": "사도행전",
+    "testament": "New Testament",
+    "summary": "바울의 아레오바고 설교를 통해 창조주 하나님, 인간의 종교성, 우상숭배, 회개와 심판을 다루며 일반계시와 자연신학 논쟁의 중요한 본문으로 연결된다.",
+    "topics": [
+      "계시론",
+      "자연신학",
+      "신론",
+      "우상숭배",
+      "선교"
+    ],
+    "relatedBooks": [
+      "calvin-institutes",
+      "bavinck-reformed-dogmatics",
+      "berkhof-systematic-theology",
+      "barth-church-dogmatics"
+    ]
+  },
+  {
+    "id": "2-timothy-3-16",
+    "reference": "디모데후서 3:16",
+    "book": "디모데후서",
+    "testament": "New Testament",
+    "summary": "모든 성경은 하나님의 감동으로 된 것이라는 성경론의 핵심 본문으로, 성경의 영감, 권위, 유익, 교리교육과 연결된다.",
+    "topics": [
+      "성경론",
+      "영감",
+      "성경의 권위",
+      "교리교육",
+      "신학방법론"
+    ],
+    "relatedBooks": [
+      "calvin-institutes",
+      "berkhof-systematic-theology",
+      "bavinck-reformed-dogmatics",
+      "barth-church-dogmatics"
     ]
   },
   {
@@ -80,7 +189,9 @@
     ],
     "relatedBooks": [
       "calvin-institutes",
-      "berkhof-systematic-theology"
+      "berkhof-systematic-theology",
+      "bavinck-reformed-dogmatics",
+      "barth-church-dogmatics"
     ]
   }
 ]
