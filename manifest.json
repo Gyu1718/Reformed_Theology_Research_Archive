@@ -1,37 +1,18 @@
 {
-  "package": "bavinck_git_upload_pack",
-  "createdFor": "Reformed_Theology_Research_Archive",
-  "bookId": "bavinck-reformed-dogmatics",
-  "mergeMode": "replace existing data/books.json item, do not append duplicate",
+  "name": "barth-improvement-upload-pack-v4",
+  "version": "v4",
+  "created": "2026-06-16T07:54:18.898056",
   "files": [
-    {
-      "path": "data/books.bavinck.replacement.json",
-      "action": "data/books.json에서 id=bavinck-reformed-dogmatics 기존 항목을 대체하는 원본"
-    },
-    {
-      "path": "data/books.bavinck.patch.json",
-      "action": "replacement 파일과 동일한 병합용 사본"
-    },
-    {
-      "path": "data/quotes/bavinck-reformed-dogmatics.json",
-      "action": "새 인용팩 파일로 추가"
-    },
-    {
-      "path": "data/topic-links.bavinck.patch.json",
-      "action": "topics.json 또는 topic-history-links.json 보강 참고용"
-    },
-    {
-      "path": "data/passage-links.bavinck.patch.json",
-      "action": "passages.json 또는 passage-theology-links.json 보강 참고용"
-    },
-    {
-      "path": "scripts/apply-bavinck-update.py",
-      "action": "로컬 저장소에서 기존 books.json 항목을 자동 교체하는 스크립트"
-    },
-    {
-      "path": "docs/bavinck-update-notes.md",
-      "action": "업로드 전 검토 및 작업 설명 문서"
-    }
+    "data/barth-subtopic-contexts-v4.json",
+    "js/barth-subtopic-context-normalize-v4.js",
+    "js/quote-context-enhance-v4.js",
+    "docs/index-script-order-snippet-v4.txt",
+    "docs/barth-subtopic-context-guide-v4.md",
+    "README_APPLY.md"
   ],
-  "copyright": "원문 전문·긴 인용문 없음. 공개 저장소 원칙 준수."
+  "stats": {
+    "sections": 75,
+    "subtopics": 214
+  },
+  "note": "Use this pack instead of v1/v2/v3."
 }
