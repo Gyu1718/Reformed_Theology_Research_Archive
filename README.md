@@ -41,6 +41,7 @@
 │  ├─ history-preload.js
 │  ├─ history-nav-enhance.js
 │  ├─ relations.js
+│  ├─ compact-related-passages.js
 │  ├─ passage-depth-enhance.js
 │  ├─ ui-polish.js
 │  └─ search.js
@@ -84,10 +85,11 @@
 8. 성경 본문과 주제·역사 항목의 연결은 `data/passage-theology-links.json`에 추가합니다.
 9. 책과 성경 본문의 양방향 연결은 `data/passages.json`의 `relatedBooks`를 기준으로 자동 생성됩니다.
 10. 자료 사이의 화면 연결은 `js/relations.js`가 담당합니다.
-11. 개혁전통의 역사 항목은 `data/tradition-history.json`에 추가합니다.
-12. 신정통주의 역사 항목은 `data/neo-orthodoxy-history.json`에 추가합니다.
-13. 신정통주의 세부 교리사 항목은 `data/neo-orthodoxy-doctrine-history.json`에 추가합니다.
-14. 표준 주제 분류는 `data/taxonomy.json`을 기준으로 관리합니다.
+11. 책 카드의 관련 본문 축약 표시는 `js/compact-related-passages.js`가 담당합니다.
+12. 개혁전통의 역사 항목은 `data/tradition-history.json`에 추가합니다.
+13. 신정통주의 역사 항목은 `data/neo-orthodoxy-history.json`에 추가합니다.
+14. 신정통주의 세부 교리사 항목은 `data/neo-orthodoxy-doctrine-history.json`에 추가합니다.
+15. 표준 주제 분류는 `data/taxonomy.json`을 기준으로 관리합니다.
 
 ## 작업 문서
 
