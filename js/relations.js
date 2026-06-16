@@ -1,6 +1,7 @@
 /* Relations layer.
    Consolidates topic-history, author-history, passage-theology, book-passage,
-   and passage detail routing into one enhancement script. */
+   and passage detail routing into one enhancement script.
+   CSS rules live in css/style.css. */
 (function () {
   window.__RELATIONS_HANDLES_PASSAGE_ROUTE__ = true;
 
@@ -351,33 +352,7 @@
   }
 
   function ensureStyles() {
-    if (document.querySelector("#relations-styles")) return;
-    var style = document.createElement("style");
-    style.id = "relations-styles";
-    style.textContent = "\
-      .topic-history-section,.author-history-section,.passage-theology-section,.passage-book-section,.book-passage-section{margin-top:14px;border-top:1px solid var(--line);padding-top:13px;}\
-      .detail-hero .book-passage-section{border-top:1px solid var(--line);margin-top:18px;padding-top:16px;}\
-      .topic-history-section h4,.author-history-section h4,.passage-theology-section h4,.passage-book-section h4,.book-passage-section h4{margin:0 0 9px;font-family:var(--font-display);font-size:.96rem;}\
-      .relation-note{margin:0 0 10px;color:var(--muted);font-size:.86rem;}\
-      .relation-group{margin-top:10px;}\
-      .relation-group>b{display:block;margin-bottom:7px;font-size:.82rem;color:var(--muted);}\
-      .relation-grid{display:grid;grid-template-columns:1fr;gap:8px;}\
-      .detail-hero .book-passage-grid{grid-template-columns:repeat(3,minmax(0,1fr));}\
-      .history-link-btn,.topic-link-btn,.book-link-btn,.passage-link-btn,.passage-book-btn,.book-passage-btn,.passage-detail-link{border:1px solid var(--line);background:var(--surface);border-radius:11px;padding:10px 11px;text-align:left;cursor:pointer;color:var(--ink);} \
-      .history-link-btn span,.topic-link-btn span,.book-link-btn span,.passage-link-btn span,.passage-book-btn span,.book-passage-btn span,.passage-detail-link span{display:block;font-family:var(--font-mono);font-size:.65rem;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;margin-bottom:3px;}\
-      .history-link-btn b,.topic-link-btn b,.book-link-btn b,.passage-link-btn b,.passage-book-btn b,.book-passage-btn b,.passage-detail-link b{font-size:.86rem;}\
-      .history-link-btn:hover,.topic-link-btn:hover,.book-link-btn:hover,.passage-link-btn:hover,.passage-book-btn:hover,.book-passage-btn:hover,.passage-detail-link:hover{border-color:var(--ink);background:var(--surface-2);}\
-      .book-passage-more{margin:10px 0 0;color:var(--muted);font-size:.84rem;}\
-      .passage-hero{background:linear-gradient(90deg,var(--scripture-soft,#EEEBD8),transparent 58%,var(--surface))!important;}\
-      .passage-detail-body{padding:22px 28px 30px;}\
-      .passage-detail-section{margin-top:18px;border:1px solid var(--line);border-radius:14px;background:var(--surface-2);padding:18px;}\
-      .passage-detail-section:first-child{margin-top:0;}\
-      .passage-detail-section h4{margin:0 0 12px;font-family:var(--font-display);font-size:1.04rem;}\
-      .passage-detail-section .muted{color:var(--muted);margin:0;}\
-      .passage-detail-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;}\
-      @media(max-width:900px){.detail-hero .book-passage-grid,.passage-detail-grid{grid-template-columns:1fr;}.passage-detail-body{padding:18px;}}\
-    ";
-    document.head.appendChild(style);
+    // Styles for this layer are maintained in css/style.css.
   }
 
   function installRelations() {
