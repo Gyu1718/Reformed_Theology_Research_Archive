@@ -15,9 +15,10 @@
 
 ```txt
 js/ui-polish.js
+css/style.css
 ```
 
-관계 연결과 본문 상세 라우팅은 `js/relations.js`가 담당합니다. `ui-polish.js`는 검색 초기화, 필터 안내, 카드 접힘, 모바일/시각 정리를 담당합니다.
+관계 연결과 본문 상세 라우팅은 `js/relations.js`가 담당합니다. `ui-polish.js`는 검색 초기화, 필터 안내, 카드 접힘 동작을 담당합니다. 관련 시각 규칙과 모바일 보강 스타일은 `css/style.css`에서 관리합니다.
 
 ## 3. 주요 기능
 
@@ -50,9 +51,10 @@ js/ui-polish.js
 --scripture-soft
 ```
 
+이 색상 변수는 `css/style.css`의 `:root`에 정의합니다.
+
 ## 4. 다음 개선 후보
 
-- 공통 버튼 컴포넌트를 `css/style.css`로 이동
 - 모바일 탭 네비게이션 개선
 - 검색 상태를 URL 쿼리 또는 해시에 보존
-- `relations.js`의 일부 스타일을 `css/style.css`로 이동
+- `compact-related-passages.js`와 `passage-depth-enhance.js`의 일부 스타일도 필요하면 `css/style.css`로 이동
