@@ -41,15 +41,31 @@ function ensureDetailStyles() {
   style.textContent = `
     .card-actions{margin-top:16px;display:flex;gap:8px;flex-wrap:wrap}.open-link,.back-btn{border:1px solid var(--line-strong);background:var(--surface-2);border-radius:999px;padding:8px 13px;cursor:pointer;font-size:.86rem;color:var(--ink)}.open-link:hover,.back-btn:hover{border-color:var(--ink);background:var(--surface)}
     .detail-page{margin-top:24px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}.detail-hero{padding:24px 28px;border-bottom:1px solid var(--line);background:linear-gradient(90deg,var(--ref-soft),transparent 55%,var(--neo-soft))}.detail-hero h2{font-family:var(--font-display);font-size:1.8rem;margin:8px 0 4px}.detail-hero .by{color:var(--muted);margin:0 0 12px}.detail-hero .sum{max-width:880px;color:var(--muted)}
-    .detail-layout{display:grid;grid-template-columns:minmax(220px,280px) 1fr;gap:0}.detail-toc{border-right:1px solid var(--line);background:var(--surface-2);padding:18px;position:sticky;top:84px;align-self:start;max-height:calc(100vh - 96px);overflow:auto}.detail-toc-title{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-bottom:10px}.detail-toc a{display:block;color:var(--muted);text-decoration:none;font-size:.86rem;padding:7px 0;border-bottom:1px solid var(--line)}.detail-toc a:hover{color:var(--ink)}.detail-main{padding:20px 28px 32px}.detail-main .part{scroll-margin-top:94px;margin-top:22px}.detail-main .part:first-child{margin-top:0}.detail-tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.topic-detail-body{padding:22px 28px 30px}.topic-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.topic-panel{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--surface-2)}.topic-panel h4{margin:0 0 10px;font-family:var(--font-display)}
+    .detail-layout{display:grid;grid-template-columns:minmax(220px,280px) 1fr;gap:0}.detail-toc{border-right:1px solid var(--line);background:var(--surface-2);padding:18px;position:sticky;top:84px;align-self:start;max-height:calc(100vh - 96px);overflow:auto}.detail-toc-title{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-bottom:10px}.detail-toc a{display:block;color:var(--muted);text-decoration:none;font-size:.86rem;padding:7px 0;border-bottom:1px solid var(--line)}.detail-toc a:hover{color:var(--ink)}.detail-main{padding:20px 28px 32px}.detail-main .part{scroll-margin-top:94px;margin-top:22px}.detail-main .part:first-child{margin-top:0}.detail-tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+    .topic-detail-body{padding:22px 28px 30px}.topic-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.topic-panel{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--surface-2)}.topic-panel h4{margin:0 0 10px;font-family:var(--font-display)}
+    .topic-section{margin-top:18px;border:1px solid var(--line);border-radius:14px;background:var(--surface-2);padding:18px}.topic-section h4{margin:0 0 12px;font-family:var(--font-display);font-size:1.02rem}.topic-section .muted{color:var(--muted)}.topic-meta-tags{margin-top:14px;display:flex;gap:7px;flex-wrap:wrap}.topic-meta-tags .tag{background:var(--surface);border-color:var(--line-strong)}
+    .axis-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.axis-card{border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--surface)}.axis-card b{display:block;margin-bottom:8px}.axis-card p{margin:8px 0;color:var(--muted);font-size:.92rem}.axis-card .axis-label{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.08em;color:var(--muted);display:block;margin-bottom:2px}.topic-list{margin:0;padding-left:19px}.topic-list li{margin:7px 0;color:var(--muted)}.reading-path{display:flex;gap:8px;flex-wrap:wrap}.reading-path span{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 10px;font-size:.85rem;color:var(--muted)}
+    @media(max-width:1020px){.axis-grid{grid-template-columns:1fr}}
     @media(max-width:860px){.detail-layout{grid-template-columns:1fr}.detail-toc{position:relative;top:auto;max-height:none;border-right:0;border-bottom:1px solid var(--line)}.topic-grid{grid-template-columns:1fr}}
   `;
   document.head.appendChild(style);
 }
 
+function applyTopicGuides() {
+  const guides = Array.isArray(window.__TOPIC_GUIDES__) ? window.__TOPIC_GUIDES__ : [];
+  if (!guides.length || !Array.isArray(DATA.topics)) return;
+  const guideMap = {};
+  guides.forEach(g => { if (g && g.id) guideMap[g.id] = g; });
+  DATA.topics = DATA.topics.map(topic => {
+    const guide = guideMap[topic.id];
+    return guide ? Object.assign({}, topic, guide) : topic;
+  });
+}
+
 /* ---------------- data load ---------------- */
 function afterLoad() {
   ensureDetailStyles();
+  applyTopicGuides();
   const both = DATA.topics.find(hasBoth);
   state.concept = (both || DATA.topics[0] || {}).id || null;
   syncRoute();
@@ -151,6 +167,10 @@ function renderTopicDetail(id) {
   if (!c) { view.innerHTML = `<div class="empty">개념을 찾지 못했습니다.<br><button class="back-btn" data-back="compare">개념 비교로</button></div>`; wireBackButtons(); return; }
   const side = trad => (c.positions || []).filter(p => p.tradition === trad).map(p => `<div class="position"><span class="holder">${p.holder}</span><p class="claim">${p.claim}</p><span class="loc">${p.loc || ""}</span></div>`).join("") || `<p class="pole-empty">입장이 아직 없습니다.</p>`;
   const refs = (c.references || []).map(r => `<div class="ref-item"><b>${bookTitle(r.bookId)}</b> <span class="loc">${r.location || ""}</span><br>${r.note || ""}</div>`).join("");
+  const tags = arr => (arr && arr.length) ? `<div class="topic-meta-tags">${arr.map(x => `<span class="tag">${x}</span>`).join("")}</div>` : "";
+  const axes = (c.comparisonAxes || []).map(a => `<div class="axis-card"><b>${a.axis}</b><p><span class="axis-label">개혁파 정통</span>${a.ref}</p><p><span class="axis-label">신정통주의</span>${a.neo}</p></div>`).join("");
+  const questions = (c.researchQuestions || []).map(q => `<li>${q}</li>`).join("");
+  const reading = (c.readingPath || []).map(x => `<span>${x}</span>`).join("");
   view.innerHTML = `
     <article class="detail-page">
       <header class="detail-hero">
@@ -159,12 +179,17 @@ function renderTopicDetail(id) {
         <h2>${c.name}<span class="lat">${c.latin || ""}</span></h2>
         ${c.summary ? `<p class="sum">${c.summary}</p>` : ""}
         ${c.diverge ? `<p class="diverge"><b>갈라지는 지점</b>${c.diverge}</p>` : ""}
+        ${tags(c.keywords || c.relatedTopics)}
       </header>
       <div class="topic-detail-body">
         <div class="topic-grid">
           <section class="topic-panel"><h4>${REF}</h4>${side(REF)}</section>
           <section class="topic-panel"><h4>${NEO}</h4>${side(NEO)}</section>
         </div>
+        ${axes ? `<section class="topic-section"><h4>비교축</h4><div class="axis-grid">${axes}</div></section>` : ""}
+        ${questions ? `<section class="topic-section"><h4>연구 질문</h4><ul class="topic-list">${questions}</ul></section>` : ""}
+        ${reading ? `<section class="topic-section"><h4>읽기 순서</h4><div class="reading-path">${reading}</div></section>` : ""}
+        ${tags(c.relatedTopics) ? `<section class="topic-section"><h4>관련 개념</h4>${tags(c.relatedTopics)}</section>` : ""}
         ${refs ? `<div class="refs" style="margin-top:18px"><p class="refs-label">관련 문헌</p>${refs}</div>` : ""}
       </div>
     </article>`;
@@ -184,13 +209,15 @@ function renderCompare() {
 
   const side = trad => {
     let pos = (c.positions || []).filter(p => p.tradition === trad);
+    const searchable = [c.name, c.summary, c.diverge, (c.keywords || []).join(" "), (c.relatedTopics || []).join(" "), (c.researchQuestions || []).join(" ")].join(" ");
     if (state.trad !== "all") pos = pos.filter(p => matchTrad(p.tradition));
-    if (state.q) pos = pos.filter(p => matchQ(p.holder + p.claim + c.name));
+    if (state.q) pos = pos.filter(p => matchQ(p.holder + p.claim + searchable));
     if (!pos.length) return `<p class="pole-empty">${state.trad !== "all" || state.q ? "조건에 맞는 입장이 없습니다." : `아직 입력된 입장이 없습니다.<span class="invite">data/topics.json 의 positions[]에 한 줄 추가하면 채워집니다.</span>`}</p>`;
     return pos.map(p => `<div class="position"><span class="holder">${p.holder}</span><p class="claim">${p.claim}</p><span class="loc">${p.loc || ""}</span></div>`).join("");
   };
 
   const refs = (c.references || []).map(r => `<div class="ref-item"><b>${bookTitle(r.bookId)}</b> <span class="loc">${r.location || ""}</span><br>${r.note || ""}</div>`).join("");
+  const conceptTags = (c.keywords || c.relatedTopics || []).slice(0, 8).map(t => `<span class="tag">${t}</span>`).join("");
 
   view.innerHTML = `
     <div class="concept-switch">${switcher}</div>
@@ -200,6 +227,7 @@ function renderCompare() {
         <h3>${c.name}<span class="lat">${c.latin || ""}</span></h3>
         ${c.summary ? `<p class="topic-sum">${c.summary}</p>` : ""}
         ${c.diverge ? `<p class="diverge"><b>갈라지는 지점</b>${c.diverge}</p>` : ""}
+        ${conceptTags ? `<div class="tags" style="margin-top:12px">${conceptTags}</div>` : ""}
         <div class="card-actions"><button class="open-link" data-topic-open="${c.id}">개념 상세 페이지 열기 →</button></div>
       </div>
       <div class="poles"><div class="pole pole-ref"><span class="pole-tag">${REF}</span>${side(REF)}</div><div class="axis" aria-hidden="true"></div><div class="pole pole-neo"><span class="pole-tag">${NEO}</span>${side(NEO)}</div></div>
