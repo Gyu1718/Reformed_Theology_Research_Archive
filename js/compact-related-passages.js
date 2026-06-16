@@ -1,5 +1,6 @@
 /* Compact related Bible passage cards on list views.
-   Keeps full related-passage lists on detail pages, but prevents book cards from becoming too tall. */
+   Keeps full related-passage lists on detail pages, but prevents book cards from becoming too tall.
+   CSS rules live in css/style.css. */
 (function () {
   var CARD_PASSAGE_LIMIT = 3;
   var passages = [];
@@ -98,20 +99,7 @@
   }
 
   function ensureStyles() {
-    if (document.querySelector("#compact-related-passages-styles")) return;
-    var style = document.createElement("style");
-    style.id = "compact-related-passages-styles";
-    style.textContent = "\
-      #view .card .book-passage-section.is-compact{margin-top:12px;padding-top:11px;border-top:1px solid var(--line);}\
-      #view .card .book-passage-section.is-compact h4{margin:0 0 8px;font-family:var(--font-display);font-size:.88rem;color:var(--muted);}\
-      .compact-passage-row{display:flex;flex-wrap:wrap;gap:6px;}\
-      .compact-passage-chip{display:inline-flex;align-items:center;width:auto;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 9px;cursor:pointer;color:var(--ink);text-align:left;}\
-      .compact-passage-chip b{font-size:.8rem;line-height:1.2;font-weight:600;}\
-      .compact-passage-chip:hover{border-color:var(--ink);background:var(--surface-2);}\
-      .compact-more-link{display:inline-block;margin-top:8px;padding:0;border:0;background:transparent;color:var(--muted);font-size:.8rem;line-height:1.4;cursor:pointer;text-align:left;}\
-      .compact-more-link:hover{color:var(--ink);text-decoration:underline;}\
-    ";
-    document.head.appendChild(style);
+    // Styles for this layer are maintained in css/style.css.
   }
 
   function init() {
