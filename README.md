@@ -11,10 +11,9 @@
 - 주제별 보기: 계시론, 신론, 예정론, 언약신학, 교회론 등 교리 주제 정리
 - 성경 본문별 보기: 특정 본문이 어느 책과 주제에서 다루어지는지 추적
 - 본문 연구 노트: 본문별 핵심 질문, 전통별 활용, 설교 활용, 연구 활용 정리
+- 관계 연결: 주제-역사, 학자-역사, 본문-주제/역사, 책-본문 연결을 `relations.js`에서 통합 처리
+- 본문 상세 라우트: `#passage=romans-9`처럼 특정 본문 상세 페이지로 직접 이동
 - 개혁전통·신정통주의 역사: 종교개혁, 개혁파, 장로교, 도르트, 웨스트민스터, 개혁파 정통주의, 근대 자유주의 신학, 변증법적 신학, 바르트와 신정통주의 흐름 정리
-- 주제-역사 연결: 계시론, 성경론, 자연신학, 예정론 같은 개념 카드에서 관련 역사 항목으로 이동
-- 학자-역사 연결: 학자 카드에서 관련 역사 항목으로 이동
-- 본문-주제-역사 연결: 성경 본문 카드에서 관련 주제와 역사 항목으로 이동
 - 통합 검색: 책, 학자, 주제, 본문, 역사 항목을 한 번에 검색
 
 ## 공개 저장소 원칙
@@ -40,10 +39,10 @@
 │  ├─ app.js
 │  ├─ preload-data.js
 │  ├─ history-preload.js
-│  ├─ topic-history-linker.js
-│  ├─ author-history-linker.js
-│  ├─ passage-theology-linker.js
+│  ├─ history-nav-enhance.js
+│  ├─ relations.js
 │  ├─ passage-depth-enhance.js
+│  ├─ ui-polish.js
 │  └─ search.js
 ├─ data/
 │  ├─ books.json
@@ -66,6 +65,9 @@
    ├─ history-plan.md
    ├─ data-schema.md
    ├─ passage-depth-schema.md
+   ├─ book-passage-linking.md
+   ├─ relations-script.md
+   ├─ ui-polish-notes.md
    ├─ input-workflow.md
    └─ copyright-policy.md
 ```
@@ -80,10 +82,12 @@
 6. 주제와 역사 항목의 연결은 `data/topic-history-links.json`에 추가합니다.
 7. 성경 본문 기본 정보와 본문 연구 노트는 `data/passages.json`에 추가합니다.
 8. 성경 본문과 주제·역사 항목의 연결은 `data/passage-theology-links.json`에 추가합니다.
-9. 개혁전통의 역사 항목은 `data/tradition-history.json`에 추가합니다.
-10. 신정통주의 역사 항목은 `data/neo-orthodoxy-history.json`에 추가합니다.
-11. 신정통주의 세부 교리사 항목은 `data/neo-orthodoxy-doctrine-history.json`에 추가합니다.
-12. 표준 주제 분류는 `data/taxonomy.json`을 기준으로 관리합니다.
+9. 책과 성경 본문의 양방향 연결은 `data/passages.json`의 `relatedBooks`를 기준으로 자동 생성됩니다.
+10. 자료 사이의 화면 연결은 `js/relations.js`가 담당합니다.
+11. 개혁전통의 역사 항목은 `data/tradition-history.json`에 추가합니다.
+12. 신정통주의 역사 항목은 `data/neo-orthodoxy-history.json`에 추가합니다.
+13. 신정통주의 세부 교리사 항목은 `data/neo-orthodoxy-doctrine-history.json`에 추가합니다.
+14. 표준 주제 분류는 `data/taxonomy.json`을 기준으로 관리합니다.
 
 ## 작업 문서
 
@@ -91,6 +95,9 @@
 - [`docs/history-plan.md`](docs/history-plan.md): 역사 파트 설계안
 - [`docs/data-schema.md`](docs/data-schema.md): JSON 데이터 입력 규칙
 - [`docs/passage-depth-schema.md`](docs/passage-depth-schema.md): 본문 연구 노트 입력 규칙
+- [`docs/book-passage-linking.md`](docs/book-passage-linking.md): 책-본문 양방향 연결 규칙
+- [`docs/relations-script.md`](docs/relations-script.md): 관계 연결 통합 스크립트 설명
+- [`docs/ui-polish-notes.md`](docs/ui-polish-notes.md): UI 정리 패치 설명
 - [`docs/input-workflow.md`](docs/input-workflow.md): 책 한 권을 추가할 때 따르는 실제 작업 순서
 - [`docs/copyright-policy.md`](docs/copyright-policy.md): 공개 저장소 운영 원칙
 
