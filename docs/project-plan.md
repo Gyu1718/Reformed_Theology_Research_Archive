@@ -2,7 +2,7 @@
 
 ## 1. 프로젝트 정의
 
-**Reformed Theology Research Archive**는 개혁신학 문헌을 책, 학자, 교리 주제, 성경 본문, 연구 메모 단위로 연결해 관리하는 정적 HTML 연구 아카이브입니다.
+**Reformed Theology Research Archive**는 개혁신학 문헌을 책, 학자, 교리 주제, 성경 본문, 역사 항목 단위로 연결해 관리하는 정적 HTML 연구 아카이브입니다.
 
 이 프로젝트는 전자책 저장소가 아니라, 연구와 집필을 위한 색인 시스템입니다.
 
@@ -11,7 +11,7 @@
 - 여러 신학 문헌을 한 화면에서 비교할 수 있게 한다.
 - 특정 주제에 대해 어떤 책과 학자가 어디에서 다루는지 추적한다.
 - 성경 본문별로 관련 교리와 문헌을 연결한다.
-- 설교, 논문, 브런치 글쓰기용 연구 메모를 축적한다.
+- 개혁전통과 신정통주의의 역사적 맥락을 교리 주제와 연결한다.
 - GitHub Pages를 통해 지속적으로 업데이트 가능한 공개 색인을 운영한다.
 
 ## 3. 자료 공개 원칙
@@ -24,8 +24,8 @@
 - 주제 태그
 - 학자 태그
 - 성경 본문 태그
+- 역사 항목
 - 짧은 인용 또는 인용 위치
-- 연구 메모
 
 다음 자료는 공개 저장소에 올리지 않습니다.
 
@@ -44,7 +44,9 @@
 - `data/authors.json`: 학자 정보
 - `data/topics.json`: 주제 정보
 - `data/passages.json`: 성경 본문 정보
-- `data/notes.json`: 연구 메모
+- `data/tradition-history.json`: 개혁전통 역사 정보
+- `data/neo-orthodoxy-history.json`: 신정통주의 역사 정보
+- `data/neo-orthodoxy-doctrine-history.json`: 신정통주의 세부 교리사 정보
 - `js/app.js`: 데이터 로딩과 렌더링
 - `js/search.js`: 검색 보조 함수
 
