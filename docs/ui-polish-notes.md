@@ -16,6 +16,7 @@
 
 ```txt
 js/ui-polish.js
+js/passage-detail-route.js
 ```
 
 ## 3. 주요 기능
@@ -39,7 +40,7 @@ js/ui-polish.js
 
 상세 페이지에서는 핵심 연결 섹션을 가능한 한 펼쳐 두고, 카드 목록에서만 세로 길이를 줄이는 방향을 우선합니다.
 
-### 본문 직접 링크
+### 본문 직접 링크와 상세 페이지
 
 다음 형식의 해시 링크를 지원합니다.
 
@@ -49,7 +50,7 @@ js/ui-polish.js
 #passage=2-timothy-3-16
 ```
 
-현재 구현은 본문 상세 페이지를 새로 만들지는 않고, 본문 탭으로 이동한 뒤 해당 본문명으로 검색하여 카드가 바로 보이게 합니다.
+`js/passage-detail-route.js`가 해당 해시를 감지하여 본문 상세 페이지를 렌더링합니다. 상세 페이지에는 본문 요약, 주제 태그, 신학 연결 메모, 관련 주제, 관련 역사, 관련 책, 핵심 질문, 전통별 활용, 설교 활용, 연구 활용이 표시됩니다.
 
 ### 성경 본문 카드 색상 보강
 
@@ -63,8 +64,7 @@ js/ui-polish.js
 
 ## 4. 다음 개선 후보
 
-- 진짜 본문 상세 페이지 구현: `renderPassageDetail(id)`
-- `topic-history-linker`, `author-history-linker`, `passage-theology-linker`, `book-passage-linker`, `ui-polish` 통합
+- `topic-history-linker`, `author-history-linker`, `passage-theology-linker`, `book-passage-linker`, `ui-polish`, `passage-detail-route` 통합
 - 공통 버튼 컴포넌트를 `css/style.css`로 이동
 - 모바일 탭 네비게이션 개선
 - 검색 상태를 URL 쿼리 또는 해시에 보존
