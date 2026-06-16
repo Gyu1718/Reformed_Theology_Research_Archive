@@ -1,7 +1,7 @@
-/* Berkhof preloader v2.
+/* Berkhof preloader v3.
    Upload this file to js/berkhof-preload.js.
    It loads Berkhof structure, chapter profiles, and explained quotations before app.js renders.
-   It also patches the book detail renderer after app.js loads so subtopic and quote explanations are visible. */
+   It also patches the book detail renderer after app.js loads. Subtopic explanations are shown only in the chapter subtopic area; quote blocks show only quote explanations. */
 (function () {
   function loadJson(path, fallback) {
     try {
@@ -110,10 +110,7 @@
       ref: quote.ref || [quote.section, quote.chapter, quote.subtopic].filter(Boolean).join(" — "),
       topic: quote.topic || quote.subtopic || quote.chapter || "조직신학",
       subtopic: quote.subtopic || "",
-      subtopicExplanation: quote.subtopicExplanation || "",
-      quoteExplanation: quote.quoteExplanation || quote.explanation || "",
-      teachingUse: quote.teachingUse || "",
-      compareNote: quote.compareNote || ""
+      quoteExplanation: quote.quoteExplanation || quote.explanation || ""
     };
   }
 
@@ -154,17 +151,14 @@
 
     var style = document.createElement("style");
     style.id = "berkhof-detail-explanation-styles";
-    style.textContent = "\n.subtopic-box{margin:12px 0 14px;border:1px solid var(--line);background:var(--surface-2);border-radius:12px;padding:12px 14px}.subtopic-box h5{margin:0 0 8px;font-family:var(--font-mono);font-size:.75rem;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}.subtopic-list{display:grid;gap:8px;margin:0}.subtopic-item{padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}.subtopic-item b{display:block;font-size:.9rem}.subtopic-item span{display:block;color:var(--muted);font-size:.86rem;margin-top:3px}.chap-quote .quote-meta{display:block;margin-top:8px;font-size:.78rem;color:var(--muted);font-family:var(--font-mono)}.quote-explain{margin-top:9px;padding:9px 10px;border-left:3px solid var(--line-strong);background:var(--surface-2);border-radius:8px;color:var(--muted);font-style:normal}.quote-explain b{color:var(--ink);font-size:.82rem}.quote-teaching{margin-top:6px;color:var(--muted);font-size:.86rem;font-style:normal}\n";
+    style.textContent = "\n.subtopic-box{margin:12px 0 14px;border:1px solid var(--line);background:var(--surface-2);border-radius:12px;padding:12px 14px}.subtopic-box h5{margin:0 0 8px;font-family:var(--font-mono);font-size:.75rem;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}.subtopic-list{display:grid;gap:8px;margin:0}.subtopic-item{padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}.subtopic-item b{display:block;font-size:.9rem}.subtopic-item span{display:block;color:var(--muted);font-size:.86rem;margin-top:3px}.quote-explain{margin-top:9px;padding:9px 10px;border-left:3px solid var(--line-strong);background:var(--surface-2);border-radius:8px;color:var(--muted);font-style:normal}.quote-explain b{color:var(--ink);font-size:.82rem}\n";
     document.head.appendChild(style);
 
     window.quotesHTML = function quotesHTML(items) {
       if (!items || !items.length) return "";
       var html = items.filter(function (q) { return q.text && q.source; }).map(function (q) {
-        var sub = q.subtopic ? '<span class="quote-meta">소주제 · ' + safeText(q.subtopic) + '</span>' : '';
-        var subExp = q.subtopicExplanation ? '<div class="quote-explain"><b>소주제 설명</b><br>' + safeText(q.subtopicExplanation) + '</div>' : '';
         var qExp = q.quoteExplanation ? '<div class="quote-explain"><b>인용 설명</b><br>' + safeText(q.quoteExplanation) + '</div>' : '';
-        var teach = q.teachingUse ? '<div class="quote-teaching">활용: ' + safeText(q.teachingUse) + '</div>' : '';
-        return '<blockquote class="chap-quote">' + safeText(q.text) + sub + '<cite>— ' + safeText(q.source) + (q.ref ? ' · ' + safeText(q.ref) : '') + '</cite>' + subExp + qExp + teach + '</blockquote>';
+        return '<blockquote class="chap-quote">' + safeText(q.text) + '<cite>— ' + safeText(q.source) + (q.ref ? ' · ' + safeText(q.ref) : '') + '</cite>' + qExp + '</blockquote>';
       }).join("");
       return html ? '<div class="quotes">' + html + '</div>' : '';
     };
@@ -197,7 +191,7 @@
   var book = buildBerkhofBook(map, profiles);
   window.__DATA__ = upsertBook(window.__DATA__, book);
 
-  var explainedPack = loadJson("./data/quotes/berkhof-systematic-theology-quotes-explained-v2.json", null) || loadJson("./data/quotes/berkhof-systematic-theology-quotes-explained-v1.json", null);
+  var explainedPack = loadJson("./data/quotes/berkhof-systematic-theology-quotes-explained-v3.json", null) || loadJson("./data/quotes/berkhof-systematic-theology-quotes-explained-v2.json", null) || loadJson("./data/quotes/berkhof-systematic-theology-quotes-explained-v1.json", null);
   var quotes = collectQuotes(explainedPack);
   if (!quotes.length) {
     ["v1", "v2", "v3", "v4", "v5", "v6"].forEach(function (v) {
