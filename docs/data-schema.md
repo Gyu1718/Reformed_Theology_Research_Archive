@@ -79,7 +79,32 @@
 }
 ```
 
-## 4. passages.json
+## 4. topic-history-links.json
+
+주제와 역사 항목을 연결하는 데이터입니다. `topics.json`의 주제 ID와 세 역사 데이터 파일의 역사 항목 ID를 연결합니다.
+
+```json
+{
+  "topicId": "predestination",
+  "topicName": "예정론",
+  "historyIds": [
+    "synod-of-dort",
+    "westminster-assembly",
+    "reformed-orthodoxy",
+    "barth-election-doctrine"
+  ],
+  "note": "예정론은 도르트·웨스트민스터·개혁파 정통주의와 바르트의 그리스도 중심 예정론을 반드시 비교해야 한다."
+}
+```
+
+### 연결 원칙
+
+- `topicId`: 반드시 `data/topics.json`에 존재하는 주제 id를 사용합니다.
+- `historyIds`: `tradition-history.json`, `neo-orthodoxy-history.json`, `neo-orthodoxy-doctrine-history.json` 중 하나에 존재하는 id를 사용합니다.
+- 연결은 주제를 설명하는 데 실제 역사적 배경을 제공할 때만 추가합니다.
+- 한 주제에 너무 많은 역사 항목을 붙이지 않고, 핵심 허브 중심으로 연결합니다.
+
+## 5. passages.json
 
 성경 본문 단위 데이터입니다.
 
@@ -95,7 +120,7 @@
 }
 ```
 
-## 5. notes.json
+## 6. notes.json
 
 연구 메모 데이터입니다.
 
@@ -111,7 +136,7 @@
 }
 ```
 
-## 6. tradition-history.json / neo-orthodoxy-history.json / neo-orthodoxy-doctrine-history.json
+## 7. tradition-history.json / neo-orthodoxy-history.json / neo-orthodoxy-doctrine-history.json
 
 역사 항목 데이터입니다. `tradition-history.json`은 개혁전통의 역사 항목을, `neo-orthodoxy-history.json`은 근대 자유주의 신학·변증법적 신학·칼 바르트와 신정통주의 항목을, `neo-orthodoxy-doctrine-history.json`은 자연신학 논쟁과 바르트 예정론 같은 세부 교리사 항목을 관리합니다. 전체 교회사 서술이 아니라, 개혁신학과 신정통주의의 주요 교리 주제와 문헌을 이해하는 데 필요한 역사적 맥락을 정리합니다.
 
@@ -185,7 +210,7 @@
 - `relatedTopics`: 주제 태그 연결
 - `status`: `draft`, `review`, `published` 중 하나로 관리
 
-## 7. 태그 관리 원칙
+## 8. 태그 관리 원칙
 
 태그는 너무 세분화하지 않고, 먼저 대주제를 고정합니다.
 
@@ -216,7 +241,7 @@
 - 신정통주의
 - 변증법적 신학
 
-## 8. 입력 원칙
+## 9. 입력 원칙
 
 - 원문 전문을 붙여 넣지 않습니다.
 - 요약은 직접 작성합니다.
