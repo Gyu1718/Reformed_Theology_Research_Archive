@@ -1,0 +1,62 @@
+[
+  {
+    "topicId": "revelation",
+    "topicName": "계시론",
+    "historyIds": [
+      "modern-liberal-theology-background",
+      "dialectical-theology",
+      "barth-and-neo-orthodoxy",
+      "natural-theology-debate",
+      "reformed-orthodoxy-and-neo-orthodoxy"
+    ],
+    "note": "계시론은 자유주의 신학 비판, 변증법적 신학, 바르트의 말씀론, 자연신학 논쟁과 직접 연결된다."
+  },
+  {
+    "topicId": "scripture",
+    "topicName": "성경론",
+    "historyIds": [
+      "reformation-to-reformed",
+      "reformed-orthodoxy",
+      "barth-and-neo-orthodoxy",
+      "natural-theology-debate",
+      "reformed-orthodoxy-and-neo-orthodoxy"
+    ],
+    "note": "성경론은 종교개혁의 성경 권위 회복, 정통주의의 성경 원리, 바르트의 성경 증언론과 비교된다."
+  },
+  {
+    "topicId": "natural-theology",
+    "topicName": "자연신학",
+    "historyIds": [
+      "modern-liberal-theology-background",
+      "barth-and-neo-orthodoxy",
+      "natural-theology-debate",
+      "reformed-orthodoxy-and-neo-orthodoxy"
+    ],
+    "note": "자연신학은 브루너와 바르트 논쟁, 개혁파 일반계시론, 신정통주의의 계시론적 거부를 함께 보아야 한다."
+  },
+  {
+    "topicId": "predestination",
+    "topicName": "예정론",
+    "historyIds": [
+      "synod-of-dort",
+      "westminster-assembly",
+      "reformed-orthodoxy",
+      "barth-and-neo-orthodoxy",
+      "barth-election-doctrine",
+      "reformed-orthodoxy-and-neo-orthodoxy"
+    ],
+    "note": "예정론은 도르트·웨스트민스터·개혁파 정통주의와 바르트의 그리스도 중심 예정론을 반드시 비교해야 한다."
+  },
+  {
+    "topicId": "theological-method",
+    "topicName": "신학방법론",
+    "historyIds": [
+      "reformation-to-reformed",
+      "reformed-orthodoxy",
+      "modern-liberal-theology-background",
+      "dialectical-theology",
+      "reformed-orthodoxy-and-neo-orthodoxy"
+    ],
+    "note": "신학방법론은 성경에서 출발하는 교리 체계와 하나님의 말씀 앞에서 교회 선포를 검토하는 바르트의 교의학 이해를 비교한다."
+  }
+]
