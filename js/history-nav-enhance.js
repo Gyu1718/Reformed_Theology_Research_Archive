@@ -70,12 +70,17 @@
     document.head.appendChild(style);
   }
 
-  function loadWscEnhancer() {
-    if (document.querySelector('script[src$="wsc-index-enhance.js"]')) return;
+  function loadScriptOnce(src) {
+    if (document.querySelector('script[src$="' + src.split("/").pop() + '"]')) return;
     var script = document.createElement("script");
-    script.src = "./js/wsc-index-enhance.js";
+    script.src = src;
     script.defer = true;
     document.body.appendChild(script);
+  }
+
+  function loadConfessionEnhancers() {
+    loadScriptOnce("./js/wsc-index-enhance.js");
+    loadScriptOnce("./js/wcf-index-enhance.js");
   }
 
   ensureStyles();
@@ -83,7 +88,7 @@
   var view = document.querySelector("#view");
   if (view) observer.observe(view, { childList: true, subtree: true });
   window.addEventListener("hashchange", function () { setTimeout(installNav, 0); });
-  document.addEventListener("DOMContentLoaded", function () { installNav(); loadWscEnhancer(); });
+  document.addEventListener("DOMContentLoaded", function () { installNav(); loadConfessionEnhancers(); });
   setTimeout(installNav, 0);
-  setTimeout(loadWscEnhancer, 0);
+  setTimeout(loadConfessionEnhancers, 0);
 })();
