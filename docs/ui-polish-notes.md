@@ -15,10 +15,12 @@
 
 ```txt
 js/ui-polish.js
+js/compact-related-passages.js
+js/passage-depth-enhance.js
 css/style.css
 ```
 
-관계 연결과 본문 상세 라우팅은 `js/relations.js`가 담당합니다. `ui-polish.js`는 검색 초기화, 필터 안내, 카드 접힘 동작을 담당합니다. 관련 시각 규칙과 모바일 보강 스타일은 `css/style.css`에서 관리합니다.
+관계 연결과 본문 상세 라우팅은 `js/relations.js`가 담당합니다. `ui-polish.js`는 검색 초기화, 필터 안내, 카드 접힘 동작을 담당합니다. `compact-related-passages.js`는 책 카드의 관련 본문을 대표 칩으로 축약하고, `passage-depth-enhance.js`는 본문 연구 노트를 카드에 붙입니다. 관련 시각 규칙과 모바일 보강 스타일은 `css/style.css`에서 관리합니다.
 
 ## 3. 주요 기능
 
@@ -53,8 +55,14 @@ css/style.css
 
 이 색상 변수는 `css/style.css`의 `:root`에 정의합니다.
 
-## 4. 다음 개선 후보
+## 4. CSS 관리 원칙
+
+- 보조 스크립트는 DOM 생성과 이벤트 처리만 담당합니다.
+- 검색 초기화, 카드 접힘, 관계 버튼, 본문 상세, 관련 본문 축약, 본문 연구 노트의 시각 규칙은 `css/style.css`에서 관리합니다.
+- 새 UI 보조 스크립트를 추가할 때도 가능하면 `<style>` 태그를 직접 만들지 않습니다.
+
+## 5. 다음 개선 후보
 
 - 모바일 탭 네비게이션 개선
 - 검색 상태를 URL 쿼리 또는 해시에 보존
-- `compact-related-passages.js`와 `passage-depth-enhance.js`의 일부 스타일도 필요하면 `css/style.css`로 이동
+- `css/style.css`를 기능별 섹션으로 더 나누어 정리
