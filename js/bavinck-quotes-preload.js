@@ -24,7 +24,11 @@
       text: completeSentence(quote.textKo || quote.text || ""),
       source: quote.source || "헤르만 바빙크, 『개혁교의학』 한국어판",
       ref: quote.ref || [quote.section, quote.chapter, quote.subtopic].filter(Boolean).join(" — "),
-      topic: quote.topic || quote.subtopic || quote.chapter || "개혁교의학"
+      topic: quote.topic || quote.subtopic || quote.chapter || "개혁교의학",
+      context: quote.context || "",
+      purpose: quote.purpose || "",
+      placement: quote.placement || "quote-block",
+      priority: quote.priority || ""
     };
   }
 
