@@ -13,6 +13,23 @@
     return fallback;
   }
 
+  function bookQuality(book) {
+    var parts = Array.isArray(book.parts) ? book.parts : [];
+    var chapters = parts.reduce(function (n, part) {
+      return n + (Array.isArray(part.chapters) ? part.chapters.length : 0);
+    }, 0);
+    return parts.length * 100 + chapters * 10 + ((book.summary || "").length);
+  }
+
+  function dedupeBooks(books) {
+    var best = {};
+    (books || []).forEach(function (book) {
+      if (!book || !book.id) return;
+      if (!best[book.id] || bookQuality(book) >= bookQuality(best[book.id])) best[book.id] = book;
+    });
+    return Object.keys(best).map(function (id) { return best[id]; });
+  }
+
   function normalizeBarthQuote(quote) {
     return {
       text: quote.textKo || quote.text || "",
@@ -25,7 +42,7 @@
   function sectionToChapter(section) {
     if (typeof section === "string") {
       return {
-        ref: section.replace(/^§/, "CD ").split(" ")[0] === "CD" ? section : section,
+        ref: section,
         title: section,
         summary: section,
         detail: "이 항목은 바르트 『교회교의학』의 실제 목차 구조를 반영한 § 단위 색인입니다.",
@@ -65,8 +82,8 @@
 
     books.forEach(function (book) {
       if (book && book.id === "barth-church-dogmatics") {
-        book.summary = book.summary || "바르트 『교회교의학』 한국어 구조 색인";
-        book.researchUse = book.researchUse || "권/분권/장/§/소주제 구조를 따라 개혁파 정통과 비교 연구할 수 있도록 정리한 항목입니다.";
+        book.summary = "바르트의 『교회교의학』은 하나님의 말씀, 삼위일체, 하나님 인식, 선택, 창조, 화해, 교회의 증언을 중심으로 전개되는 20세기 개신교 교의학의 대표 문헌입니다. 이 항목은 원문 전체가 아니라 권별·§별 구조와 핵심 논지, 한국어 번역 인용, 개혁파 정통과의 비교 지점을 색인합니다.";
+        book.researchUse = "칼빈·벌코프·바빙크와 비교할 때, 바르트는 신학의 출발점을 인간의 종교 의식이나 자연신학이 아니라 예수 그리스도 안에서 일어나는 하나님의 자기계시에 둡니다. 계시론, 성경론, 예정론, 창조론, 화해론, 교회론 비교에 특히 중요합니다.";
         book.parts = parts;
         book.edition = "『교회교의학』 영어판 기반 한국어 구조 색인 · " + parts.length + "개 대주제 / " + parts.reduce(function (n, p) { return n + (p.chapters || []).length; }, 0) + "개 §";
       }
@@ -110,10 +127,10 @@
 
   var books = loadJson("./data/books.json", []);
   var extraBooks = loadJson("./data/books-barth.json", []);
-  var combinedBooks = books.concat(Array.isArray(extraBooks) ? extraBooks : []);
+  var combinedBooks = dedupeBooks(books.concat(Array.isArray(extraBooks) ? extraBooks : []));
 
   var barthStructure = loadJson("./data/books-barth-structure-map.json", null);
-  combinedBooks = applyBarthStructureMap(combinedBooks, barthStructure);
+  combinedBooks = dedupeBooks(applyBarthStructureMap(combinedBooks, barthStructure));
 
   var quotePacks = [
     loadJson("./data/quotes/barth-translated-sentence-quotes-v1.json", null)
