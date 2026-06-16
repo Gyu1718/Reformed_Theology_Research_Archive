@@ -1,18 +1,27 @@
 {
-  "name": "barth-improvement-upload-pack-v4",
-  "version": "v4",
-  "created": "2026-06-16T07:54:18.898056",
+  "id": "barth-improvement-upload-pack-v5",
+  "createdFor": "Reformed_Theology_Research_Archive",
+  "mode": "upload-only",
+  "directGitCommit": false,
+  "version": "v5",
   "files": [
-    "data/barth-subtopic-contexts-v4.json",
-    "js/barth-subtopic-context-normalize-v4.js",
-    "js/quote-context-enhance-v4.js",
-    "docs/index-script-order-snippet-v4.txt",
-    "docs/barth-subtopic-context-guide-v4.md",
+    "data/barth-book-deep-context-v5.json",
+    "js/barth-book-deep-enhance-v5.js",
+    "docs/barth-book-improvement-audit-v5.md",
+    "docs/barth-book-deep-context-guide-v5.md",
+    "docs/index-script-order-snippet-v5.txt",
     "README_APPLY.md"
   ],
   "stats": {
     "sections": 75,
-    "subtopics": 214
+    "subtopics": 214,
+    "basis": "data/books-barth-structure-map.json의 75개 § 구조와 subtopics 배열, III/IV권 문자열 항목은 v5에서 소주제로 확장"
   },
-  "note": "Use this pack instead of v1/v2/v3."
+  "fixes": [
+    "section-level repeated detail problem",
+    "subtopic-level missing explanations",
+    "Barth III/IV string section lack of subtopic contexts",
+    "quote.context not mapped to subtopic",
+    "UI did not render subtopic detail cards"
+  ]
 }
