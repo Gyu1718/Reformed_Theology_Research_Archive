@@ -82,6 +82,7 @@
     loadScriptOnce("./js/wsc-index-enhance.js");
     loadScriptOnce("./js/wcf-index-enhance.js");
     loadScriptOnce("./js/belgic-index-enhance.js");
+    loadScriptOnce("./js/dort-index-enhance.js");
   }
 
   ensureStyles();
