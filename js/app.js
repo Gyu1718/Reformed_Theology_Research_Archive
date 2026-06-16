@@ -19,7 +19,14 @@ const matchQ = h => !state.q || h.toLowerCase().includes(state.q.toLowerCase());
 const bookTitle = id => { const b = DATA.books.find(x => x.id === id); return b ? b.title : id; };
 
 /* ---------------- data load ---------------- */
+function afterLoad() {
+  const both = DATA.topics.find(hasBoth);
+  state.concept = (both || DATA.topics[0] || {}).id || null;
+  renderCounts();
+  render();
+}
 async function boot() {
+  if (window.__DATA__) { Object.assign(DATA, window.__DATA__); afterLoad(); return; }
   view.innerHTML = `<div class="loading">데이터를 불러오는 중…</div>`;
   const files = ["books", "authors", "topics", "passages", "notes", "taxonomy"];
   try {
@@ -30,11 +37,7 @@ async function boot() {
       }))
     );
     files.forEach((f, i) => { DATA[f] = results[i]; });
-    // pick a default concept that has both traditions if possible
-    const both = DATA.topics.find(hasBoth);
-    state.concept = (both || DATA.topics[0] || {}).id || null;
-    renderCounts();
-    render();
+    afterLoad();
   } catch (e) {
     view.innerHTML = `<div class="empty"><b>데이터를 불러오지 못했습니다.</b><br>
       ${e.message}<br><br>이 사이트는 <code>data/*.json</code>을 fetch로 읽습니다.
@@ -98,6 +101,15 @@ function renderCompare() {
 }
 
 /* ---------------- books ---------------- */
+function chapterHTML(ch) {
+  const ref = `<span class="cref">${ch.ref || "·"}</span>`;
+  const head = `${ref}<div class="chap-head"><b>${ch.title}</b>${ch.summary ? `<p>${ch.summary}</p>` : ""}</div>`;
+  const tags = (ch.concepts && ch.concepts.length) ? `<div class="tags">${ch.concepts.map(x => `<span class="tag">${x}</span>`).join("")}</div>` : "";
+  const hasDetail = ch.detail || (ch.keyPoints && ch.keyPoints.length);
+  if (!hasDetail) return `<div class="chap">${head}</div>${tags ? `<div class="chap-tagrow">${tags}</div>` : ""}`;
+  const kp = (ch.keyPoints && ch.keyPoints.length) ? `<ul class="keypoints">${ch.keyPoints.map(k => `<li>${k}</li>`).join("")}</ul>` : "";
+  return `<details class="chap-x"><summary class="chap chap-sum">${head}</summary><div class="chap-detail">${ch.detail ? `<p class="chap-body">${ch.detail}</p>` : ""}${kp}${tags}</div></details>`;
+}
 function bookStructure(b) {
   if (b.parts && b.parts.length) {
     const total = b.parts.reduce((n, p) => n + (p.chapters ? p.chapters.length : 0), 0);
@@ -105,12 +117,12 @@ function bookStructure(b) {
       <div class="part">
         <h4 class="part-h">${p.title}</h4>
         ${p.summary ? `<p class="part-sum">${p.summary}</p>` : ""}
-        ${(p.chapters || []).map(ch => `<div class="chap"><span class="cref">${ch.ref || ""}</span><div><b>${ch.title}</b><p>${ch.summary || ""}</p>${ch.concepts ? `<div class="tags">${ch.concepts.map(x => `<span class="tag">${x}</span>`).join("")}</div>` : ""}</div></div>`).join("")}
+        ${(p.chapters || []).map(chapterHTML).join("")}
       </div>`).join("");
     return `<details class="structure"><summary>전체 구조 — ${b.parts.length}권 ${total}장 펼치기</summary>${parts}</details>`;
   }
   if (b.chapters && b.chapters.length) {
-    return `<details class="flatchap"><summary>장별 요약 ${b.chapters.length}개</summary>${b.chapters.map(ch => `<div class="fc"><b>${ch.title}</b><p>${ch.summary || ""}</p></div>`).join("")}</details>`;
+    return `<details class="structure"><summary>장별 상세 ${b.chapters.length}개 펼치기</summary><div class="part">${b.chapters.map(chapterHTML).join("")}</div></details>`;
   }
   return "";
 }
