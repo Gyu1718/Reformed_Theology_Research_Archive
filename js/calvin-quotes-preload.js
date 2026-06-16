@@ -64,7 +64,8 @@
   var quotePacks = [
     loadJson("./data/quotes/calvin-institutes-quotes-v1.json", null),
     loadJson("./data/quotes/calvin-institutes-quotes-v2.json", null),
-    loadJson("./data/quotes/calvin-institutes-quotes-v3.json", null)
+    loadJson("./data/quotes/calvin-institutes-quotes-v3.json", null),
+    loadJson("./data/quotes/calvin-institutes-quotes-v4.json", null)
   ].filter(Boolean);
   window.__DATA__ = attachCalvinQuotes(window.__DATA__, quotePacks);
 })();
