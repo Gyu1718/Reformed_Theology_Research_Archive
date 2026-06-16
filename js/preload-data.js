@@ -69,12 +69,19 @@
     var lens = " 바르트 신학상 이 항목은 그리스도 중심적 계시 이해, 교회의 선포, 그리고 하나님이 먼저 자신을 알려 주신다는 신학적 질서 안에서 읽어야 합니다.";
     return base + pointText + lens;
   }
+  function completeSentence(text) {
+    var t = (text || "").trim();
+    if (!t) return "";
+    return /[.!?。！？다요임됨함니다습니다]$/.test(t) ? t : t + "입니다.";
+  }
   function fallbackQuote(chapter) {
-    var text = chapter.summary || (chapter.keyPoints && chapter.keyPoints[0]) || chapter.title || "바르트 『교회교의학』의 핵심 단락입니다.";
-    return { text: text, source: "칼 바르트, 『교회교의학』 영어판에서 한국어 번역·요약", ref: chapter.ref ? chapter.ref + " — " + chapter.title : chapter.title, topic: (chapter.concepts && chapter.concepts[0]) || chapter.title || "교회교의학" };
+    var theme = chapter.title || "이 단락";
+    var ref = chapter.ref || "";
+    var sentence = "바르트는 " + (ref ? ref + "에서 " : "이 단락에서 ") + "‘" + theme + "’을 하나님의 자유로운 계시와 예수 그리스도 중심의 교의학 안에서 해명해야 할 신학적 주제로 다룹니다.";
+    return { text: completeSentence(sentence), source: "칼 바르트, 『교회교의학』 영어판 기반 한국어 해설문", ref: chapter.ref ? chapter.ref + " — " + chapter.title : chapter.title, topic: (chapter.concepts && chapter.concepts[0]) || chapter.title || "교회교의학" };
   }
   function normalizeBarthQuote(quote) {
-    return { text: quote.textKo || quote.text || "", source: quote.source || "칼 바르트, 『교회교의학』 영어판에서 한국어 번역", ref: quote.ref || [quote.volume, quote.section, quote.chapter, quote.subtopic].filter(Boolean).join(" "), topic: quote.topic || quote.subtopic || quote.chapter || "바르트 교회교의학" };
+    return { text: completeSentence(quote.textKo || quote.text || ""), source: quote.source || "칼 바르트, 『교회교의학』 영어판에서 한국어 번역", ref: quote.ref || [quote.volume, quote.section, quote.chapter, quote.subtopic].filter(Boolean).join(" "), topic: quote.topic || quote.subtopic || quote.chapter || "바르트 교회교의학" };
   }
 
   function sectionToChapter(section, volumeId) {
