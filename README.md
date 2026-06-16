@@ -10,6 +10,7 @@
 - 학자별 보기: 칼빈, 바빙크, 벌코프, 바르트 등 학자 중심 색인
 - 주제별 보기: 계시론, 신론, 예정론, 언약신학, 교회론 등 교리 주제 정리
 - 성경 본문별 보기: 특정 본문이 어느 책과 주제에서 다루어지는지 추적
+- 본문 연구 노트: 본문별 핵심 질문, 전통별 활용, 설교 활용, 연구 활용 정리
 - 개혁전통·신정통주의 역사: 종교개혁, 개혁파, 장로교, 도르트, 웨스트민스터, 개혁파 정통주의, 근대 자유주의 신학, 변증법적 신학, 바르트와 신정통주의 흐름 정리
 - 주제-역사 연결: 계시론, 성경론, 자연신학, 예정론 같은 개념 카드에서 관련 역사 항목으로 이동
 - 학자-역사 연결: 학자 카드에서 관련 역사 항목으로 이동
@@ -43,6 +44,7 @@
 │  ├─ topic-history-linker.js
 │  ├─ author-history-linker.js
 │  ├─ passage-theology-linker.js
+│  ├─ passage-depth-enhance.js
 │  └─ search.js
 ├─ data/
 │  ├─ books.json
@@ -78,7 +80,7 @@
 4. 학자와 역사 항목의 연결은 `data/author-history-links.json`에 추가합니다.
 5. 주제 연결은 `data/topics.json`에 추가합니다.
 6. 주제와 역사 항목의 연결은 `data/topic-history-links.json`에 추가합니다.
-7. 성경 본문 기본 정보는 `data/passages.json`에 추가합니다.
+7. 성경 본문 기본 정보와 본문 연구 노트는 `data/passages.json`에 추가합니다.
 8. 성경 본문과 주제·역사 항목의 연결은 `data/passage-theology-links.json`에 추가합니다.
 9. 개혁전통의 역사 항목은 `data/tradition-history.json`에 추가합니다.
 10. 신정통주의 역사 항목은 `data/neo-orthodoxy-history.json`에 추가합니다.
