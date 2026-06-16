@@ -128,3 +128,4 @@
     taxonomy: loadJson("./data/taxonomy.json", {})
   };
 })();
+document.write('<script src="./js/barth-enhance.js"><\\/script>');
