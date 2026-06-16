@@ -84,6 +84,7 @@
     loadScriptOnce("./js/belgic-index-enhance.js");
     loadScriptOnce("./js/dort-index-enhance.js");
     loadScriptOnce("./js/ancient-creeds-text-enhance.js");
+    loadScriptOnce("./js/heidelberg-text-enhance.js");
   }
 
   ensureStyles();
