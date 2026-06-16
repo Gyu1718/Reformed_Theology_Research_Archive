@@ -37,6 +37,11 @@
   });
 
   function goToPassage(reference) {
+    var passage = passageByReference[reference];
+    if (passage && passage.id) {
+      location.hash = "passage=" + encodeURIComponent(passage.id);
+      return;
+    }
     var search = document.querySelector("#q");
     var tab = document.querySelector('.tab[data-view="passages"]');
     if (search) {
@@ -44,14 +49,6 @@
       search.dispatchEvent(new Event("input", { bubbles: true }));
     }
     if (tab) tab.click();
-    setTimeout(function () {
-      var cards = Array.prototype.slice.call(document.querySelectorAll("#view .card.passage"));
-      var target = cards.find(function (card) {
-        var h = card.querySelector("h3");
-        return h && h.textContent.trim() === reference;
-      });
-      if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 80);
   }
 
   function goToBook(bookId) {
@@ -73,7 +70,7 @@
     if (!items.length) return "";
     var limit = compact ? 6 : 20;
     var buttons = items.slice(0, limit).map(passageButtonHtml).join("");
-    var more = items.length > limit ? '<p class="book-passage-more">외 ' + (items.length - limit) + '개 본문은 본문 탭에서 책 제목으로 검색해 확인할 수 있습니다.</p>' : "";
+    var more = items.length > limit ? '<p class="book-passage-more">외 ' + (items.length - limit) + '개 본문은 본문 탭 또는 본문 상세 링크에서 확인할 수 있습니다.</p>' : "";
     return '<section class="book-passage-section' + (compact ? ' is-compact' : '') + '"><h4>관련 성경 본문</h4><div class="book-passage-grid">' + buttons + '</div>' + more + '</section>';
   }
 
