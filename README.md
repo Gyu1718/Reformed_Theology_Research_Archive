@@ -1,21 +1,18 @@
 # Reformed Theology Research Archive
 
-개혁신학 연구 자료를 책, 학자, 주제, 성경 본문, 본문 연구 노트, 개혁전통·신정통주의 역사 단위로 연결해 정리하는 정적 HTML 아카이브입니다.
+개혁신학 연구 자료를 책, 학자, 주제, 인용 위치, 개혁전통·신정통주의 역사 단위로 연결해 정리하는 정적 HTML 아카이브입니다.
 
-이 저장소의 목표는 저작권 있는 원문 전체를 공개하는 것이 아니라, 연구와 인용을 돕기 위한 **서지정보, 목차, 요약, 주제 색인, 성경 본문 색인, 본문 연구 노트, 개혁전통·신정통주의 역사 색인, 짧은 인용 위치**를 체계적으로 관리하는 것입니다.
+이 저장소의 목표는 저작권 있는 원문 전체를 공개하는 것이 아니라, 연구와 인용을 돕기 위한 **서지정보, 목차, 요약, 주제 색인, 개혁전통·신정통주의 역사 색인, 짧은 인용 위치**를 체계적으로 관리하는 것입니다.
 
 ## 핵심 기능
 
 - 책별 보기: 주요 개혁신학·신정통주의 문헌의 목차와 장별 요약
 - 학자별 보기: 칼빈, 바빙크, 벌코프, 바르트 등 학자 중심 색인
 - 주제별 보기: 계시론, 신론, 예정론, 언약신학, 교회론 등 교리 주제 정리
-- 성경 본문별 보기: 특정 본문이 어느 책과 주제에서 다루어지는지 추적
-- 본문 연구 노트: 본문별 핵심 질문, 전통별 활용, 설교 활용, 연구 활용 정리
-- 관계 연결: 주제-역사, 학자-역사, 본문-주제/역사, 책-본문 연결을 `relations.js`에서 통합 처리
-- 본문 상세 라우트: `#passage=romans-9`처럼 특정 본문 상세 페이지로 직접 이동
+- 관계 연결: 주제-역사, 학자-역사 연결을 `relations.js`에서 통합 처리
 - 모바일 탭 보강: 작은 화면에서 탭을 pill 형태로 표시하고 활성 탭을 자동으로 시야에 맞춤
 - 개혁전통·신정통주의 역사: 종교개혁, 개혁파, 장로교, 도르트, 웨스트민스터, 개혁파 정통주의, 근대 자유주의 신학, 변증법적 신학, 바르트와 신정통주의 흐름 정리
-- 통합 검색: 책, 학자, 주제, 본문, 역사 항목을 한 번에 검색
+- 통합 검색: 책, 학자, 주제, 역사 항목을 한 번에 검색
 
 ## 공개 저장소 원칙
 
@@ -43,8 +40,6 @@
 │  ├─ history-preload.js
 │  ├─ history-nav-enhance.js
 │  ├─ relations.js
-│  ├─ compact-related-passages.js
-│  ├─ passage-depth-enhance.js
 │  ├─ ui-polish.js
 │  └─ search.js
 ├─ data/
@@ -53,8 +48,6 @@
 │  ├─ author-history-links.json
 │  ├─ topics.json
 │  ├─ topic-history-links.json
-│  ├─ passages.json
-│  ├─ passage-theology-links.json
 │  ├─ tradition-history.json
 │  ├─ neo-orthodoxy-history.json
 │  ├─ neo-orthodoxy-doctrine-history.json
@@ -67,8 +60,6 @@
    ├─ project-plan.md
    ├─ history-plan.md
    ├─ data-schema.md
-   ├─ passage-depth-schema.md
-   ├─ book-passage-linking.md
    ├─ relations-script.md
    ├─ ui-polish-notes.md
    ├─ input-workflow.md
@@ -83,24 +74,18 @@
 4. 학자와 역사 항목의 연결은 `data/author-history-links.json`에 추가합니다.
 5. 주제 연결은 `data/topics.json`에 추가합니다.
 6. 주제와 역사 항목의 연결은 `data/topic-history-links.json`에 추가합니다.
-7. 성경 본문 기본 정보와 본문 연구 노트는 `data/passages.json`에 추가합니다.
-8. 성경 본문과 주제·역사 항목의 연결은 `data/passage-theology-links.json`에 추가합니다.
-9. 책과 성경 본문의 양방향 연결은 `data/passages.json`의 `relatedBooks`를 기준으로 자동 생성됩니다.
-10. 자료 사이의 화면 연결은 `js/relations.js`가 담당합니다.
-11. 책 카드의 관련 본문 축약 표시는 `js/compact-related-passages.js`가 담당합니다.
-12. 모바일 탭 동작은 `js/ui-polish.js`, 시각 규칙은 `css/mobile-tabs.css`가 담당합니다.
-13. 개혁전통의 역사 항목은 `data/tradition-history.json`에 추가합니다.
-14. 신정통주의 역사 항목은 `data/neo-orthodoxy-history.json`에 추가합니다.
-15. 신정통주의 세부 교리사 항목은 `data/neo-orthodoxy-doctrine-history.json`에 추가합니다.
-16. 표준 주제 분류는 `data/taxonomy.json`을 기준으로 관리합니다.
+7. 자료 사이의 화면 연결은 `js/relations.js`가 담당합니다.
+8. 모바일 탭 동작은 `js/ui-polish.js`, 시각 규칙은 `css/mobile-tabs.css`가 담당합니다.
+9. 개혁전통의 역사 항목은 `data/tradition-history.json`에 추가합니다.
+10. 신정통주의 역사 항목은 `data/neo-orthodoxy-history.json`에 추가합니다.
+11. 신정통주의 세부 교리사 항목은 `data/neo-orthodoxy-doctrine-history.json`에 추가합니다.
+12. 표준 주제 분류는 `data/taxonomy.json`을 기준으로 관리합니다.
 
 ## 작업 문서
 
 - [`docs/project-plan.md`](docs/project-plan.md): 전체 기획서
 - [`docs/history-plan.md`](docs/history-plan.md): 역사 파트 설계안
 - [`docs/data-schema.md`](docs/data-schema.md): JSON 데이터 입력 규칙
-- [`docs/passage-depth-schema.md`](docs/passage-depth-schema.md): 본문 연구 노트 입력 규칙
-- [`docs/book-passage-linking.md`](docs/book-passage-linking.md): 책-본문 양방향 연결 규칙
 - [`docs/relations-script.md`](docs/relations-script.md): 관계 연결 통합 스크립트 설명
 - [`docs/ui-polish-notes.md`](docs/ui-polish-notes.md): UI 정리 패치 설명
 - [`docs/input-workflow.md`](docs/input-workflow.md): 책 한 권을 추가할 때 따르는 실제 작업 순서
