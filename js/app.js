@@ -7,7 +7,7 @@ const TRAD = {
 };
 const REF = "개혁파 정통", NEO = "신정통주의";
 
-const DATA = { books: [], authors: [], topics: [], passages: [], notes: [], history: [], taxonomy: {} };
+const DATA = { books: [], authors: [], topics: [], notes: [], history: [], taxonomy: {} };
 let state = { view: "compare", trad: "all", q: "", concept: null, route: null };
 
 const el = s => document.querySelector(s);
@@ -86,7 +86,6 @@ async function boot() {
     { key: "books", file: "books" },
     { key: "authors", file: "authors" },
     { key: "topics", file: "topics" },
-    { key: "passages", file: "passages" },
     { key: "notes", file: "notes" },
     { key: "taxonomy", file: "taxonomy" },
     { key: "history", file: "tradition-history" }
@@ -218,7 +217,6 @@ function renderHistoryDetail(id) {
   const relatedTopics = arr(h.relatedTopics).map(t => `<button type="button" data-topic-jump="${t}">${t}</button>`).join("");
   const relatedBooks = arr(h.relatedBooks).map(id => `<button type="button" data-book-jump="${id}">📖 ${bookTitle(id)}</button>`).join("");
   const relatedAuthors = arr(h.relatedAuthors).map(id => `<span>${authorTitle(id)}</span>`).join("");
-  const relatedPassages = arr(h.relatedPassages).map(p => `<span>${p}</span>`).join("");
   const pointers = arr(h.quotePointers).map(p => `<div class="history-mini"><b>${p.source || "인용 위치"}</b>${p.location ? `<span>${p.location}</span>` : ""}${p.note ? `<p>${p.note}</p>` : ""}</div>`).join("");
   view.innerHTML = `
     <article class="detail-page">
@@ -236,7 +234,7 @@ function renderHistoryDetail(id) {
         ${arr(h.keyFigures).length ? `<section class="history-section"><h4>주요 인물</h4><div class="history-grid">${mini(h.keyFigures, "name", "", "role")}</div></section>` : ""}
         ${arr(h.keyDocuments).length ? `<section class="history-section"><h4>주요 문헌</h4><div class="history-grid">${mini(h.keyDocuments, "title", "year", "note")}</div></section>` : ""}
         ${arr(h.theologicalIssues).length ? `<section class="history-section"><h4>핵심 신학 쟁점</h4><div class="history-relations">${arr(h.theologicalIssues).map(x => `<span>${x}</span>`).join("")}</div></section>` : ""}
-        ${(relatedTopics || relatedBooks || relatedAuthors || relatedPassages) ? `<section class="history-section"><h4>연결 색인</h4><div class="history-relations">${relatedTopics}${relatedBooks}${relatedAuthors}${relatedPassages}</div></section>` : ""}
+        ${(relatedTopics || relatedBooks || relatedAuthors) ? `<section class="history-section"><h4>연결 색인</h4><div class="history-relations">${relatedTopics}${relatedBooks}${relatedAuthors}</div></section>` : ""}
         ${arr(h.misunderstandings).length ? `<section class="history-section"><h4>자주 생기는 오해</h4>${list(h.misunderstandings)}</section>` : ""}
         ${arr(h.researchUses).length ? `<section class="history-section"><h4>연구 활용</h4>${list(h.researchUses)}</section>` : ""}
         ${pointers ? `<section class="history-section"><h4>인용 위치 메모</h4><div class="history-grid">${pointers}</div></section>` : ""}
@@ -325,19 +323,6 @@ function renderAuthors() {
     </article>`).join("") + `</div>`;
 }
 
-/* ---------------- passages ---------------- */
-function renderPassages() {
-  const items = DATA.passages.filter(p => matchQ(p.reference + (p.summary || "") + (p.topics || []).join(" ")));
-  if (!items.length) return emptyState("본문");
-  view.innerHTML = `<div class="grid">` + items.map(p => `
-    <article class="card passage">
-      <div class="meta-row"><span class="cat-tag">${p.testament || ""} · ${p.book || ""}</span></div>
-      <h3>${p.reference}</h3>
-      <p class="sum">${p.summary || ""}</p>
-      <div class="tags">${(p.topics || []).map(t => `<span class="tag">${t}</span>`).join("")}</div>
-    </article>`).join("") + `</div>`;
-}
-
 /* ---------------- history ---------------- */
 function historyText(h) {
   return [
@@ -349,7 +334,6 @@ function historyText(h) {
     arr(h.relatedTopics).join(" "),
     arr(h.relatedBooks).join(" "),
     arr(h.relatedAuthors).join(" "),
-    arr(h.relatedPassages).join(" "),
     arr(h.misunderstandings).join(" "),
     arr(h.researchUses).join(" "),
     arr(h.quotePointers).map(x => [x.source, x.location, x.note].join(" ")).join(" ")
@@ -384,7 +368,7 @@ function renderNotes() {
 
 function emptyState(label) { view.innerHTML = `<div class="grid"><div class="empty"><b>${label}</b>에서 조건에 맞는 항목을 찾지 못했습니다.<br>검색어를 지우거나 전통 필터를 '전체'로 바꿔 보세요.</div></div>`; }
 
-const VIEWS = { compare: renderCompare, books: renderBooks, authors: renderAuthors, passages: renderPassages, history: renderHistory, notes: renderNotes };
+const VIEWS = { compare: renderCompare, books: renderBooks, authors: renderAuthors, history: renderHistory, notes: renderNotes };
 function render() {
   syncRoute();
   if (state.route?.type === "book") { setActiveTab("books"); return renderBookDetail(state.route.id); }
@@ -397,7 +381,7 @@ function render() {
 function renderCounts() {
   const ch = DATA.books.reduce((n, b) => n + (b.parts ? b.parts.reduce((m, p) => m + (p.chapters ? p.chapters.length : 0), 0) : (b.chapters ? b.chapters.length : 0)), 0);
   const pos = DATA.topics.reduce((n, t) => n + (t.positions ? t.positions.length : 0), 0);
-  el("#countbar").innerHTML = `<b>${DATA.books.length}</b> 책 <span class="sep">·</span><b>${ch}</b> 장 색인 <span class="sep">·</span><b>${DATA.topics.length}</b> 개념 <span class="sep">·</span><b>${pos}</b> 입장 <span class="sep">·</span><b>${DATA.passages.length}</b> 본문 <span class="sep">·</span><b>${DATA.history.length}</b> 역사 항목 <span class="sep">·</span><b>${DATA.notes.length}</b> 메모`;
+  el("#countbar").innerHTML = `<b>${DATA.books.length}</b> 책 <span class="sep">·</span><b>${ch}</b> 장 색인 <span class="sep">·</span><b>${DATA.topics.length}</b> 개념 <span class="sep">·</span><b>${pos}</b> 입장 <span class="sep">·</span><b>${DATA.history.length}</b> 역사 항목 <span class="sep">·</span><b>${DATA.notes.length}</b> 메모`;
 }
 
 /* ---------------- wiring ---------------- */
