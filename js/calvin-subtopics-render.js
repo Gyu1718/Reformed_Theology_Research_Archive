@@ -52,6 +52,12 @@
     return value ? '<p><span class="mini-label">' + esc(label) + ':</span> ' + esc(value) + '</p>' : "";
   }
 
+  function quoteChip(value) {
+    if (!value) return "";
+    if (typeof value === "string") return '<span>' + esc(value) + '</span>';
+    return '<span>' + esc(value.target || value.ref || value.location || value.topic || "인용 후보") + '</span>';
+  }
+
   function subtopicHTML(item) {
     var quoteTargets = arr(item.quoteTargets || item.refs || item.connections).slice(0, 6);
     return '<section class="calvin-subtopic-card">' +
@@ -60,16 +66,28 @@
       field("핵심 질문", item.keyQuestion || item.question || item.studyPrompt) +
       field("논증 역할", item.doctrinalFunction || item.argumentRole) +
       field("오독 방지", item.caution) +
-      (quoteTargets.length ? '<div class="quote-targets">' + quoteTargets.map(function (target) { return '<span>' + esc(target) + '</span>'; }).join("") + '</div>' : "") +
+      (quoteTargets.length ? '<div class="quote-targets">' + quoteTargets.map(quoteChip).join("") + '</div>' : "") +
+      '</section>';
+  }
+
+  function quoteTargetHTML(item) {
+    if (!item) return "";
+    if (typeof item === "string") {
+      return '<section class="calvin-subtopic-card"><b>인용 후보 위치</b>' + field("위치", item) + '</section>';
+    }
+    return '<section class="calvin-subtopic-card"><b>' + esc(item.topic || "인용 후보 위치") + '</b>' +
+      field("위치", item.target || item.ref || item.location) +
+      field("선별 이유", item.reason || item.note || item.context) +
       '</section>';
   }
 
   function renderForChapter(chapter) {
     var details = arr(chapter && chapter.subtopicDetails).length ? chapter.subtopicDetails : arr(chapter && chapter.subtopicsRaw);
-    if (!details.length) return "";
+    var quoteTargets = arr(chapter && chapter.quoteTargets);
+    if (!details.length && !quoteTargets.length) return "";
     return '<div class="calvin-subtopic-details" data-calvin-subtopic-rendered="true">' +
-      '<p class="calvin-subtopic-title">Subtopic Notes</p>' +
-      details.map(subtopicHTML).join("") +
+      (details.length ? '<p class="calvin-subtopic-title">Subtopic Notes</p>' + details.map(subtopicHTML).join("") : "") +
+      (quoteTargets.length ? '<p class="calvin-subtopic-title">Quote Targets</p>' + quoteTargets.map(quoteTargetHTML).join("") : "") +
       '</div>';
   }
 
