@@ -152,6 +152,12 @@
     return relationButton("history", item.id, item.title || item.id, item.category || "역사", className || "history-link-btn");
   }
 
+  function topicButton(topicId, className) {
+    var topic = topicMap[topicId];
+    if (!topic) return "";
+    return relationButton("topic", topic.id, topic.name || topic.id, topic.category || "교리", className || "topic-link-btn");
+  }
+
   function topicCard(topicId) {
     var topic = topicMap[topicId];
     if (!topic) return "";
@@ -268,14 +274,15 @@
     var historyIds = historyIdsForBook(book, topicIds);
     if (!topicIds.length && !historyIds.length) return;
 
-    var topicCards = topicIds.map(topicCard).filter(Boolean).join("");
-    var historyCards = historyIds.map(historyCard).filter(Boolean).join("");
-    var html = '<section class="topic-section book-relation-section"><h4>이 책과 연결된 교리·역사</h4>' +
+    var topicButtons = topicIds.map(function (id) { return topicButton(id, "compact-relation-btn topic-link-btn"); }).filter(Boolean).join("");
+    var historyButtons = historyIds.map(function (id) { return historyButton(id, "compact-relation-btn history-link-btn"); }).filter(Boolean).join("");
+    var html = '<details class="topic-section book-relation-section book-relation-compact">' +
+      '<summary><span>연결 지도</span><b>교리 ' + topicIds.length + ' · 역사 ' + historyIds.length + '</b></summary>' +
       '<p class="relation-note">' + esc((link && link.note) || "책의 주제어와 장별 개념을 바탕으로 함께 읽을 교리 페이지와 역사 항목을 묶었습니다.") + '</p>' +
-      (topicCards ? '<div class="book-relation-block"><h5>관련 교리 페이지</h5><div class="relation-card-grid">' + topicCards + '</div></div>' : '') +
-      (historyCards ? '<div class="book-relation-block"><h5>관련 역사 항목</h5><div class="relation-card-grid">' + historyCards + '</div></div>' : '') +
-    '</section>';
-    detailMain.insertAdjacentHTML("afterbegin", html);
+      (topicButtons ? '<div class="book-relation-block compact-relation-block"><h5>교리</h5><div class="compact-relation-grid">' + topicButtons + '</div></div>' : '') +
+      (historyButtons ? '<div class="book-relation-block compact-relation-block"><h5>역사</h5><div class="compact-relation-grid">' + historyButtons + '</div></div>' : '') +
+    '</details>';
+    detailMain.insertAdjacentHTML("beforeend", html);
     wire(detailMain);
   }
 
@@ -293,13 +300,27 @@
       .relation-card p,.history-relation-card p{color:var(--muted);font-size:.9rem;line-height:1.65;margin:0 0 12px;}\
       .relation-card button,.history-relation-card button{border:1px solid var(--line-strong);background:var(--surface-2);border-radius:999px;padding:8px 11px;cursor:pointer;color:var(--ink);font-size:.84rem;}\
       .relation-card button:hover,.history-relation-card button:hover{border-color:var(--ink);background:var(--surface);}\
-      .book-relation-section{margin-bottom:18px;}\
+      .book-relation-section{margin:22px 0 0;}\
+      .book-relation-compact{border:1px dashed var(--line);background:var(--surface-2);border-radius:14px;padding:0;}\
+      .book-relation-compact summary{display:flex;align-items:center;justify-content:space-between;gap:12px;cursor:pointer;padding:12px 14px;list-style:none;}\
+      .book-relation-compact summary::-webkit-details-marker{display:none;}\
+      .book-relation-compact summary span{font-family:var(--font-display);font-weight:700;}\
+      .book-relation-compact summary b{font-family:var(--font-mono);font-size:.76rem;color:var(--muted);font-weight:500;}\
+      .book-relation-compact[open]{padding-bottom:12px;}\
+      .book-relation-compact[open] summary{border-bottom:1px solid var(--line);margin-bottom:12px;}\
+      .book-relation-compact .relation-note{font-size:.9rem;margin:0 14px 12px;}\
       .book-relation-block{margin-top:14px;}\
       .book-relation-block h5{font-family:var(--font-display);font-size:.98rem;margin:0 0 10px;}\
+      .compact-relation-block{margin:10px 14px 0;}\
+      .compact-relation-block h5{font-size:.88rem;margin-bottom:8px;color:var(--muted);}\
+      .compact-relation-grid{display:flex;gap:7px;flex-wrap:wrap;}\
+      .compact-relation-btn{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 10px;cursor:pointer;color:var(--ink);font-size:.82rem;}\
+      .compact-relation-btn span{font-family:var(--font-mono);font-size:.66rem;color:var(--muted);margin-right:5px;}\
+      .compact-relation-btn:hover{border-color:var(--ink);background:var(--surface-2);}\
       .relation-grid{display:flex;gap:8px;flex-wrap:wrap;}\
       .relation-grid .history-link-btn{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:8px 12px;cursor:pointer;color:var(--ink);}\
       .relation-grid .history-link-btn span{font-family:var(--font-mono);font-size:.68rem;color:var(--muted);margin-right:6px;}\
-      @media(max-width:820px){.history-relation-card-grid,.relation-card-grid{grid-template-columns:1fr;}}\
+      @media(max-width:820px){.history-relation-card-grid,.relation-card-grid{grid-template-columns:1fr;}.book-relation-compact summary{align-items:flex-start;flex-direction:column;gap:4px;}}\
     ";
     document.head.appendChild(style);
   }
