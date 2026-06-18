@@ -1,5 +1,7 @@
 /* History ↔ doctrine topic linking enhancer.
-   Resolves history relatedTopics/theologicalIssues into actual topic detail routes. */
+   Resolves history relatedTopics/theologicalIssues into actual topic detail routes.
+   Accuracy note: aliases follow current topic IDs, especially sacraments, covenant-theology, and anthropology-and-sin.
+*/
 (function () {
   var ALIASES = {
     "계시": "revelation",
@@ -27,17 +29,23 @@
     "유기": "predestination",
     "작정": "predestination",
     "하나님의 작정": "predestination",
-    "언약": "creation-covenant",
-    "언약신학": "creation-covenant",
-    "언약론": "creation-covenant",
+    "언약": "covenant-theology",
+    "언약신학": "covenant-theology",
+    "언약론": "covenant-theology",
+    "행위언약": "covenant-theology",
+    "은혜언약": "covenant-theology",
     "창조론": "creation-covenant",
     "창조와 언약": "creation-covenant",
     "섭리": "providence-and-evil",
     "섭리론": "providence-and-evil",
     "악": "providence-and-evil",
-    "죄론": "sin",
-    "죄": "sin",
-    "인간론": "humanity",
+    "무": "providence-and-evil",
+    "죄론": "anthropology-and-sin",
+    "죄": "anthropology-and-sin",
+    "타락": "anthropology-and-sin",
+    "원죄": "anthropology-and-sin",
+    "인간론": "anthropology-and-sin",
+    "하나님의 형상": "anthropology-and-sin",
     "기독론": "christology",
     "그리스도 중심성": "christology",
     "성육신": "christology",
@@ -53,8 +61,10 @@
     "교회": "ecclesiology",
     "교회 정치": "ecclesiology",
     "장로회 정치": "ecclesiology",
-    "성례론": "ecclesiology",
-    "성례": "ecclesiology",
+    "성례론": "sacraments",
+    "성례": "sacraments",
+    "세례": "sacraments",
+    "성찬": "sacraments",
     "종말론": "eschatology"
   };
 
@@ -149,6 +159,7 @@
         button.title = "아직 직접 연결된 교리 상세 페이지가 없습니다.";
         return;
       }
+      button.classList.remove("history-topic-unresolved");
       button.classList.add("history-topic-resolved");
       button.setAttribute("data-topic-resolved", topic.id);
       button.title = "교리 상세 페이지로 이동: " + topic.name;
