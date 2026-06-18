@@ -93,11 +93,16 @@ function normalizeSubtopics(subtopics) {
   return (subtopics || [])
     .map((subtopic) => {
       if (typeof subtopic === "string") {
-        return { title: subtopic, summary: "", refs: [] };
+        return { title: subtopic, summary: "", note: "", refs: [] };
       }
+      const summary = subtopic.summary || "";
       return {
         title: subtopic.title || subtopic.name || "",
-        summary: subtopic.summary || subtopic.note || "",
+        summary,
+        note: subtopic.note || subtopic.description || summary,
+        argumentRole: subtopic.argumentRole || "",
+        reformedContrast: subtopic.reformedContrast || "",
+        studyPrompt: subtopic.studyPrompt || "",
         refs: subtopic.refs || subtopic.chapters || [],
       };
     })
@@ -118,13 +123,23 @@ function renderSubtopicCards(subtopics) {
   `;
 }
 
+function renderSubtopicField(label, value) {
+  if (!value) return "";
+  return `<p class="subtopic-field"><strong>${escapeHtml(label)}:</strong> ${escapeHtml(value)}</p>`;
+}
+
 function renderSubtopicCard(subtopic) {
   const refs = Array.isArray(subtopic.refs) ? subtopic.refs : [];
+  const hasDistinctNote = subtopic.note && subtopic.note !== subtopic.summary;
   return `
     <section class="chapter-item subtopic-card">
       <div class="card-meta">${escapeHtml(refs.length ? refs.join(" · ") : "소주제")}</div>
       <h4>${escapeHtml(subtopic.title)}</h4>
-      ${subtopic.summary ? `<p>${escapeHtml(subtopic.summary)}</p>` : ""}
+      ${renderSubtopicField(hasDistinctNote ? "요약" : "소주제 설명", subtopic.summary || subtopic.note)}
+      ${hasDistinctNote ? renderSubtopicField("소주제 설명", subtopic.note) : ""}
+      ${renderSubtopicField("논증 역할", subtopic.argumentRole)}
+      ${renderSubtopicField("개혁파 비교", subtopic.reformedContrast)}
+      ${renderSubtopicField("학습 질문", subtopic.studyPrompt)}
     </section>
   `;
 }
