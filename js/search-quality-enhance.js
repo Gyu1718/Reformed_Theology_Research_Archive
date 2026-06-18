@@ -17,11 +17,12 @@
       chapter.question,
       chapter.thesis,
       chapter.reformedContrast,
+      chapter.subtopicSearchText,
       list(chapter.keyPoints).join(" "),
       list(chapter.concepts).join(" "),
       list(chapter.argumentFlow).join(" "),
       list(chapter.studyQuestions).join(" "),
-      list(chapter.subtopicNotes).map(function (item) { return [item.title, item.note].filter(Boolean).join(" "); }).join(" "),
+      list(chapter.subtopicNotes).map(function (item) { return [item.title, item.summary, item.note].filter(Boolean).join(" "); }).join(" "),
       list(chapter.quotes).map(quoteText).join(" ")
     ].filter(Boolean).join(" ");
   }
