@@ -24,30 +24,18 @@
   function mergeUnique(a, b) {
     return arr(a).concat(arr(b)).filter(function (item, idx, list) { return item && list.indexOf(item) === idx; });
   }
-  function noteDetail(note, existing) {
-    var parts = [];
-    if (existing) parts.push(existing);
-    if (note.question) parts.push("핵심 질문: " + note.question);
-    if (note.thesis) parts.push("핵심 주장: " + note.thesis);
-    if (arr(note.argumentFlow).length) parts.push("논증 흐름: " + note.argumentFlow.join(" → "));
-    if (note.reformedContrast) parts.push("개혁파 정통과의 비교: " + note.reformedContrast);
-    if (arr(note.studyQuestions).length) parts.push("학습 질문: " + note.studyQuestions.join(" / "));
-    return parts.join(" ");
-  }
   function attachNotes(book, notes) {
     book.parts.forEach(function (part) {
       arr(part.chapters).forEach(function (chapter) {
         var note = notes.find(function (candidate) { return noteMatches(candidate, chapter); });
         if (!note) return;
+        chapter.studyNoteApplied = true;
         chapter.question = note.question;
         chapter.thesis = note.thesis;
         chapter.argumentFlow = note.argumentFlow;
         chapter.subtopicNotes = note.subtopicNotes;
         chapter.reformedContrast = note.reformedContrast;
         chapter.studyQuestions = note.studyQuestions;
-        chapter.detail = noteDetail(note, chapter.detail);
-        var explained = arr(note.subtopicNotes).map(function (item) { return item.title + " — " + item.note; });
-        if (explained.length) chapter.keyPoints = explained;
         chapter.concepts = mergeUnique(chapter.concepts, note.concepts);
       });
     });
