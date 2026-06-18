@@ -27,7 +27,8 @@
   function loadStudyNotes() {
     var packs = [
       loadJson("./data/barth-study-notes.json", null),
-      loadJson("./data/barth-study-notes-expanded.json", null)
+      loadJson("./data/barth-study-notes-expanded.json", null),
+      loadJson("./data/barth-study-notes-creation-expanded.json", null)
     ];
     var seen = {};
     var notes = [];
