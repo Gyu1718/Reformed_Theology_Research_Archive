@@ -215,8 +215,12 @@
 #view.view-topic .topic-grid .topic-panel:nth-child(2) h4::before{background:var(--neo);}
 #view.view-history-detail .history-section h4::before{background:var(--scripture);}
 
-/* Shared empty state refinement */
-#view .empty{
+/* Empty states for non-book views only. */
+#view.view-compare .empty,
+#view.view-authors .empty,
+#view.view-history .empty,
+#view.view-topic .empty,
+#view.view-history-detail .empty{
   border:1px solid var(--line);
   border-radius:18px;
   background:
@@ -226,7 +230,11 @@
   line-height:1.7;
 }
 
-#view .empty b{
+#view.view-compare .empty b,
+#view.view-authors .empty b,
+#view.view-history .empty b,
+#view.view-topic .empty b,
+#view.view-history-detail .empty b{
   color:var(--ink);
   font-family:var(--font-display);
   font-size:1.08rem;
