@@ -15,6 +15,7 @@
     style.id = "barth-study-render-styles";
     style.textContent = "\n" +
       ".barth-study-blocks{margin-top:16px;display:grid;gap:10px}\n" +
+      ".barth-study-inline{margin:10px 0 16px 0}\n" +
       ".barth-study-card{border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:13px 14px}\n" +
       ".barth-study-card h5{margin:0 0 7px;font-family:var(--font-mono);font-size:.76rem;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}\n" +
       ".barth-study-card p{margin:0;color:var(--muted);line-height:1.75}\n" +
@@ -59,7 +60,7 @@
       field("subtopic-prompt", "학습 질문", item.studyPrompt) +
       "</div>";
   }
-  function render(chapter) {
+  function render(chapter, extraClass) {
     var blocks = [];
     blocks.push(card("핵심 질문", chapter.question ? "<p>" + esc(chapter.question) + "</p>" : ""));
     blocks.push(card("핵심 주장", chapter.thesis ? "<p>" + esc(chapter.thesis) + "</p>" : ""));
@@ -67,7 +68,7 @@
     blocks.push(card("소주제 요약·설명", arr(chapter.subtopicNotes).length ? '<div class="barth-study-subtopics">' + arr(chapter.subtopicNotes).map(subtopicHTML).join("") + "</div>" : ""));
     blocks.push(card("개혁파 정통과의 비교", chapter.reformedContrast ? "<p>" + esc(chapter.reformedContrast) + "</p>" : ""));
     blocks.push(card("학습 질문", arr(chapter.studyQuestions).length ? "<ul>" + arr(chapter.studyQuestions).map(function (item) { return "<li>" + esc(item) + "</li>"; }).join("") + "</ul>" : ""));
-    return '<div class="barth-study-blocks" data-barth-study-rendered="true">' + blocks.join("") + "</div>";
+    return '<div class="barth-study-blocks ' + (extraClass || "") + '" data-barth-study-rendered="true">' + blocks.join("") + "</div>";
   }
   function apply() {
     injectStyles();
@@ -81,7 +82,18 @@
       var ref = refNode.textContent.trim();
       var chapter = map[ref];
       if (!chapter) return;
-      detail.insertAdjacentHTML("beforeend", render(chapter));
+      detail.insertAdjacentHTML("beforeend", render(chapter, ""));
+    });
+    document.querySelectorAll(".chap:not(.chap-sum)").forEach(function (node) {
+      if (node.closest(".chap-x")) return;
+      var next = node.nextElementSibling;
+      if (next && next.matches('[data-barth-study-rendered="true"]')) return;
+      var refNode = node.querySelector(".cref");
+      if (!refNode) return;
+      var ref = refNode.textContent.trim();
+      var chapter = map[ref];
+      if (!chapter) return;
+      node.insertAdjacentHTML("afterend", render(chapter, "barth-study-inline"));
     });
   }
   var scheduled = false;
