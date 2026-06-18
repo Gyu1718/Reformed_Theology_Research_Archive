@@ -7,6 +7,17 @@
     if (!quote) return "";
     return [quote.text, quote.source, quote.ref, quote.topic].filter(Boolean).join(" ");
   }
+  function subtopicText(item) {
+    if (!item) return "";
+    return [
+      item.title,
+      item.summary,
+      item.note,
+      item.argumentRole,
+      item.reformedContrast,
+      item.studyPrompt
+    ].filter(Boolean).join(" ");
+  }
   function chapterSearchText(chapter) {
     if (!chapter) return "";
     return [
@@ -22,7 +33,7 @@
       list(chapter.concepts).join(" "),
       list(chapter.argumentFlow).join(" "),
       list(chapter.studyQuestions).join(" "),
-      list(chapter.subtopicNotes).map(function (item) { return [item.title, item.summary, item.note].filter(Boolean).join(" "); }).join(" "),
+      list(chapter.subtopicNotes).map(subtopicText).join(" "),
       list(chapter.quotes).map(quoteText).join(" ")
     ].filter(Boolean).join(" ");
   }
