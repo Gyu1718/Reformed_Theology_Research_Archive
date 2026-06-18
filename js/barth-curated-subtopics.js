@@ -56,7 +56,8 @@
   }
 
   var packs = [
-    loadJson("./data/barth-subtopics-i-1.json", null)
+    loadJson("./data/barth-subtopics-i-1.json", null),
+    loadJson("./data/barth-subtopics-i-1-trinity.json", null)
   ];
   window.__DATA__.books.forEach(function (book) {
     if (!book || book.id !== "barth-church-dogmatics") return;
