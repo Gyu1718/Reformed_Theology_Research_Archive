@@ -1,18 +1,20 @@
-/* Load curated Barth subtopic files before the fallback completion layer.
-   Curated files are organized by CD volume and replace generated fallback subtopic notes. */
+/* Load curated Barth content packs before the fallback completion layer.
+   Pack paths are declared in data/barth-content-packs.json, not hard-coded here. */
 (function () {
   if (!window.__DATA__ || !Array.isArray(window.__DATA__.books)) return;
 
   function arr(value) { return Array.isArray(value) ? value : []; }
   function clean(text) { return String(text || "").replace(/\s+/g, " ").trim(); }
-  function loadJson(path, fallback) {
+  function loadJson(path, fallback, options) {
+    options = options || {};
     try {
       var xhr = new XMLHttpRequest();
       xhr.open("GET", path, false);
       xhr.send(null);
       if (xhr.status >= 200 && xhr.status < 300) return JSON.parse(xhr.responseText);
+      if (!options.optional) console.warn(path + " returned " + xhr.status + " in Barth content pack loader.");
     } catch (error) {
-      console.warn(path + " was not loaded by Barth curated subtopic loader.", error);
+      if (!options.optional) console.warn(path + " was not loaded by Barth content pack loader.", error);
     }
     return fallback;
   }
@@ -58,14 +60,17 @@
       });
     });
   }
+  function packEntries() {
+    var manifest = loadJson("./data/barth-content-packs.json", { packs: [] }, { optional: false });
+    return arr(manifest && manifest.packs).filter(function (entry) {
+      return entry && entry.active !== false && entry.path;
+    });
+  }
 
-  var packs = [
-    loadJson("./data/barth-subtopics-i-1.json", null),
-    loadJson("./data/barth-subtopics-i-1-trinity.json", null),
-    loadJson("./data/barth-subtopics-i-2-incarnation-spirit.json", null),
-    loadJson("./data/barth-subtopics-i-2-scripture-proclamation.json", null),
-    loadJson("./data/barth-subtopics-ii-1.json", null)
-  ];
+  var packs = packEntries().map(function (entry) {
+    return loadJson(entry.path, null, { optional: entry.required === false });
+  }).filter(Boolean);
+
   window.__DATA__.books.forEach(function (book) {
     if (!book || book.id !== "barth-church-dogmatics") return;
     packs.forEach(function (pack) { applyPack(book, pack); });
