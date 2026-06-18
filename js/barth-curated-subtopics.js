@@ -28,11 +28,19 @@
       curated: true
     };
   }
+  function clearGeneratedDisplayFields(chapter) {
+    chapter.summary = "";
+    chapter.detail = "";
+    chapter.keyPoints = [];
+    chapter.quotes = [];
+    chapter.concepts = [];
+  }
   function replaceSubtopics(chapter, incoming) {
     var curated = arr(incoming).map(normalizeSubtopic).filter(function (item) {
       return item && item.title;
     });
     if (!curated.length) return;
+    clearGeneratedDisplayFields(chapter);
     chapter.subtopicNotes = curated;
     chapter.studyNoteApplied = true;
     chapter.curatedSubtopicsApplied = true;
