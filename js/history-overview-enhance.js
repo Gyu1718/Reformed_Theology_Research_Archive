@@ -81,22 +81,6 @@
     if (id) location.hash = "history=" + encodeURIComponent(id);
   }
 
-  function countByCategory(items) {
-    var counts = {};
-    items.forEach(function (item) {
-      var category = item.category || "기타 역사 항목";
-      counts[category] = (counts[category] || 0) + 1;
-    });
-    return counts;
-  }
-
-  function categoryCards(items) {
-    var counts = countByCategory(items);
-    return Object.keys(counts).map(function (category) {
-      return '<div class="history-overview-stat"><span>' + esc(category) + '</span><b>' + counts[category] + '</b></div>';
-    }).join("");
-  }
-
   function flowCards(items, compact) {
     return OVERVIEW_FLOWS.map(function (flow) {
       var first = flow.items.map(function (id) { return byId(items, id); }).filter(Boolean)[0];
@@ -146,10 +130,6 @@
           '<button type="button" data-history-target="modern-liberal-theology-background">신정통주의부터 시작</button>' +
         '</div>' +
       '</div>' +
-      '<div class="history-overview-stats">' +
-        '<div class="history-overview-stat total"><span>전체 역사 항목</span><b>' + items.length + '</b></div>' +
-        categoryCards(items) +
-      '</div>' +
       '<div class="history-overview-flows">' + flowCards(items, true) + '</div>';
 
     view.insertBefore(panel, view.firstChild);
@@ -170,10 +150,6 @@
     section.innerHTML =
       '<h4>전체 역사 개요</h4>' +
       '<p class="history-overview-intro">이 페이지는 역사 파트의 대문입니다. 아래 세 흐름을 따라가면 개혁전통의 형성, 신정통주의의 등장, 그리고 두 전통의 핵심 논쟁을 순서대로 확인할 수 있습니다.</p>' +
-      '<div class="history-overview-stats in-detail">' +
-        '<div class="history-overview-stat total"><span>전체 역사 항목</span><b>' + items.length + '</b></div>' +
-        categoryCards(items) +
-      '</div>' +
       '<div class="history-overview-flows detail-flows">' + flowCards(items, false) + '</div>';
 
     var learningFlow = body.querySelector(".history-learning-flow");
@@ -194,11 +170,6 @@
       .history-overview-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}\
       .history-overview-actions button,.history-overview-start{border:1px solid var(--line-strong);background:var(--surface);border-radius:999px;padding:8px 12px;cursor:pointer;color:var(--ink);font-size:.86rem;}\
       .history-overview-actions button:hover,.history-overview-start:hover{border-color:var(--ink);}\
-      .history-overview-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;padding:14px 18px;border-bottom:1px solid var(--line);}\
-      .history-overview-stats.in-detail{padding:0;margin:14px 0;border-bottom:0;grid-template-columns:repeat(3,minmax(0,1fr));}\
-      .history-overview-stat{border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:12px;}\
-      .history-overview-stat span{display:block;color:var(--muted);font-size:.78rem;margin-bottom:6px;}\
-      .history-overview-stat b{font-family:var(--font-display);font-size:1.3rem;}\
       .history-overview-flows{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding:16px 18px 18px;}\
       .history-overview-flows.detail-flows{padding:0;margin-top:14px;}\
       .history-overview-flow{border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:15px;}\
@@ -208,7 +179,7 @@
       .history-overview-chip{border:1px solid var(--line);background:var(--surface-2);border-radius:999px;padding:7px 10px;font-size:.82rem;color:var(--muted);cursor:pointer;}\
       .history-overview-chip span{font-family:var(--font-mono);font-size:.68rem;margin-right:5px;}\
       .history-overview-chip:hover{border-color:var(--ink);color:var(--ink);}\
-      @media(max-width:980px){.history-overview-stats,.history-overview-stats.in-detail,.history-overview-flows{grid-template-columns:1fr;}}\
+      @media(max-width:980px){.history-overview-flows{grid-template-columns:1fr;}}\
     ";
     document.head.appendChild(style);
   }
