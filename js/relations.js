@@ -82,6 +82,17 @@
     return relationButton("history", item.id, item.title || item.id, item.category || "역사", className || "history-link-btn");
   }
 
+  function historyCard(historyId) {
+    var item = historyMap[historyId];
+    if (!item) return "";
+    return '<article class="history-relation-card">' +
+      '<span class="history-relation-meta">' + esc(item.period || item.category || "역사 항목") + '</span>' +
+      '<h5>' + esc(item.title || item.id) + '</h5>' +
+      (item.summary || item.definition ? '<p>' + esc(item.summary || item.definition) + '</p>' : '') +
+      '<button type="button" data-relation-kind="history" data-relation-id="' + esc(item.id) + '">역사 항목 열기 →</button>' +
+    '</article>';
+  }
+
   function wire(scope) {
     (scope || document).querySelectorAll("[data-relation-kind][data-relation-id]").forEach(function (button) {
       button.onclick = function () {
@@ -90,13 +101,38 @@
     });
   }
 
-  function historySection(entry, className, title) {
+  function historySection(entry, sectionClass, title, mode) {
     if (!entry || !entry.historyIds || !entry.historyIds.length) return "";
-    var buttons = entry.historyIds.map(function (id) { return historyButton(id, className || "history-link-btn"); }).filter(Boolean).join("");
-    if (!buttons) return "";
-    return '<section class="' + esc(className || "history-relation-section") + '"><h4>' + esc(title || "관련 역사 항목") + '</h4>' +
+    var isCard = mode === "card";
+    var body = entry.historyIds.map(function (id) {
+      return isCard ? historyCard(id) : historyButton(id, "history-link-btn");
+    }).filter(Boolean).join("");
+    if (!body) return "";
+    return '<section class="' + esc(sectionClass || "history-relation-section") + '"><h4>' + esc(title || "관련 역사 항목") + '</h4>' +
       (entry.note ? '<p class="relation-note">' + esc(entry.note) + '</p>' : '') +
-      '<div class="relation-grid">' + buttons + '</div></section>';
+      '<div class="' + (isCard ? 'history-relation-card-grid' : 'relation-grid') + '">' + body + '</div></section>';
+  }
+
+  function ensureRelationStyles() {
+    if (document.querySelector("#relation-card-styles")) return;
+    var style = document.createElement("style");
+    style.id = "relation-card-styles";
+    style.textContent = "\
+      .topic-history-section{margin-top:18px;}\
+      .relation-note{color:var(--muted);line-height:1.7;margin:0 0 12px;}\
+      .history-relation-card-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}\
+      .history-relation-card{border:1px solid var(--line);background:var(--surface);border-radius:13px;padding:14px;}\
+      .history-relation-card .history-relation-meta{display:block;font-family:var(--font-mono);font-size:.7rem;color:var(--muted);letter-spacing:.08em;margin-bottom:6px;}\
+      .history-relation-card h5{font-family:var(--font-display);font-size:1rem;margin:0 0 8px;}\
+      .history-relation-card p{color:var(--muted);font-size:.9rem;line-height:1.65;margin:0 0 12px;}\
+      .history-relation-card button{border:1px solid var(--line-strong);background:var(--surface-2);border-radius:999px;padding:8px 11px;cursor:pointer;color:var(--ink);font-size:.84rem;}\
+      .history-relation-card button:hover{border-color:var(--ink);background:var(--surface);}\
+      .relation-grid{display:flex;gap:8px;flex-wrap:wrap;}\
+      .relation-grid .history-link-btn{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:8px 12px;cursor:pointer;color:var(--ink);}\
+      .relation-grid .history-link-btn span{font-family:var(--font-mono);font-size:.68rem;color:var(--muted);margin-right:6px;}\
+      @media(max-width:820px){.history-relation-card-grid{grid-template-columns:1fr;}}\
+    ";
+    document.head.appendChild(style);
   }
 
   function installTopicHistory() {
@@ -104,9 +140,11 @@
     if (topicId) {
       var detailBody = document.querySelector("#view .topic-detail-body");
       if (detailBody && !detailBody.querySelector(".topic-history-section")) {
-        var html = historySection(topicHistoryMap[topicId], "topic-history-section", "관련 역사 항목");
+        var html = historySection(topicHistoryMap[topicId], "topic-section topic-history-section", "관련 역사 항목", "card");
         if (html) {
-          detailBody.insertAdjacentHTML("beforeend", html);
+          var refs = detailBody.querySelector(".refs");
+          if (refs) refs.insertAdjacentHTML("beforebegin", html);
+          else detailBody.insertAdjacentHTML("beforeend", html);
           wire(detailBody);
         }
       }
@@ -119,7 +157,7 @@
     if (!title) return;
     var label = title.childNodes && title.childNodes.length ? title.childNodes[0].textContent.trim() : title.textContent.trim();
     var id = topicIdByLabel[label];
-    var html = historySection(topicHistoryMap[id], "topic-history-section", "관련 역사 항목");
+    var html = historySection(topicHistoryMap[id], "topic-history-section", "관련 역사 항목", "button");
     if (html) {
       compareHead.insertAdjacentHTML("beforeend", html);
       wire(compareHead);
@@ -134,7 +172,7 @@
       var title = card.querySelector("h3");
       if (!title) return;
       var authorId = authorIdByLabel[title.textContent.trim()];
-      var html = historySection(authorHistoryMap[authorId], "author-history-section", "관련 역사 항목");
+      var html = historySection(authorHistoryMap[authorId], "author-history-section", "관련 역사 항목", "button");
       if (html) {
         card.insertAdjacentHTML("beforeend", html);
         wire(card);
@@ -143,6 +181,7 @@
   }
 
   function installRelations() {
+    ensureRelationStyles();
     installTopicHistory();
     installAuthorHistory();
   }
