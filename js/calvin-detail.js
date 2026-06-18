@@ -89,6 +89,46 @@ function matchesQuery(item) {
   return JSON.stringify(item).toLowerCase().includes(calvinState.query);
 }
 
+function normalizeSubtopics(subtopics) {
+  return (subtopics || [])
+    .map((subtopic) => {
+      if (typeof subtopic === "string") {
+        return { title: subtopic, summary: "", refs: [] };
+      }
+      return {
+        title: subtopic.title || subtopic.name || "",
+        summary: subtopic.summary || subtopic.note || "",
+        refs: subtopic.refs || subtopic.chapters || [],
+      };
+    })
+    .filter((subtopic) => subtopic.title);
+}
+
+function getSubtopicLabels(subtopics) {
+  return normalizeSubtopics(subtopics).map((subtopic) => subtopic.title);
+}
+
+function renderSubtopicCards(subtopics) {
+  const items = normalizeSubtopics(subtopics);
+  if (!items.length) return "";
+  return `
+    <div class="chapter-list subtopic-list">
+      ${items.map(renderSubtopicCard).join("")}
+    </div>
+  `;
+}
+
+function renderSubtopicCard(subtopic) {
+  const refs = Array.isArray(subtopic.refs) ? subtopic.refs : [];
+  return `
+    <section class="chapter-item subtopic-card">
+      <div class="card-meta">${escapeHtml(refs.length ? refs.join(" · ") : "소주제")}</div>
+      <h4>${escapeHtml(subtopic.title)}</h4>
+      ${subtopic.summary ? `<p>${escapeHtml(subtopic.summary)}</p>` : ""}
+    </section>
+  `;
+}
+
 function renderCalvinOverviewPage() {
   const root = document.querySelector("#calvin-root");
   const data = calvinState.data;
@@ -145,7 +185,7 @@ function renderThemeCard(theme) {
       <div class="card-meta">${escapeHtml(theme.bookTitle || "기독교 강요")} · ${escapeHtml((theme.chapters || []).join(" · "))}</div>
       <h4>${escapeHtml(theme.title)}</h4>
       <p>${escapeHtml(theme.summary)}</p>
-      ${renderTags(theme.subtopics)}
+      ${renderTags(getSubtopicLabels(theme.subtopics))}
       <div class="card-actions">
         <a href="calvin-topic.html?topic=${encodeURIComponent(theme.concept || theme.id)}">개념 상세 보기</a>
       </div>
@@ -180,7 +220,7 @@ function renderCalvinBookPage() {
     <section class="results">
       <article class="result-card full-width">
         <h2>대주제–소주제 카드</h2>
-        <p class="card-summary">각 대주제는 관련 장으로 이어지며, 장 상세 페이지에서 더 깊은 연구 메모와 짧은 인용을 확인합니다.</p>
+        <p class="card-summary">각 대주제 아래에서 소주제별 고유 해설과 관련 장 위치를 확인합니다.</p>
         <div class="chapter-list">
           ${themes.map((theme) => renderBookThemeWithChapters(theme, chapterMap)).join("") || `<div class="empty-state">검색 결과가 없습니다.</div>`}
         </div>
@@ -196,7 +236,7 @@ function renderBookThemeWithChapters(theme, chapterMap) {
       <div class="card-meta">${escapeHtml((theme.chapters || []).join(" · "))}</div>
       <h3>${escapeHtml(theme.title)}</h3>
       <p>${escapeHtml(theme.summary)}</p>
-      ${renderTags(theme.subtopics)}
+      ${renderSubtopicCards(theme.subtopics)}
       <div class="card-actions">
         <a href="calvin-topic.html?topic=${encodeURIComponent(theme.concept || theme.id)}">개념 상세 보기</a>
       </div>
@@ -288,7 +328,7 @@ function renderCalvinTopicPage() {
         <div class="card-meta">Concept View</div>
         <h2>${escapeHtml(theme ? theme.title : topicParam)}</h2>
         <p>${escapeHtml(theme ? theme.summary : "이 개념과 연결된 장들을 표시합니다.")}</p>
-        ${theme ? renderTags(theme.subtopics) : ""}
+        ${theme ? renderSubtopicCards(theme.subtopics) : ""}
       </article>
     </section>
 
