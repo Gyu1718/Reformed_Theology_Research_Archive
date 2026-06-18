@@ -1,5 +1,5 @@
 /* Load curated Barth subtopic files before the fallback completion layer.
-   Curated files are organized by CD volume and override generated fallback subtopic notes. */
+   Curated files are organized by CD volume and replace generated fallback subtopic notes. */
 (function () {
   if (!window.__DATA__ || !Array.isArray(window.__DATA__.books)) return;
 
@@ -28,18 +28,14 @@
       curated: true
     };
   }
-  function mergeSubtopics(chapter, incoming) {
-    var byTitle = {};
-    arr(chapter.subtopicNotes).forEach(function (item) {
-      if (item && item.title) byTitle[clean(item.title)] = item;
+  function replaceSubtopics(chapter, incoming) {
+    var curated = arr(incoming).map(normalizeSubtopic).filter(function (item) {
+      return item && item.title;
     });
-    arr(incoming).forEach(function (item) {
-      var normalized = normalizeSubtopic(item);
-      if (!normalized || !normalized.title) return;
-      byTitle[normalized.title] = normalized;
-    });
-    chapter.subtopicNotes = Object.keys(byTitle).map(function (key) { return byTitle[key]; });
+    if (!curated.length) return;
+    chapter.subtopicNotes = curated;
     chapter.studyNoteApplied = true;
+    chapter.curatedSubtopicsApplied = true;
     chapter.subtopicSearchText = chapter.subtopicNotes.map(function (item) {
       return [item.title, item.summary, item.note, item.argumentRole, item.reformedContrast, item.studyPrompt].filter(Boolean).join(" ");
     }).join(" ");
@@ -49,7 +45,7 @@
       arr(book.parts).forEach(function (part) {
         arr(part.chapters).forEach(function (chapter) {
           if (clean(chapter.ref) !== clean(entry.ref)) return;
-          mergeSubtopics(chapter, entry.subtopics);
+          replaceSubtopics(chapter, entry.subtopics);
         });
       });
     });
