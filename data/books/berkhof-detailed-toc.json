@@ -1,0 +1,909 @@
+{
+  "id": "berkhof-english-epub-toc-v1",
+  "book": "berkhof-systematic-theology",
+  "sourceBasis": "업로드된 영어판 EPUB Systematic Theology by Louis Berkhof의 목차 및 본문 heading 구조에서 추출한 연구용 상세 목차입니다. 원문 전문은 포함하지 않습니다.",
+  "stats": {
+    "divisions": 6,
+    "sections": 14,
+    "chapters": 70,
+    "subheads": 293
+  },
+  "divisions": [
+    {
+      "title": "PART ONE: THE DOCTRINE OF GOD",
+      "titleKo": "하나님에 관한 교리",
+      "sections": [
+        {
+          "title": "The Being of God",
+          "titleKo": "하나님의 존재",
+          "chapters": [
+            {
+              "ref": "BT-002",
+              "src": "systematic_theology_split_002.html",
+              "title": "I. The Existence of God",
+              "subheads": [
+                "A. Place of the Doctrine of God in Dogmatics.",
+                "B. Scripture Proof for the Existence of God.",
+                "C. Denial of the existence of God in its various forms.",
+                "D. The So-called Rational Proofs for the Existence of God."
+              ]
+            },
+            {
+              "ref": "BT-003",
+              "src": "systematic_theology_split_003.html",
+              "title": "II. The Knowability of God",
+              "subheads": [
+                "A. God Incomprehensible but yet Knowable.",
+                "B. Denial of the Knowability of God.",
+                "C. Self-revelation the Prerequisite of all Knowledge of God."
+              ]
+            },
+            {
+              "ref": "BT-004",
+              "src": "systematic_theology_split_004.html",
+              "title": "III. Relation of the Being and Attributes of God",
+              "subheads": [
+                "A. The Being of God.",
+                "B. The Possibility of Knowing the Being of God.",
+                "C. The Being of God Revealed in His Attributes."
+              ]
+            },
+            {
+              "ref": "BT-005",
+              "src": "systematic_theology_split_005.html",
+              "title": "IV. The Names of God",
+              "subheads": [
+                "A. The Names of God in General.",
+                "B. The Old Testament Names and their Meaning.",
+                "C. The New Testament Names and their Interpretation."
+              ]
+            },
+            {
+              "ref": "BT-006",
+              "src": "systematic_theology_split_006.html",
+              "title": "V. The Attributes of God in General",
+              "subheads": [
+                "A. Evaluation of the Terms Used.",
+                "B. Method of determining the attributes of God."
+              ]
+            },
+            {
+              "ref": "BT-007",
+              "src": "systematic_theology_split_007.html",
+              "title": "VI. The Incommunicable Attributes",
+              "subheads": [
+                "(God as the Absolute Being)",
+                "A. The Self-Existence of God.",
+                "B. The Immutability of God.",
+                "C. The Infinity of God .",
+                "D. The Unity of God."
+              ]
+            },
+            {
+              "ref": "BT-008",
+              "src": "systematic_theology_split_008.html",
+              "title": "VII. The Communicable Attributes",
+              "subheads": [
+                "(God as a Personal Spirit)",
+                "A. The Spirituality of God.",
+                "B. Intellectual Attributes.",
+                "C. Moral Attributes.",
+                "D. Attributes of Sovereignty."
+              ]
+            },
+            {
+              "ref": "BT-009",
+              "src": "systematic_theology_split_009.html",
+              "title": "VIII. The Holy Trinity",
+              "subheads": [
+                "A. The Doctrine of the Trinity in History.",
+                "B. God as Trinity in Unity.",
+                "C. The Three Persons Considered Separately."
+              ]
+            }
+          ]
+        },
+        {
+          "title": "The Works of God",
+          "titleKo": "하나님의 사역",
+          "chapters": [
+            {
+              "ref": "BT-010",
+              "src": "systematic_theology_split_010.html",
+              "title": "I. The Divine Decrees in General",
+              "subheads": [
+                "A. The Doctrine of the Decrees in Theology.",
+                "B. Scriptural Names for the Divine Decrees.",
+                "C. The Nature of the Divine Decrees.",
+                "D. Characteristics of the Divine Decree.",
+                "E. Objections to the Doctrine of the Decrees."
+              ]
+            },
+            {
+              "ref": "BT-011",
+              "src": "systematic_theology_split_011.html",
+              "title": "II. Predestination",
+              "subheads": [
+                "A. The Doctrine of Predestination in History.",
+                "B. Scriptural Terms for Predestination.",
+                "C. The Author and Objects of Predestination.",
+                "D. The Parts of Predestination.",
+                "E. Supra- and Infra-lapsarianism."
+              ]
+            },
+            {
+              "ref": "BT-012",
+              "src": "systematic_theology_split_012.html",
+              "title": "III. Creation in General",
+              "subheads": [
+                "A. The Doctrine of Creation in History.",
+                "B. Scriptural Proof for the Doctrine of Creation.",
+                "C. The Idea of Creation.",
+                "D. Divergent Theories Respecting the Origin of the World."
+              ]
+            },
+            {
+              "ref": "BT-013",
+              "src": "systematic_theology_split_013.html",
+              "title": "IV. Creation of the Spiritual World",
+              "subheads": [
+                "A. The Doctrine of the Angels in History.",
+                "B. The Existence of the Angels.",
+                "C. The Nature of the Angels.",
+                "D. The Number and Organization of the Angels.",
+                "E. The Service of the Angels.",
+                "F. The Evil Angels."
+              ]
+            },
+            {
+              "ref": "BT-014",
+              "src": "systematic_theology_split_014.html",
+              "title": "V. Creation of the Material World",
+              "subheads": [
+                "A. The Mosaic Account of Creation.",
+                "B. The Hexaemeron, or the Work of the Separate Days."
+              ]
+            },
+            {
+              "ref": "BT-015",
+              "src": "systematic_theology_split_015.html",
+              "title": "VI. Providence",
+              "subheads": [
+                "A. Providence in General.",
+                "B. Preservation.",
+                "C. Concurrence.",
+                "D. Government.",
+                "E. Extraordinary Providences or Miracles."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "PART TWO: THE DOCTRINE OF MAN IN RELATION TO GOD",
+      "titleKo": "하나님과의 관계 안에 있는 인간론",
+      "sections": [
+        {
+          "title": "Man in His Original State",
+          "titleKo": "원시 상태의 인간",
+          "chapters": [
+            {
+              "ref": "BT-016",
+              "src": "systematic_theology_split_016.html",
+              "title": "I. The Origin of Man",
+              "subheads": [
+                "A. The Doctrine of Man in Dogmatics.",
+                "B. Scriptural Account of Man's Origin.",
+                "C. The Evolutionary Theory of Man's Origin.",
+                "D. The Origin of Man and the Unity of the Race."
+              ]
+            },
+            {
+              "ref": "BT-017",
+              "src": "systematic_theology_split_017.html",
+              "title": "II. The Constitutional Nature of Man",
+              "subheads": [
+                "A. The Constituent Elements of Human Nature.",
+                "B. The Origin of the Soul in the Individual."
+              ]
+            },
+            {
+              "ref": "BT-018",
+              "src": "systematic_theology_split_018.html",
+              "title": "III. Man as the Image of God",
+              "subheads": [
+                "A. Historical Views of the Image of God in Man.",
+                "B. Scriptural Data Respecting the Image of God in Man.",
+                "C. Man as the Image of God.",
+                "D. The Original Condition of Man as the Image of God."
+              ]
+            },
+            {
+              "ref": "BT-019",
+              "src": "systematic_theology_split_019.html",
+              "title": "IV. Man in the Covenant of Works",
+              "subheads": [
+                "A. The Doctrine of the Covenant of Works in History.",
+                "B. The Scriptural Foundation for the Doctrine of the Covenant of Works.",
+                "C. Elements of the Covenant of Works.",
+                "D. The Present Status of the Covenant of Works."
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Man in the State of Sin",
+          "titleKo": "죄의 상태 안에 있는 인간",
+          "chapters": [
+            {
+              "ref": "BT-020",
+              "src": "systematic_theology_split_020.html",
+              "title": "I. The Origin of Sin",
+              "subheads": [
+                "A. Historical Views Respecting the Origin of Sin.",
+                "B. Scriptural Data Respecting the Origin of Sin.",
+                "C. The Nature of the First Sin or the Fall of Man.",
+                "D. The First Sin or the Fall as Occasioned by Temptation.",
+                "E. The Evolutionary Explanation of the Origin of Sin.",
+                "F. The Results of the First Sin."
+              ]
+            },
+            {
+              "ref": "BT-021",
+              "src": "systematic_theology_split_021.html",
+              "title": "II. The Essential Character of Sin",
+              "subheads": [
+                "A. Philosophic Theories Respecting the Nature of Evil.",
+                "B. The Scriptural Idea of Sin.",
+                "C. The Pelagian View of Sin.",
+                "D. The Roman Catholic View of Sin."
+              ]
+            },
+            {
+              "ref": "BT-022",
+              "src": "systematic_theology_split_022.html",
+              "title": "III. The Transmission of Sin",
+              "subheads": [
+                "A. Historical Review.",
+                "B. The Universality of Sin.",
+                "C. The Connection of Adam's Sin with that of the Race."
+              ]
+            },
+            {
+              "ref": "BT-023",
+              "src": "systematic_theology_split_023.html",
+              "title": "IV. Sin in the Life of the Human Race",
+              "subheads": [
+                "A. Original Sin.",
+                "B. Actual Sin."
+              ]
+            },
+            {
+              "ref": "BT-024",
+              "src": "systematic_theology_split_024.html",
+              "title": "V. The Punishment of Sin",
+              "subheads": [
+                "A. Natural and positive penalties.",
+                "B. Nature and Purpose of Punishments.",
+                "C. The Actual Penalty of Sin."
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Man in the Covenant of Grace",
+          "titleKo": "은혜 언약 안에 있는 인간",
+          "chapters": [
+            {
+              "ref": "BT-025",
+              "src": "systematic_theology_split_025.html",
+              "title": "I. Name and Concept of the Covenant",
+              "subheads": [
+                "A. The Name.",
+                "B. The Concept."
+              ]
+            },
+            {
+              "ref": "BT-026",
+              "src": "systematic_theology_split_026.html",
+              "title": "II. The Covenant of Redemption",
+              "subheads": [
+                "A. Separate Discussion of this Desirable.",
+                "B. Scriptural Data for the Covenant of Redemption.",
+                "C. The Son in the Covenant of Redemption.",
+                "D. Requirements and Promises in the Covenant of Redemption.",
+                "E. Relation of this Covenant to the Covenant of Grace."
+              ]
+            },
+            {
+              "ref": "BT-027",
+              "src": "systematic_theology_split_027.html",
+              "title": "III. Nature of the Covenant of Grace",
+              "subheads": [
+                "A. Comparison of the Covenant of Grace and the Covenant of Works.",
+                "B. The Contracting Parties.",
+                "C. The Contents of the Covenant of Grace.",
+                "D. The Characteristics of the Covenant of Grace.",
+                "E. The Relation of Christ to the Covenant of Grace."
+              ]
+            },
+            {
+              "ref": "BT-028",
+              "src": "systematic_theology_split_028.html",
+              "title": "IV. The Dual Aspect of the Covenant",
+              "subheads": [
+                "A. An External and an Internal Covenant.",
+                "B. The Essence and the Administration of the Covenant.",
+                "C. A Conditional and an Absolute Covenant.",
+                "D. The Covenant as a Purely Legal Relationship and as a Communion of Life.",
+                "E. Membership in the Covenant as a Legal Relationship.",
+                "F. Membership in the Covenant as a Communion of Life."
+              ]
+            },
+            {
+              "ref": "BT-029",
+              "src": "systematic_theology_split_029.html",
+              "title": "V. The Different Dispensations of the Covenant",
+              "subheads": [
+                "A. The Proper Conception of the Different Dispensations.",
+                "B. The Old Testament Dispensation.",
+                "C. The New Testament Dispensation."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "PART THREE: THE DOCTRINE OF THE PERSON AND WORK OF CHRIST",
+      "titleKo": "그리스도의 인격과 사역에 관한 교리",
+      "sections": [
+        {
+          "title": "The Person of Christ",
+          "titleKo": "그리스도의 인격",
+          "chapters": [
+            {
+              "ref": "BT-030",
+              "src": "systematic_theology_split_030.html",
+              "title": "I. The Doctrine of Christ in History",
+              "subheads": [
+                "A. The relation between Anthropology and Christology.",
+                "B. The Doctrine of Christ before the Reformation.",
+                "C. The Doctrine of Christ after the Reformation."
+              ]
+            },
+            {
+              "ref": "BT-031",
+              "src": "systematic_theology_split_031.html",
+              "title": "II. The Names and Natures of Christ",
+              "subheads": [
+                "A. The Names of Christ.",
+                "B. The Natures of Christ."
+              ]
+            },
+            {
+              "ref": "BT-032",
+              "src": "systematic_theology_split_032.html",
+              "title": "III. The Unipersonality of Christ",
+              "subheads": [
+                "A. Statement of the Church's View Respecting the Person of Christ.",
+                "B. Scriptural Proof for the Unipersonality of Christ.",
+                "C. The Effects of the Union of the Two Natures in One Person.",
+                "D. The Unipersonality of Christ a Mystery.",
+                "E. The Lutheran Doctrine of the Communication of Attributes.",
+                "F. The Kenosis Doctrine in Various Forms.",
+                "G. The Theory of Gradual Incarnation.",
+                "H. The Impersonal Logos Theory.",
+                "I. The Theory of a Divine Man."
+              ]
+            }
+          ]
+        },
+        {
+          "title": "The States of Christ",
+          "titleKo": "그리스도의 신분",
+          "chapters": [
+            {
+              "ref": "BT-033",
+              "src": "systematic_theology_split_033.html",
+              "title": "I. The State of Humiliation",
+              "subheads": [
+                "A. Introductory: The Doctrine of the States of Christ in General.",
+                "B. The State of Humiliation.",
+                "C. The Stages of the Humiliation."
+              ]
+            },
+            {
+              "ref": "BT-034",
+              "src": "systematic_theology_split_034.html",
+              "title": "II. The State of Exaltation",
+              "subheads": [
+                "A. General Remarks on the State of Exaltation.",
+                "B. The Stages of the Exaltation."
+              ]
+            }
+          ]
+        },
+        {
+          "title": "The Offices of Christ",
+          "titleKo": "그리스도의 직분",
+          "chapters": [
+            {
+              "ref": "BT-035",
+              "src": "systematic_theology_split_035.html",
+              "title": "I. Introduction: The Prophetic Office",
+              "subheads": [
+                "A. The Idea of the Offices in History.",
+                "B. The Prophetic Office.",
+                "C. Modern Emphasis on the Prophetic Office of Christ."
+              ]
+            },
+            {
+              "ref": "BT-036",
+              "src": "systematic_theology_split_036.html",
+              "title": "II. The Priestly Office",
+              "subheads": [
+                "A. Scriptural Idea of a Priest.",
+                "B. The Sacrificial Work of Christ.",
+                "C. The Intercessory Work of Christ."
+              ]
+            },
+            {
+              "ref": "BT-037",
+              "src": "systematic_theology_split_037.html",
+              "title": "III. Cause and Necessity of the Atonement",
+              "subheads": [
+                "A. The Moving Cause of the Atonement.",
+                "B. Historical Views Respecting the Necessity of the Atonement.",
+                "C. Proofs for the Necessity of the Atonement."
+              ]
+            },
+            {
+              "ref": "BT-038",
+              "src": "systematic_theology_split_038.html",
+              "title": "IV. The Nature of the Atonement",
+              "subheads": [
+                "A. Statement of the Penal Substitutionary Doctrine of the Atonement.",
+                "B. Objections to the Satisfaction or Penal Substitutionary Doctrine of the Atonement.",
+                "C. Divergent Theories of the Atonement."
+              ]
+            },
+            {
+              "ref": "BT-039",
+              "src": "systematic_theology_split_039.html",
+              "title": "V. Divergent Theories of the Atonement",
+              "subheads": [
+                "A. Theories of the Early Church.",
+                "B. The Satisfaction Theory of Anselm (Commercial Theory).",
+                "C. The Moral Influence Theory.",
+                "D. The Example Theory.",
+                "E. The Governmental Theory.",
+                "F. The Mystical Theory.",
+                "G. The Theory of Vicarious Repentance."
+              ]
+            },
+            {
+              "ref": "BT-040",
+              "src": "systematic_theology_split_040.html",
+              "title": "VI. Purpose and Extent of the Atonement",
+              "subheads": [
+                "A. The Purpose of the Atonement.",
+                "B. The Extent of the Atonement."
+              ]
+            },
+            {
+              "ref": "BT-041",
+              "src": "systematic_theology_split_041.html",
+              "title": "VII. The Intercessory Work of Christ",
+              "subheads": [
+                "A. Scriptural Proof for the Intercessory Work of Christ.",
+                "B. The Nature of Christ's Intercessory Work.",
+                "C. The Persons for Whom and the Things for Which He Intercedes.",
+                "D. The Characteristics of His Intercession."
+              ]
+            },
+            {
+              "ref": "BT-042",
+              "src": "systematic_theology_split_042.html",
+              "title": "VIII. The Kingly Office",
+              "subheads": [
+                "A. The Spiritual Kingship of Christ.",
+                "B. The Kingship of Christ over the Universe."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "PART FOUR: THE DOCTRINE OF THE APPLICATION OF THE WORK OF REDEMPTION",
+      "titleKo": "구속 사역의 적용에 관한 교리",
+      "sections": [
+        {
+          "title": "The Order of Salvation",
+          "titleKo": "구원의 서정",
+          "chapters": [
+            {
+              "ref": "BT-043",
+              "src": "systematic_theology_split_043.html",
+              "title": "I. Soteriology in General",
+              "subheads": [
+                "A. Connection Between Soteriology and the Preceding Loci.",
+                "B. The Ordo Salutis (Order of Salvation).",
+                "C. Application of the Work of Redemption by the Holy Spirit."
+              ]
+            },
+            {
+              "ref": "BT-044",
+              "src": "systematic_theology_split_044.html",
+              "title": "II. The Operations of the Holy Spirit in General",
+              "subheads": [
+                "A. Transition to the Work of the Holy Spirit.",
+                "B. General and Special Operations of the Holy Spirit.",
+                "C. The Holy Spirit as the Dispenser of Divine Grace."
+              ]
+            },
+            {
+              "ref": "BT-045",
+              "src": "systematic_theology_split_045.html",
+              "title": "III. Common Grace",
+              "subheads": [
+                "A. Origin of the Doctrine of Common Grace.",
+                "B. Name and Concept of Common Grace.",
+                "C. Common Grace and the Atoning Work of Christ.",
+                "D. The Relation Between Special and Common Grace.",
+                "E. The Means by Which Common Grace Operates.",
+                "F. The Fruits of Common Grace.",
+                "G. Objections to the Reformed Doctrine of Common Grace."
+              ]
+            },
+            {
+              "ref": "BT-046",
+              "src": "systematic_theology_split_046.html",
+              "title": "IV. Mystical Union",
+              "subheads": [
+                "A. Nature of the Mystical Union.",
+                "B. Characteristics of the Mystical Union.",
+                "C. Erroneous Conceptions of the Mystical Union.",
+                "D. Significance of the Mystical Union."
+              ]
+            },
+            {
+              "ref": "BT-047",
+              "src": "systematic_theology_split_047.html",
+              "title": "V. Calling in General and External Calling",
+              "subheads": [
+                "A. Reasons for Discussing Calling First.",
+                "B. Calling in General.",
+                "C. External Calling.",
+                "D. The Significance of External Calling."
+              ]
+            },
+            {
+              "ref": "BT-048",
+              "src": "systematic_theology_split_048.html",
+              "title": "VI. Regeneration and Effectual Calling",
+              "subheads": [
+                "A. The Scriptural Terms for Regeneration and Their Implications.",
+                "B. The Use of the Term \"Regeneration\" in Theology.",
+                "C. The Essential Nature of Regeneration.",
+                "D. Effectual Calling in Relation to External Calling and Regeneration.",
+                "E. The Necessity of Regeneration.",
+                "F. The Efficient Cause of Regeneration.",
+                "G. The Use of the Word of God as an Instrument in Regeneration.",
+                "H. Divergent Views of Regeneration."
+              ]
+            },
+            {
+              "ref": "BT-049",
+              "src": "systematic_theology_split_049.html",
+              "title": "VII. Conversion",
+              "subheads": [
+                "A. The Biblical Terms for Conversion.",
+                "B. The Biblical Idea of Conversion. Definitions.",
+                "C. The Characteristics of Conversion.",
+                "D. The Different Elements in Conversion.",
+                "E. The Psychology of Conversion.",
+                "F. The Author of Conversion.",
+                "G. The Necessity of Conversion."
+              ]
+            },
+            {
+              "ref": "BT-050",
+              "src": "systematic_theology_split_050.html",
+              "title": "VIII. Faith",
+              "subheads": [
+                "A. Scriptural Terms for Faith.",
+                "B. Figurative Expressions Used to Describe the Activity of Faith.",
+                "C. The Doctrine of Faith in History.",
+                "D. The Idea of Faith in Scripture.",
+                "E. Faith in General.",
+                "F. Faith in the Religious Sense and particularly Saving Faith.",
+                "G. Faith and Assurance.",
+                "H. The Roman Catholic Conception of Faith.",
+                "I. Faith and Justification."
+              ]
+            },
+            {
+              "ref": "BT-051",
+              "src": "systematic_theology_split_051.html",
+              "title": "IX. Justification",
+              "subheads": [
+                "A. The Scriptural Terms for Justification and Their Meaning.",
+                "B. The Doctrine of Justification in History.",
+                "C. The Nature and Characteristics of Justification.",
+                "D. The Elements of Justification.",
+                "E. The Sphere in Which Justification Occurs.",
+                "F. The Time of Justification.",
+                "G. The Ground of Justification.",
+                "H. Objections to the Doctrine of Justification.",
+                "I. Divergent Views of Justification."
+              ]
+            },
+            {
+              "ref": "BT-052",
+              "src": "systematic_theology_split_052.html",
+              "title": "X. Sanctification",
+              "subheads": [
+                "A. The Scriptural Terms for Sanctification and Holiness.",
+                "B. The Doctrine of Sanctification in History.",
+                "C. The Biblical Idea of Holiness and Sanctification.",
+                "D. The Nature of Sanctification.",
+                "E. The Characteristics of Sanctification.",
+                "F. The Author and Means of Sanctification.",
+                "G. Relation of Sanctification to Other Stages in the Ordo Salutis.",
+                "H. The Imperfect Character of Sanctification in This Life.",
+                "I. Sanctification and Good Works."
+              ]
+            },
+            {
+              "ref": "BT-053",
+              "src": "systematic_theology_split_053.html",
+              "title": "XI. Perseverance of the Saints",
+              "subheads": [
+                "A. The Doctrine of the Perseverance of the Saints in History.",
+                "B. Statement of the Doctrine of Perseverance.",
+                "C. Proof for the Doctrine of Perseverance.",
+                "D. Objections to the Doctrine of Perseverance."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "PART FIVE: THE DOCTRINE OF THE CHURCH AND OF THE MEANS OF GRACE",
+      "titleKo": "교회와 은혜의 방편에 관한 교리",
+      "sections": [
+        {
+          "title": "The Church",
+          "titleKo": "교회",
+          "chapters": [
+            {
+              "ref": "BT-054",
+              "src": "systematic_theology_split_054.html",
+              "title": "I. Scriptural Names of the Church and the Doctrine of the Church in History",
+              "subheads": [
+                "A. Scriptural Names for the Church.",
+                "B. The Doctrine of the Church in History."
+              ]
+            },
+            {
+              "ref": "BT-055",
+              "src": "systematic_theology_split_055.html",
+              "title": "II. Nature of the Church",
+              "subheads": [
+                "A. The Essence of the Church.",
+                "B. The Many-sided Character of the Church.",
+                "C. Various Definitions of the Church.",
+                "D. The Church and the Kingdom of God.",
+                "E. The Church in the Different Dispensations.",
+                "F. The Attributes of the Church.",
+                "G. The Marks of the Church."
+              ]
+            },
+            {
+              "ref": "BT-056",
+              "src": "systematic_theology_split_056.html",
+              "title": "III. The Government of the Church",
+              "subheads": [
+                "A. Different Theories Respecting the Government of the Church.",
+                "B. The Fundamental Principles of the Reformed or Presbyterian System.",
+                "C. The Officers of the Church.",
+                "D. The Ecclesiastical Assemblies."
+              ]
+            },
+            {
+              "ref": "BT-057",
+              "src": "systematic_theology_split_057.html",
+              "title": "IV. The Power of the Church",
+              "subheads": [
+                "A. The Source of Church Power.",
+                "B. The Nature of this Power.",
+                "C. Different Kinds of Church Power."
+              ]
+            }
+          ]
+        },
+        {
+          "title": "The Means of Grace",
+          "titleKo": "은혜의 방편",
+          "chapters": [
+            {
+              "ref": "BT-058",
+              "src": "systematic_theology_split_058.html",
+              "title": "I. The Means of Grace in General",
+              "subheads": [
+                "A. The Idea of the Means of Grace.",
+                "B. Characteristics of the Word and the Sacraments as Means of Grace.",
+                "C. Historical Views Respecting the Means of Grace.",
+                "D. Characteristic Elements in the Reformed Doctrine of the Means of Grace."
+              ]
+            },
+            {
+              "ref": "BT-059",
+              "src": "systematic_theology_split_059.html",
+              "title": "II. The Word as a Means of Grace",
+              "subheads": [
+                "A. Meaning of the Term \"Word of God\" in This Connection.",
+                "B. The Relation of the Word to the Holy Spirit.",
+                "C. The Two Parts of the Word of God Considered as a Means of Grace.",
+                "D. The Threefold Use of the Law."
+              ]
+            },
+            {
+              "ref": "BT-060",
+              "src": "systematic_theology_split_060.html",
+              "title": "III. The Sacraments in General",
+              "subheads": [
+                "A. Relation Between the Word and the Sacraments.",
+                "B. Origin and Meaning of the Word \"Sacrament.\"",
+                "C. The Component Parts of the Sacraments.",
+                "D. The Necessity of the Sacraments.",
+                "E. The Old and New Testament Sacraments Compared.",
+                "F. The Number of the Sacraments."
+              ]
+            },
+            {
+              "ref": "BT-061",
+              "src": "systematic_theology_split_061.html",
+              "title": "IV. Christian Baptism",
+              "subheads": [
+                "A. Analogies of Christian Baptism.",
+                "B. The Institution of Christian Baptism.",
+                "C. The Doctrine of Baptism in History.",
+                "D. The Proper Mode of Baptism.",
+                "E. The Lawful Administrators of Baptism.",
+                "F. The Proper Subjects of Baptism.",
+                "G. Infant Baptism."
+              ]
+            },
+            {
+              "ref": "BT-062",
+              "src": "systematic_theology_split_062.html",
+              "title": "V. The Lord's Supper",
+              "subheads": [
+                "A. Analogies of the Lord's Supper among Israel.",
+                "B. The Doctrine of the Lord's Supper in History.",
+                "C. Scriptural Names for the Lord's Supper.",
+                "D. Institution of the Lord's Supper.",
+                "E. The Things Signified and Sealed in the Lord's Supper.",
+                "F. The Sacramental Union or the Question of the Real Presence of Christ in the Lord's Supper.",
+                "G. The Lord's Supper as a Means of Grace, or Its Efficacy.",
+                "H. The Persons for Whom the Lord's Supper is Instituted."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "PART SIX: THE DOCTRINE OF THE LAST THINGS",
+      "titleKo": "마지막 일들에 관한 교리",
+      "sections": [
+        {
+          "title": "Individual Eschatology",
+          "titleKo": "개인적 종말론",
+          "chapters": [
+            {
+              "ref": "BT-063",
+              "src": "systematic_theology_split_063.html",
+              "title": "I. Physical Death",
+              "subheads": [
+                "A. The Nature of Physical Death.",
+                "B. The Connection of Sin and Death.",
+                "C. The Significance of the Death of Believers."
+              ]
+            },
+            {
+              "ref": "BT-064",
+              "src": "systematic_theology_split_064.html",
+              "title": "II. The Immortality of the Soul",
+              "subheads": [
+                "A. Different Connotations of the Term \"Immortality.\"",
+                "B. Testimony of General Revelation to the Immortality of the Soul.",
+                "C. Testimony of Special Revelation to the Immortality of the Soul.",
+                "D. Objections to the Doctrine of Personal Immortality and Modern Substitutes for It."
+              ]
+            },
+            {
+              "ref": "BT-065",
+              "src": "systematic_theology_split_065.html",
+              "title": "III. The Intermediate State",
+              "subheads": [
+                "A. The Scriptural View of the Intermediate State.",
+                "B. The Doctrine of the Intermediate State in History.",
+                "C. The Modern Construction of the Doctrine of Sheol-Hades.",
+                "D. The Roman Catholic Doctrines Respecting the Abode of the Soul After Death.",
+                "E. The State of the Soul After Death, One of Conscious Existence.",
+                "F. The Intermediate State Not a State of Further Probation."
+              ]
+            }
+          ]
+        },
+        {
+          "title": "General Eschatology",
+          "titleKo": "일반적 종말론",
+          "chapters": [
+            {
+              "ref": "BT-066",
+              "src": "systematic_theology_split_066.html",
+              "title": "I. The Second Coming of Christ",
+              "subheads": [
+                "A. The Second Coming a Single Event.",
+                "B. Great Events Preceding the Parousia.",
+                "C. The Parousia or the Second Coming Itself."
+              ]
+            },
+            {
+              "ref": "BT-067",
+              "src": "systematic_theology_split_067.html",
+              "title": "II. Millennial Views",
+              "subheads": [
+                "A. Premillennialism.",
+                "B. Postmillennialism.",
+                "C. Amillennialism."
+              ]
+            },
+            {
+              "ref": "BT-068",
+              "src": "systematic_theology_split_068.html",
+              "title": "III. The Resurrection of the Dead",
+              "subheads": [
+                "A. The Doctrine of the Resurrection in History.",
+                "B. Scriptural Proof for the Resurrection.",
+                "C. The Nature of the Resurrection.",
+                "D. The Time of the Resurrection."
+              ]
+            },
+            {
+              "ref": "BT-069",
+              "src": "systematic_theology_split_069.html",
+              "title": "IV. The Final Judgment",
+              "subheads": [
+                "A. The Doctrine of the Last Judgment in History.",
+                "B. The Nature of the Final Judgment.",
+                "C. Erroneous Views Respecting the Judgment.",
+                "D. The Judge and His Assistants.",
+                "E. The Parties That Will Be Judged.",
+                "F. The Time of the Judgment.",
+                "G. The Standard of Judgment.",
+                "H. The Different Parts of the Judgment."
+              ]
+            },
+            {
+              "ref": "BT-070",
+              "src": "systematic_theology_split_070.html",
+              "title": "V. The Final State",
+              "subheads": [
+                "A. The Final State of the Wicked.",
+                "B. The Final State of the Righteous."
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
