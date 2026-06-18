@@ -67,17 +67,9 @@
       .replace(/'/g, "&#39;");
   }
 
-  function arr(value) {
-    return Array.isArray(value) ? value : [];
-  }
-
-  function topics() {
-    return (typeof DATA !== "undefined" && Array.isArray(DATA.topics)) ? DATA.topics : [];
-  }
-
-  function historyItems() {
-    return (typeof DATA !== "undefined" && Array.isArray(DATA.history)) ? DATA.history : [];
-  }
+  function arr(value) { return Array.isArray(value) ? value : []; }
+  function topics() { return (typeof DATA !== "undefined" && Array.isArray(DATA.topics)) ? DATA.topics : []; }
+  function historyItems() { return (typeof DATA !== "undefined" && Array.isArray(DATA.history)) ? DATA.history : []; }
 
   function currentHistoryId() {
     var raw = decodeURIComponent((location.hash || "").replace(/^#/, ""));
@@ -90,13 +82,8 @@
     return historyItems().find(function (item) { return item.id === id; });
   }
 
-  function normalize(value) {
-    return String(value || "").trim().toLowerCase();
-  }
-
-  function topicById(id) {
-    return topics().find(function (topic) { return topic.id === id; }) || null;
-  }
+  function normalize(value) { return String(value || "").trim().toLowerCase(); }
+  function topicById(id) { return topics().find(function (topic) { return topic.id === id; }) || null; }
 
   function resolveTopic(value) {
     var raw = String(value || "").trim();
@@ -130,19 +117,12 @@
     return fuzzy || null;
   }
 
-  function routeTopic(topic) {
-    if (topic && topic.id) location.hash = "topic=" + encodeURIComponent(topic.id);
-  }
+  function routeTopic(topic) { if (topic && topic.id) location.hash = "topic=" + encodeURIComponent(topic.id); }
 
   function candidateLabels(historyItem) {
     if (!historyItem) return [];
-    var labels = [].concat(
-      arr(historyItem.relatedTopics),
-      arr(historyItem.theologicalIssues)
-    );
-    return labels.filter(function (value, index) {
-      return value && labels.indexOf(value) === index;
-    });
+    var labels = [].concat(arr(historyItem.relatedTopics), arr(historyItem.theologicalIssues));
+    return labels.filter(function (value, index) { return value && labels.indexOf(value) === index; });
   }
 
   function resolvedTopicCards(historyItem) {
@@ -190,18 +170,13 @@
     var cards = resolvedTopicCards(h);
     if (!cards.length) return;
 
-    var section = document.createElement("section");
-    section.className = "history-section history-doctrine-guide";
+    var section = document.createElement("details");
+    section.className = "history-section history-doctrine-guide history-doctrine-compact";
     section.innerHTML =
-      '<h4>연결된 교리 페이지</h4>' +
-      '<p class="history-doctrine-intro">이 역사 항목과 함께 읽으면 좋은 교리 상세 페이지입니다. 역사적 사건이 어떤 교리 쟁점과 연결되는지 바로 확인할 수 있습니다.</p>' +
-      '<div class="history-doctrine-grid">' + cards.map(function (card) {
-        return '<article class="history-doctrine-card">' +
-          '<span>' + esc(card.topic.category || "교리") + '</span>' +
-          '<h5>' + esc(card.topic.name) + '</h5>' +
-          '<p>' + esc(card.topic.summary || "") + '</p>' +
-          '<button type="button" data-topic-card="' + esc(card.topic.id) + '">교리 페이지 열기 →</button>' +
-        '</article>';
+      '<summary><span>연결된 교리 페이지</span><b>' + cards.length + '개</b></summary>' +
+      '<p class="history-doctrine-intro">이 역사 항목과 함께 읽으면 좋은 교리 상세 페이지입니다. 필요할 때 펼쳐 확인할 수 있습니다.</p>' +
+      '<div class="history-doctrine-chip-grid">' + cards.map(function (card) {
+        return '<button type="button" class="history-doctrine-chip" data-topic-card="' + esc(card.topic.id) + '"><span>' + esc(card.topic.category || "교리") + '</span><b>' + esc(card.topic.name) + '</b></button>';
       }).join("") + '</div>';
 
     var relationSection = Array.prototype.slice.call(body.querySelectorAll(".history-section")).find(function (section) {
@@ -227,15 +202,20 @@
       .history-topic-resolved{font-weight:700;}\
       .history-topic-resolved::after{content:' ↗';font-size:.78em;color:var(--muted);}\
       .history-topic-unresolved{opacity:.7;}\
-      .history-doctrine-intro{color:var(--muted);line-height:1.75;margin-top:0;}\
-      .history-doctrine-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}\
-      .history-doctrine-card{border:1px solid var(--line);background:var(--surface);border-radius:13px;padding:14px;}\
-      .history-doctrine-card span{display:block;font-family:var(--font-mono);font-size:.7rem;color:var(--muted);letter-spacing:.08em;margin-bottom:6px;}\
-      .history-doctrine-card h5{font-family:var(--font-display);font-size:1rem;margin:0 0 8px;}\
-      .history-doctrine-card p{color:var(--muted);font-size:.9rem;line-height:1.65;margin:0 0 12px;}\
-      .history-doctrine-card button{border:1px solid var(--line-strong);background:var(--surface-2);border-radius:999px;padding:8px 11px;cursor:pointer;color:var(--ink);font-size:.84rem;}\
-      .history-doctrine-card button:hover{border-color:var(--ink);background:var(--surface);}\
-      @media(max-width:820px){.history-doctrine-grid{grid-template-columns:1fr;}}\
+      .history-doctrine-intro{color:var(--muted);line-height:1.7;margin:0 14px 12px;font-size:.9rem;}\
+      .history-doctrine-compact{border:1px dashed var(--line);background:var(--surface-2);border-radius:14px;padding:0;}\
+      .history-doctrine-compact summary{display:flex;align-items:center;justify-content:space-between;gap:12px;cursor:pointer;padding:12px 14px;list-style:none;}\
+      .history-doctrine-compact summary::-webkit-details-marker{display:none;}\
+      .history-doctrine-compact summary span{font-family:var(--font-display);font-weight:700;color:var(--ink);}\
+      .history-doctrine-compact summary b{font-family:var(--font-mono);font-size:.76rem;color:var(--muted);font-weight:500;}\
+      .history-doctrine-compact[open]{padding-bottom:12px;}\
+      .history-doctrine-compact[open] summary{border-bottom:1px solid var(--line);margin-bottom:12px;}\
+      .history-doctrine-chip-grid{display:flex;flex-wrap:wrap;gap:7px;margin:0 14px;}\
+      .history-doctrine-chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 10px;cursor:pointer;color:var(--ink);font-size:.82rem;}\
+      .history-doctrine-chip span{font-family:var(--font-mono);font-size:.66rem;color:var(--muted);margin-right:5px;}\
+      .history-doctrine-chip b{font-weight:600;}\
+      .history-doctrine-chip:hover{border-color:var(--ink);background:var(--surface-2);}\
+      @media(max-width:820px){.history-doctrine-compact summary{align-items:flex-start;flex-direction:column;gap:4px;}}\
     ";
     document.head.appendChild(style);
   }
