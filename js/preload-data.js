@@ -26,6 +26,22 @@
     });
     return Object.keys(best).map(function (id) { return best[id]; });
   }
+  function unique(values) {
+    var seen = {};
+    return (values || []).filter(function (value) {
+      var text = String(value || "").trim();
+      if (!text || seen[text]) return false;
+      seen[text] = true;
+      return true;
+    });
+  }
+  function mergeUnique() {
+    var merged = [];
+    for (var i = 0; i < arguments.length; i += 1) {
+      if (Array.isArray(arguments[i])) merged = merged.concat(arguments[i]);
+    }
+    return unique(merged);
+  }
 
   var volumeFrames = {
     "I/1": "이 단락은 바르트가 교의학의 가능성과 기준을 하나님의 말씀에서 찾는 제I권 1부의 논의를 이룹니다. 교회는 하나님에 대해 말하지만, 그 말은 스스로 기준이 될 수 없고 계시하시는 하나님의 말씀 앞에서 검토되어야 합니다.",
@@ -49,7 +65,13 @@
     "CD I/1 §9": "하나님의 삼위일체성은 바르트 계시론의 핵심 결론입니다. 하나님은 성부·성자·성령의 세 존재 방식 안에서 한 분 하나님이시며, 계시의 하나님과 영원한 하나님은 분리되지 않습니다.",
     "CD I/2 §17": "바르트의 종교 비판이 집중되는 단락입니다. 계시는 인간 종교의 완성이 아니라 인간 종교를 심판하고 폐지하며, 동시에 하나님이 기뻐하시는 참된 종교를 창조합니다.",
     "CD I/2 §19": "성경론의 중심 단락입니다. 성경은 계시 자체와 단순 동일하지 않지만, 하나님의 계시를 증언하는 정경적 증언으로서 교회 선포를 규율합니다.",
+    "CD II/1 §25": "바르트는 하나님 지식을 인간이 하나님을 대상으로 확보하는 인식 행위가 아니라, 하나님 앞에 세워진 인간과 인간 앞에 자신을 드러내시는 하나님 사이에서 성취되는 계시 사건으로 이해합니다.",
+    "CD II/1 §26": "하나님의 인식 가능성은 인간의 자연적 종교 능력에서 나오지 않습니다. 하나님이 자신을 알 수 있게 준비하시며, 인간의 준비도 이 하나님의 자기계시 안에서 가능해집니다.",
+    "CD II/1 §27": "하나님은 계시 안에서 실제로 알려지지만 피조물의 포착과 소유를 넘어서는 분으로 남습니다. 그러므로 하나님 지식은 참되지만 언제나 유한하고 경건한 한계를 가집니다.",
     "CD II/1 §28": "바르트 신론의 대표 공식이 나오는 단락입니다. 하나님은 사랑 안에서 자유롭고 자유 안에서 사랑하시는 분입니다. 하나님의 존재는 추상적 본질이 아니라 계시 행위 안에서 자신을 주시는 살아 있는 현실입니다.",
+    "CD II/1 §29": "바르트의 신속성론으로 들어가는 문턱입니다. 하나님의 완전성은 분리된 속성 목록이 아니라 사랑과 자유 안에서 자신을 드러내시는 한 분 하나님의 살아 있는 충만성입니다.",
+    "CD II/1 §30": "하나님의 사랑의 완전성은 은혜와 거룩, 자비와 의, 인내와 지혜라는 쌍으로 전개됩니다. 바르트는 이 항목들을 서로 충돌하는 성질이 아니라 하나님의 한 사랑이 구체화되는 방식으로 읽습니다.",
+    "CD II/1 §31": "하나님의 자유의 완전성은 통일성과 무소부재, 불변성과 전능, 영원성과 영광으로 전개됩니다. 이는 하나님이 피조물에 의해 제한되지 않으면서도 자유롭게 자신을 드러내시는 분임을 말합니다.",
     "CD II/2 §32": "바르트 예정론의 출발점입니다. 예정론은 어두운 운명론이 아니라 복음의 총화입니다. 하나님이 인간을 선택하신다는 말은 예수 그리스도 안에서 은혜의 소식으로 이해됩니다.",
     "CD II/2 §33": "바르트 예정론의 가장 중요한 단락입니다. 예수 그리스도는 선택하시는 하나님이자 선택받은 인간입니다. 선택은 그리스도 밖의 추상적 작정이 아니라 그리스도 안의 하나님의 자기결정입니다.",
     "CD III/1 §41": "바르트 창조론의 핵심 공식이 나오는 단락입니다. 창조는 언약의 외적 근거이고, 언약은 창조의 내적 근거입니다. 창조론은 기독론과 언약론으로부터 분리되지 않습니다.",
@@ -103,6 +125,70 @@
     books.forEach(function (book) { if (book && book.id === "barth-church-dogmatics") { book.summary = "바르트의 『교회교의학』은 하나님의 말씀, 삼위일체, 하나님 인식, 선택, 창조, 화해, 교회의 증언을 중심으로 전개되는 20세기 개신교 교의학의 대표 문헌입니다. 이 항목은 원문 전체가 아니라 권별·§별 구조와 핵심 논지, 한국어 번역 인용, 개혁파 정통과의 비교 지점을 색인합니다."; book.researchUse = "칼빈·벌코프·바빙크와 비교할 때, 바르트는 신학의 출발점을 인간의 종교 의식이나 자연신학이 아니라 예수 그리스도 안에서 일어나는 하나님의 자기계시에 둡니다. 계시론, 성경론, 예정론, 창조론, 화해론, 교회론 비교에 특히 중요합니다."; book.parts = parts; book.edition = "『교회교의학』 영어판 기반 한국어 구조 색인 · " + parts.length + "개 대주제 / " + parts.reduce(function (n, p) { return n + (p.chapters || []).length; }, 0) + "개 §"; } });
     return books;
   }
+
+  function flattenResearchSections(researchIndex) {
+    var map = {};
+    if (!researchIndex || !Array.isArray(researchIndex.chapters)) return map;
+    researchIndex.chapters.forEach(function (chapterGroup) {
+      (chapterGroup.sections || []).forEach(function (section) {
+        if (!section || !section.ref) return;
+        map[section.ref] = Object.assign({}, section, {
+          chapterTitleKo: chapterGroup.titleKo || "",
+          chapterTitleEn: chapterGroup.titleEn || ""
+        });
+      });
+    });
+    return map;
+  }
+  function sectionLocationText(section) {
+    var bits = [];
+    if (section.cdPageStart) bits.push("CD p." + section.cdPageStart);
+    if (section.kdPageStart) bits.push("KD p." + section.kdPageStart);
+    if (section.epubLocation) bits.push("EPUB: " + section.epubLocation);
+    return bits.length ? "연구 위치: " + bits.join(" / ") + "." : "";
+  }
+  function subsectionTitles(section) {
+    return (section.subsections || []).map(function (item) {
+      return [item.titleKo, item.titleEn ? "(" + item.titleEn + ")" : ""].filter(Boolean).join(" ");
+    });
+  }
+  function applyBarthResearchIndex(books, researchIndex) {
+    var researchMap = flattenResearchSections(researchIndex);
+    if (!Object.keys(researchMap).length) return books;
+    books.forEach(function (book) {
+      if (!book || book.id !== "barth-church-dogmatics" || !Array.isArray(book.parts)) return;
+      book.parts.forEach(function (part) {
+        (part.chapters || []).forEach(function (chapter) {
+          var research = researchMap[chapter.ref];
+          if (!research) return;
+          var subs = subsectionTitles(research);
+          var comparisons = Array.isArray(research.comparisonAxes) ? research.comparisonAxes : [];
+          var location = sectionLocationText(research);
+          chapter.title = research.titleKo || chapter.title;
+          chapter.summary = research.summaryKo || chapter.summary;
+          chapter.detail = [
+            research.summaryKo,
+            subs.length ? "소절 구조: " + subs.join(" / ") + "." : "",
+            comparisons.length ? "비교 축: " + comparisons.join(" / ") + "." : "",
+            location
+          ].filter(Boolean).join(" ");
+          chapter.keyPoints = mergeUnique(subs, chapter.keyPoints || [], comparisons);
+          chapter.concepts = mergeUnique(research.concepts || [], chapter.concepts || []).slice(0, 12);
+          chapter.researchMeta = {
+            titleEn: research.titleEn || "",
+            chapterTitleKo: research.chapterTitleKo || "",
+            chapterTitleEn: research.chapterTitleEn || "",
+            cdPageStart: research.cdPageStart || null,
+            kdPageStart: research.kdPageStart || null,
+            epubLocation: research.epubLocation || "",
+            comparisonAxes: comparisons
+          };
+        });
+      });
+    });
+    return books;
+  }
+
   function attachQuotesToBooks(books, quotePacks) {
     var allQuotes = []; quotePacks.forEach(function (pack) { if (pack && Array.isArray(pack.quotes)) allQuotes = allQuotes.concat(pack.quotes); }); if (!allQuotes.length) return books;
     books.forEach(function (book) { if (!book || !Array.isArray(book.parts)) return; var bookQuotes = allQuotes.filter(function (quote) { return quote.book === book.id; }); if (!bookQuotes.length) return; book.parts.forEach(function (part) { (part.chapters || []).forEach(function (chapter) { var matched = bookQuotes.filter(function (quote) { var quoteRef = [quote.volume, quote.section].filter(Boolean).join(" ").trim(); return chapter.ref === quoteRef || (quote.ref && quote.ref.indexOf(chapter.ref) === 0); }); if (!matched.length) return; var existing = Array.isArray(chapter.quotes) ? chapter.quotes : []; var merged = existing.concat(matched.map(normalizeBarthQuote)); var seen = {}; chapter.quotes = merged.filter(function (item) { var key = [item.text, item.ref].join("|"); if (seen[key]) return false; seen[key] = true; return true; }); }); }); });
@@ -166,6 +252,8 @@
   var combinedBooks = dedupeBooks(books.concat(Array.isArray(extraBooks) ? extraBooks : []));
   var barthStructure = loadJson("./data/books-barth-structure-map.json", null);
   combinedBooks = dedupeBooks(applyBarthStructureMap(combinedBooks, barthStructure));
+  var barthII1Research = loadJson("./data/barth-cd-ii-1-research-index.json", null);
+  combinedBooks = dedupeBooks(applyBarthResearchIndex(combinedBooks, barthII1Research));
   var calvinStructure = loadJson("./data/books-calvin-structure-map.json", null);
   combinedBooks = dedupeBooks(applyCalvinStructureMap(combinedBooks, calvinStructure));
   var quotePacks = [
