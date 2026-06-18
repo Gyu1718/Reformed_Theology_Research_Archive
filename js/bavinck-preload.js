@@ -1,4 +1,4 @@
-/* Bavinck preloader v2.
+/* Bavinck preloader v3.
    Loads Herman Bavinck's Reformed Dogmatics Outline with chapter profiles before app.js renders.
    This keeps the archive at the same data depth as the Barth and Berkhof book work without embedding full copyrighted text. */
 (function () {
@@ -43,20 +43,30 @@
     });
   }
 
+  function inferConcepts(title) {
+    var concepts = ["개혁파 정통", "개혁교의학", "유기적 신학"];
+    if (/계시|성경|신앙고백/.test(title)) concepts = concepts.concat(["계시론", "성경론"]);
+    if (/삼위일체/.test(title)) concepts = concepts.concat(["신론", "삼위일체"]);
+    else if (/하나님의 존재/.test(title)) concepts = concepts.concat(["신론", "하나님 지식"]);
+    if (/창조|섭리/.test(title)) concepts = concepts.concat(["창조론", "섭리"]);
+    if (/사람|인간/.test(title)) concepts = concepts.concat(["인간론"]);
+    if (/죄/.test(title)) concepts = concepts.concat(["죄론"]);
+    if (/언약/.test(title)) concepts = concepts.concat(["언약신학"]);
+    if (/중보자|그리스도의 신성과 인성|낮아지심|높아지심/.test(title)) concepts = concepts.concat(["기독론", "구속론"]);
+    if (/성령/.test(title)) concepts = concepts.concat(["성령론", "구원론"]);
+    if (/소명|칭의|성화/.test(title)) concepts = concepts.concat(["구원론"]);
+    if (/교회/.test(title)) concepts = concepts.concat(["교회론"]);
+    if (/영생/.test(title)) concepts = concepts.concat(["종말론"]);
+    return concepts;
+  }
+
   function chapterFromString(raw, partTitle, profiles) {
     var m = String(raw).match(/^([IVX]+\.\d+)\s+(.+)$/);
     var ref = m ? m[1] : String(raw);
     var title = m ? m[2] : String(raw);
     var profile = profiles[ref] || {};
     var subtopics = profile.subtopics || [];
-    var concepts = profile.concepts || ["개혁파 정통", "개혁교의학", "유기적 신학"];
-    if (/계시|성경|신앙고백/.test(title)) concepts = concepts.concat(["계시론", "성경론"]);
-    if (/하나님|삼위일체/.test(title)) concepts = concepts.concat(["신론", "삼위일체"]);
-    if (/창조|섭리|사람|인간/.test(title)) concepts = concepts.concat(["창조론", "인간론"]);
-    if (/죄|언약|중보자|그리스도/.test(title)) concepts = concepts.concat(["죄론", "기독론", "구속론"]);
-    if (/성령|소명|칭의|성화/.test(title)) concepts = concepts.concat(["구원론", "성령론"]);
-    if (/교회/.test(title)) concepts = concepts.concat(["교회론"]);
-    if (/영생/.test(title)) concepts = concepts.concat(["종말론"]);
+    var concepts = Array.isArray(profile.concepts) && profile.concepts.length ? profile.concepts.slice() : inferConcepts(title);
     return {
       ref: ref,
       title: title,
