@@ -74,9 +74,11 @@
     return value ? '<p><em>' + esc(label) + ':</em> ' + esc(value) + '</p>' : "";
   }
   function subtopicHTML(item) {
+    var explanation = item.note || item.description || item.summary || "";
+    var hasDistinctExplanation = explanation && explanation !== item.summary;
     return "<div><span>" + esc(item.title) + "</span>" +
-      field("요약", item.summary) +
-      field("설명", item.note) +
+      field(hasDistinctExplanation ? "요약" : "소주제 설명", item.summary || explanation) +
+      (hasDistinctExplanation ? field("소주제 설명", explanation) : "") +
       field("논증 역할", item.argumentRole) +
       field("개혁파 비교", item.reformedContrast) +
       field("학습 질문", item.studyPrompt) +
