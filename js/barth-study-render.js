@@ -23,7 +23,9 @@
       ".barth-study-card b{color:var(--ink)}\n" +
       ".barth-study-subtopics{display:grid;gap:8px}\n" +
       ".barth-study-subtopics div{border:1px solid var(--line);border-radius:10px;background:var(--surface-2);padding:10px 11px}\n" +
-      ".barth-study-subtopics span{display:block;color:var(--ink);font-weight:700;margin-bottom:3px}\n";
+      ".barth-study-subtopics span{display:block;color:var(--ink);font-weight:700;margin-bottom:4px}\n" +
+      ".barth-study-subtopics .subtopic-summary{font-weight:600;color:var(--ink);margin-bottom:4px}\n" +
+      ".barth-study-subtopics .subtopic-note{color:var(--muted)}\n";
     document.head.appendChild(style);
   }
   function barthBook() {
@@ -44,12 +46,17 @@
   function card(title, html) {
     return html ? '<section class="barth-study-card"><h5>' + esc(title) + '</h5>' + html + '</section>' : "";
   }
+  function subtopicHTML(item) {
+    var summary = item.summary ? '<p class="subtopic-summary">요약: ' + esc(item.summary) + '</p>' : "";
+    var note = item.note ? '<p class="subtopic-note">설명: ' + esc(item.note) + '</p>' : "";
+    return "<div><span>" + esc(item.title) + "</span>" + summary + note + "</div>";
+  }
   function render(chapter) {
     var blocks = [];
     blocks.push(card("핵심 질문", chapter.question ? "<p>" + esc(chapter.question) + "</p>" : ""));
     blocks.push(card("핵심 주장", chapter.thesis ? "<p>" + esc(chapter.thesis) + "</p>" : ""));
     blocks.push(card("논증 흐름", arr(chapter.argumentFlow).length ? "<ol>" + arr(chapter.argumentFlow).map(function (item) { return "<li>" + esc(item) + "</li>"; }).join("") + "</ol>" : ""));
-    blocks.push(card("소주제 설명", arr(chapter.subtopicNotes).length ? '<div class="barth-study-subtopics">' + arr(chapter.subtopicNotes).map(function (item) { return "<div><span>" + esc(item.title) + "</span><p>" + esc(item.note) + "</p></div>"; }).join("") + "</div>" : ""));
+    blocks.push(card("소주제 요약·설명", arr(chapter.subtopicNotes).length ? '<div class="barth-study-subtopics">' + arr(chapter.subtopicNotes).map(subtopicHTML).join("") + "</div>" : ""));
     blocks.push(card("개혁파 정통과의 비교", chapter.reformedContrast ? "<p>" + esc(chapter.reformedContrast) + "</p>" : ""));
     blocks.push(card("학습 질문", arr(chapter.studyQuestions).length ? "<ul>" + arr(chapter.studyQuestions).map(function (item) { return "<li>" + esc(item) + "</li>"; }).join("") + "</ul>" : ""));
     return '<div class="barth-study-blocks" data-barth-study-rendered="true">' + blocks.join("") + "</div>";
