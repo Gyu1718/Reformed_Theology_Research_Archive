@@ -16,6 +16,18 @@
 3. `data/barth-cd-ii-1-research-index.json`를 새로 추가했다.
    - EPUB 내부 위치, CD/KD 시작 페이지, 장/§/소절 구조, 핵심 개념, 비교 축을 따로 관리한다.
 
+## 2026-06-18 문제 해결
+
+1. 2.1권 연구 인덱스가 화면에 반영되지 않는 문제를 해결했다.
+   - `js/preload-data.js`가 `data/barth-cd-ii-1-research-index.json`를 로드하도록 연결했다.
+   - 연구 인덱스의 `summaryKo`, 소절 구조, 비교 축, CD/KD/EPUB 위치 정보를 바르트 책 화면의 `summary`, `detail`, `keyPoints`, `concepts`, `researchMeta`로 병합한다.
+2. 1권 작업 방식과 맞지 않던 스키마 문제를 완화했다.
+   - 연구용 `chapters → sections → subsections` 구조는 유지하되, 화면용 `parts → chapters` 구조에 자동 병합되도록 했다.
+3. `data/books-barth-structure-map.json`가 한 줄 JSON으로 바뀐 문제를 해결했다.
+   - 기존처럼 리뷰와 후속 수정이 가능한 pretty JSON 형식으로 복구했다.
+4. II/1 핵심 단락의 특수 해설을 보강했다.
+   - §25, §26, §27, §29, §30, §31을 `specialDetails`에 추가했다.
+
 ## 다음 작업
 
 - §25–§27: 하나님 지식론의 흐름을 장문 요약으로 확장한다.
