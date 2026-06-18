@@ -89,10 +89,18 @@
         if (!item) return "";
         return '<button type="button" class="history-overview-chip" data-history-target="' + esc(id) + '"><span>' + esc(index + 1) + '</span>' + esc(item.title) + '</button>';
       }).join("");
+
+      if (compact) {
+        return '<button type="button" class="history-overview-flow is-compact" data-history-target="' + esc(first ? first.id : "") + '">' +
+          '<strong>' + esc(flow.title) + '</strong>' +
+          '<span>시작 →</span>' +
+        '</button>';
+      }
+
       return '<article class="history-overview-flow">' +
         '<h4>' + esc(flow.title) + '</h4>' +
         '<p>' + esc(flow.description) + '</p>' +
-        (compact ? "" : '<div class="history-overview-chips">' + chips + '</div>') +
+        '<div class="history-overview-chips">' + chips + '</div>' +
         '<button type="button" class="history-overview-start" data-history-target="' + esc(first ? first.id : "") + '">이 흐름 시작하기 →</button>' +
       '</article>';
     }).join("");
@@ -123,14 +131,14 @@
       '<div class="history-overview-head">' +
         '<span class="loci-label">HISTORY GUIDE</span>' +
         '<h3>역사 파트 읽기 안내</h3>' +
-        '<p>역사 항목은 단순한 사건 목록이 아니라 개혁파 정통과 신정통주의를 비교해서 읽기 위한 길잡이입니다. 처음 읽는다면 개혁전통 기본 흐름을 먼저 보고, 이후 신정통주의와 주요 논쟁 흐름으로 이동하는 순서가 좋습니다.</p>' +
+        '<p>처음 읽는다면 개혁전통 기본 흐름을 먼저 보고, 이후 신정통주의와 주요 논쟁 흐름으로 이동하는 순서가 좋습니다.</p>' +
         '<div class="history-overview-actions">' +
-          '<button type="button" data-history-target="history-index">전체 개요 열기</button>' +
-          '<button type="button" data-history-target="reformation-to-reformed">개혁전통부터 시작</button>' +
-          '<button type="button" data-history-target="modern-liberal-theology-background">신정통주의부터 시작</button>' +
+          '<button type="button" data-history-target="history-index">전체 개요</button>' +
+          '<button type="button" data-history-target="reformation-to-reformed">개혁전통</button>' +
+          '<button type="button" data-history-target="modern-liberal-theology-background">신정통주의</button>' +
         '</div>' +
       '</div>' +
-      '<div class="history-overview-flows">' + flowCards(items, true) + '</div>';
+      '<div class="history-overview-flows compact-flows">' + flowCards(items, true) + '</div>';
 
     view.insertBefore(panel, view.firstChild);
     bindButtons(panel);
@@ -163,23 +171,30 @@
     var style = document.createElement("style");
     style.id = "history-overview-enhance-styles";
     style.textContent = "\
-      .history-overview-panel{margin:0 0 18px;border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(135deg,var(--surface),var(--surface-2));overflow:hidden;}\
-      .history-overview-head{padding:22px 24px 16px;border-bottom:1px solid var(--line);}\
-      .history-overview-head h3{font-family:var(--font-display);font-size:1.45rem;margin:6px 0 8px;}\
-      .history-overview-head p,.history-overview-intro{color:var(--muted);line-height:1.75;max-width:980px;}\
-      .history-overview-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}\
-      .history-overview-actions button,.history-overview-start{border:1px solid var(--line-strong);background:var(--surface);border-radius:999px;padding:8px 12px;cursor:pointer;color:var(--ink);font-size:.86rem;}\
+      .history-overview-panel{margin:0 0 12px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(135deg,var(--surface),var(--surface-2));overflow:hidden;}\
+      .history-overview-head{padding:16px 18px 12px;border-bottom:1px solid var(--line);}\
+      .history-overview-head h3{font-family:var(--font-display);font-size:1.2rem;margin:4px 0 6px;}\
+      .history-overview-head p,.history-overview-intro{color:var(--muted);line-height:1.6;max-width:980px;}\
+      .history-overview-head p{font-size:.9rem;margin:0;}\
+      .history-overview-actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}\
+      .history-overview-actions button,.history-overview-start{border:1px solid var(--line-strong);background:var(--surface);border-radius:999px;padding:7px 10px;cursor:pointer;color:var(--ink);font-size:.82rem;}\
       .history-overview-actions button:hover,.history-overview-start:hover{border-color:var(--ink);}\
       .history-overview-flows{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding:16px 18px 18px;}\
+      .history-overview-flows.compact-flows{display:flex;flex-wrap:wrap;gap:8px;padding:10px 14px 14px;}\
       .history-overview-flows.detail-flows{padding:0;margin-top:14px;}\
       .history-overview-flow{border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:15px;}\
+      .history-overview-flow.is-compact{flex:1 1 220px;display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:42px;padding:9px 12px;border-radius:999px;text-align:left;cursor:pointer;color:var(--ink);}\
+      .history-overview-flow.is-compact strong{font-family:var(--font-display);font-size:.9rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}\
+      .history-overview-flow.is-compact span{flex:0 0 auto;color:var(--muted);font-size:.78rem;}\
+      .history-overview-flow.is-compact:hover{border-color:var(--ink);}\
       .history-overview-flow h4{font-family:var(--font-display);margin:0 0 8px;font-size:1rem;}\
       .history-overview-flow p{color:var(--muted);font-size:.9rem;line-height:1.65;margin:0 0 12px;}\
       .history-overview-chips{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0;}\
       .history-overview-chip{border:1px solid var(--line);background:var(--surface-2);border-radius:999px;padding:7px 10px;font-size:.82rem;color:var(--muted);cursor:pointer;}\
       .history-overview-chip span{font-family:var(--font-mono);font-size:.68rem;margin-right:5px;}\
       .history-overview-chip:hover{border-color:var(--ink);color:var(--ink);}\
-      @media(max-width:980px){.history-overview-flows{grid-template-columns:1fr;}}\
+      @media(max-width:980px){.history-overview-flows:not(.compact-flows){grid-template-columns:1fr;}}\
+      @media(max-width:680px){.history-overview-panel{margin-bottom:10px;}.history-overview-head{padding:13px 14px 10px;}.history-overview-head h3{font-size:1.08rem;}.history-overview-head p{display:none;}.history-overview-actions{margin-top:8px;}.history-overview-flows.compact-flows{padding:8px 10px 10px;}.history-overview-flow.is-compact{flex-basis:100%;min-height:38px;padding:8px 10px;}}\
     ";
     document.head.appendChild(style);
   }
