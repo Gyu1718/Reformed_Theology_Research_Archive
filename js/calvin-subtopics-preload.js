@@ -24,7 +24,7 @@
     if (typeof value === "string" || typeof value === "number" || typeof value === "boolean") return String(value).trim();
     if (Array.isArray(value)) return value.map(function (item) { return text(item); }).filter(Boolean).join(" · ");
     if (typeof value === "object") {
-      return text(value.title || value.label || value.name || value.text || value.summary || value.displaySummary || value.explanation || value.note || value.description, fallback);
+      return text(value.title || value.label || value.name || value.text || value.summary || value.displaySummary || value.explanation || value.note || value.description || value.thesis, fallback);
     }
     return fallback || "";
   }
@@ -53,8 +53,9 @@
     var displaySummary = text(item && (item.displaySummary || item.summary));
     var explanation = text(item && (item.explanation || item.note || item.description)) || displaySummary;
     var title = text(item && (item.title || item.label || item.name)) || displaySummary || "소주제 " + (index + 1);
-    var keyQuestion = text(item && (item.keyQuestion || item.question));
+    var keyQuestion = text(item && (item.keyQuestion || item.question || item.studyPrompt));
     var doctrinalFunction = text(item && (item.doctrinalFunction || item.argumentRole || item.function));
+    var reformedContrast = text(item && item.reformedContrast);
     var caution = text(item && item.caution);
     var connections = unique(textArray(item && (item.connections || item.tags || item.concepts || item.refs || item.chapters)));
     var quoteTargets = unique(textArray(item && item.quoteTargets));
@@ -70,6 +71,7 @@
       question: keyQuestion,
       doctrinalFunction: doctrinalFunction,
       argumentRole: doctrinalFunction,
+      reformedContrast: reformedContrast,
       connections: connections,
       quoteTargets: quoteTargets,
       caution: caution,
@@ -88,34 +90,77 @@
     };
   }
 
-  var pack = loadJson("./data/books-calvin-subtopics-expanded-v3.json");
-  if (!pack || !Array.isArray(pack.chapterPatches)) return;
+  function normalizeStudyNote(note) {
+    if (!note || !note.ref) return null;
+    var ref = normalizeRef(note.ref);
+    var subtopicNotes = Array.isArray(note.subtopicNotes) ? note.subtopicNotes : [];
+    return {
+      ref: ref,
+      question: text(note.question),
+      thesis: text(note.thesis),
+      argumentFlow: textArray(note.argumentFlow),
+      subtopicNotes: subtopicNotes.map(function (item, index) { return normalizeSubtopic(item, index, ref); }),
+      reformedContrast: text(note.reformedContrast),
+      studyQuestions: textArray(note.studyQuestions),
+      concepts: unique(textArray(note.concepts)),
+      _source: "data/books/calvin-study-notes-book-*.json"
+    };
+  }
+
+  function loadStudyNotes() {
+    var paths = [
+      "./data/books/calvin-study-notes-book-1.json",
+      "./data/books/calvin-study-notes-book-2.json",
+      "./data/books/calvin-study-notes-book-3.json",
+      "./data/books/calvin-study-notes-book-4.json"
+    ];
+    var map = {};
+    paths.forEach(function (path) {
+      var pack = loadJson(path);
+      if (!pack || !Array.isArray(pack.notes)) return;
+      pack.notes.forEach(function (note) {
+        var normalized = normalizeStudyNote(note);
+        if (normalized && normalized.ref) map[normalized.ref] = normalized;
+      });
+    });
+    return map;
+  }
+
+  var pack = loadJson("./data/books-calvin-subtopics-expanded-v3.json") || { chapterPatches: [] };
   if (!window.__DATA__ || !Array.isArray(window.__DATA__.books)) return;
 
   var book = window.__DATA__.books.find(function (item) { return item && item.id === (pack.bookId || "calvin-institutes"); });
   if (!book || !Array.isArray(book.parts)) return;
 
   var patchMap = {};
-  pack.chapterPatches.forEach(function (patch) {
+  (pack.chapterPatches || []).forEach(function (patch) {
     var normalized = normalizePatch(patch);
     if (normalized.ref) patchMap[normalized.ref] = normalized;
   });
+  var noteMap = loadStudyNotes();
 
   book.parts.forEach(function (part) {
     (part.chapters || []).forEach(function (chapter) {
-      var patch = patchMap[normalizeRef(chapter.ref)];
-      if (!patch) return;
+      var ref = normalizeRef(chapter.ref);
+      var patch = patchMap[ref];
+      var studyNote = noteMap[ref];
+      if (!patch && !studyNote) return;
 
-      chapter.chapterFunction = patch.chapterFunction || chapter.chapterFunction || "";
-      chapter.subtopics = patch.subtopics;
+      chapter.studyNote = studyNote || null;
+      chapter.chapterFunction = (studyNote && studyNote.thesis) || (patch && patch.chapterFunction) || chapter.chapterFunction || "";
+      chapter.detail = (studyNote && studyNote.thesis) || chapter.detail || chapter.summary || "";
+      chapter.keyPoints = unique((studyNote && studyNote.argumentFlow && studyNote.argumentFlow.length ? studyNote.argumentFlow : chapter.keyPoints || []));
+      chapter.subtopics = (studyNote && studyNote.subtopicNotes && studyNote.subtopicNotes.length)
+        ? studyNote.subtopicNotes
+        : (patch && patch.subtopics) || [];
       chapter.subtopicCount = chapter.subtopics.length;
-      chapter.subtopicSource = "data/books-calvin-subtopics-expanded-v3.json";
+      chapter.subtopicSource = studyNote ? "data/books/calvin-study-notes-book-1-4.json" : "data/books-calvin-subtopics-expanded-v3.json";
 
       var connectionTerms = [];
       chapter.subtopics.forEach(function (subtopic) {
         connectionTerms = connectionTerms.concat(subtopic.connections || []);
       });
-      chapter.concepts = unique((chapter.concepts || []).concat(connectionTerms).slice(0, 12));
+      chapter.concepts = unique((chapter.concepts || []).concat((studyNote && studyNote.concepts) || []).concat(connectionTerms).slice(0, 14));
     });
   });
 })();
