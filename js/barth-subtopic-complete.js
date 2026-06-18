@@ -67,7 +67,6 @@
   function makeSummary(subtopic, chapter) {
     var title = clean(subtopic.title || subtopic);
     var chapterTitle = clean(chapter.title);
-    var volume = volumeOf(chapter.ref);
     return "「" + title + "」은 「" + chapterTitle + "」 논의 안에서 " + lensFor(title) + "을 요약하는 소주제입니다.";
   }
   function makeNote(subtopic, chapter) {
@@ -87,6 +86,7 @@
     };
   }
   function completeChapter(chapter) {
+    if (chapter.curatedSubtopicsApplied) return;
     var existing = {};
     var notes = arr(chapter.subtopicNotes).map(function (item) { return normalizeSubtopic(item, chapter); }).filter(Boolean);
     notes.forEach(function (item) { existing[item.title] = item; });
