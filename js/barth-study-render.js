@@ -25,7 +25,8 @@
       ".barth-study-subtopics div{border:1px solid var(--line);border-radius:10px;background:var(--surface-2);padding:10px 11px}\n" +
       ".barth-study-subtopics span{display:block;color:var(--ink);font-weight:700;margin-bottom:4px}\n" +
       ".barth-study-subtopics .subtopic-summary{font-weight:600;color:var(--ink);margin-bottom:4px}\n" +
-      ".barth-study-subtopics .subtopic-note{color:var(--muted)}\n";
+      ".barth-study-subtopics .subtopic-note,.barth-study-subtopics .subtopic-role,.barth-study-subtopics .subtopic-contrast,.barth-study-subtopics .subtopic-prompt{color:var(--muted);margin-top:4px}\n" +
+      ".barth-study-subtopics em{font-style:normal;color:var(--ink);font-weight:700}\n";
     document.head.appendChild(style);
   }
   function barthBook() {
@@ -46,10 +47,17 @@
   function card(title, html) {
     return html ? '<section class="barth-study-card"><h5>' + esc(title) + '</h5>' + html + '</section>' : "";
   }
+  function field(className, label, value) {
+    return value ? '<p class="' + className + '"><em>' + esc(label) + ':</em> ' + esc(value) + '</p>' : "";
+  }
   function subtopicHTML(item) {
-    var summary = item.summary ? '<p class="subtopic-summary">요약: ' + esc(item.summary) + '</p>' : "";
-    var note = item.note ? '<p class="subtopic-note">설명: ' + esc(item.note) + '</p>' : "";
-    return "<div><span>" + esc(item.title) + "</span>" + summary + note + "</div>";
+    return "<div><span>" + esc(item.title) + "</span>" +
+      field("subtopic-summary", "요약", item.summary) +
+      field("subtopic-note", "설명", item.note) +
+      field("subtopic-role", "논증 역할", item.argumentRole) +
+      field("subtopic-contrast", "개혁파 비교", item.reformedContrast) +
+      field("subtopic-prompt", "학습 질문", item.studyPrompt) +
+      "</div>";
   }
   function render(chapter) {
     var blocks = [];
