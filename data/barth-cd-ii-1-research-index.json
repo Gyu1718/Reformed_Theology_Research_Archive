@@ -6,7 +6,7 @@
   "titleKo": "교회교의학 II/1 — 하나님 교리 1부",
   "author": "Karl Barth",
   "publicRepoPolicy": "원문 전문, EPUB 원본, 긴 인용문은 포함하지 않는다. 이 파일은 연구용 목차, 위치 정보, 한국어 요약, 비교 축만 제공한다.",
-  "status": "started",
+  "status": "integrated-with-preloader",
   "updatedAt": "2026-06-18",
   "chapters": [
     {
@@ -235,7 +235,7 @@
               "titleKo": "하나님의 인내와 지혜",
               "cdPageStart": 406,
               "kdPageStart": 457,
-              "epubLocation": "OEBPS/Text/index_split_019.html#filepos6556007"
+              "epubLocation": "OEBPS/Text/index_split_019.html"
             }
           ],
           "concepts": [
