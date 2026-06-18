@@ -82,7 +82,7 @@
   }
 
   function renderForChapter(chapter) {
-    var details = arr(chapter && chapter.subtopicDetails).length ? chapter.subtopicDetails : arr(chapter && chapter.subtopicsRaw);
+    var details = arr(chapter && chapter.subtopicsRaw).length ? chapter.subtopicsRaw : arr(chapter && chapter.subtopicDetails);
     var quoteTargets = arr(chapter && chapter.quoteTargets);
     if (!details.length && !quoteTargets.length) return "";
     return '<div class="calvin-subtopic-details" data-calvin-subtopic-rendered="true">' +
