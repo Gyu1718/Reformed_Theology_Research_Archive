@@ -55,9 +55,16 @@
     return unique(subtopicPoints.concat(existing));
   }
 
+  function standardSubtopicTitles(chapter) {
+    return arr(chapter.subtopics).map(function (item, index) {
+      return subtopicTitle(item, index);
+    }).filter(Boolean);
+  }
+
   function normalizeChapter(chapter) {
     if (!chapter || chapter.__barthStyleDescription === true) return;
     var note = chapter.studyNote || {};
+    var rawSubtopics = arr(chapter.subtopics).slice();
 
     if (!chapter.detail) {
       chapter.detail = text(note.thesis || chapter.chapterFunction || chapter.summary);
@@ -69,13 +76,17 @@
     var noteConcepts = arr(note.concepts);
     if (noteConcepts.length) chapter.concepts = unique(arr(chapter.concepts).concat(noteConcepts));
 
-    if (arr(chapter.subtopics).length && !arr(chapter.subtopicDetails).length) {
-      chapter.subtopicDetails = arr(chapter.subtopics).map(function (item, index) {
+    if (rawSubtopics.length && !arr(chapter.subtopicDetails).length) {
+      chapter.subtopicDetails = rawSubtopics.map(function (item, index) {
         return {
           title: subtopicTitle(item, index),
           explanation: subtopicExplanation(item, index, chapter)
         };
       });
+    }
+
+    if (rawSubtopics.length) {
+      chapter.subtopics = standardSubtopicTitles({ subtopics: rawSubtopics });
     }
 
     chapter.__barthStyleDescription = true;
