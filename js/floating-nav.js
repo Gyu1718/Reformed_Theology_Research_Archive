@@ -1,4 +1,4 @@
-/* Floating quick navigation: top / toc / bottom */
+/* Floating quick navigation: home / top / toc / bottom */
 (function(){
   const NAV_ID = "floating-page-nav";
   const PANEL_ID = "floating-page-toc-panel";
@@ -195,6 +195,35 @@
     else closePanel();
   }
 
+  function resetHomeControls(){
+    const searchInput = document.querySelector("#q");
+    if(searchInput && searchInput.value){
+      searchInput.value = "";
+      searchInput.dispatchEvent(new Event("input", { bubbles:true }));
+    }
+
+    const allFilter = document.querySelector('.chip[data-trad="all"]');
+    if(allFilter && allFilter.getAttribute("aria-pressed") !== "true"){
+      allFilter.click();
+    }
+  }
+
+  function goHome(){
+    closePanel();
+    resetHomeControls();
+
+    const homeTab = document.querySelector('.tab[data-view="compare"]');
+    if(homeTab){
+      homeTab.click();
+    }else{
+      history.pushState("", document.title, location.pathname + location.search);
+    }
+
+    window.setTimeout(function(){
+      window.scrollTo({ top:0, behavior:getBehavior() });
+    },0);
+  }
+
   function mount(){
     if(document.getElementById(NAV_ID)) return;
 
@@ -204,6 +233,7 @@
     nav.setAttribute("aria-label", "빠른 화면 이동");
 
     nav.append(
+      createButton("home", "⌂", "홈", "홈으로 이동"),
       createButton("top", "↑", "위", "맨 위로 이동"),
       createButton("toc", "≡", "목차", "목차 열기"),
       createButton("bottom", "↓", "아래", "맨 아래로 이동")
@@ -213,6 +243,11 @@
       const button = event.target.closest("button[data-floating-action]");
       if(!button || button.disabled) return;
       const action = button.dataset.floatingAction;
+
+      if(action === "home"){
+        goHome();
+        return;
+      }
 
       if(action === "top"){
         closePanel();
