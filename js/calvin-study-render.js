@@ -3,7 +3,8 @@
 (function () {
   var NOTE_URLS = [
     "data/books/calvin-study-notes-book-1.json",
-    "data/books/calvin-study-notes-book-2.json"
+    "data/books/calvin-study-notes-book-2.json",
+    "data/books/calvin-study-notes-book-3.json"
   ];
   var notesByRef = {};
   var loaded = false;
