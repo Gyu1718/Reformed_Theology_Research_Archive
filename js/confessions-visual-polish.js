@@ -49,6 +49,14 @@
     return "C";
   }
 
+  function buttonLabel(button) {
+    var nodes = Array.prototype.slice.call(button.children || []);
+    var labelNode = nodes.find(function (node) {
+      return !node.classList.contains("doc-sigil") && !node.classList.contains("mini");
+    });
+    return labelNode ? labelNode.textContent.trim() : button.textContent.trim();
+  }
+
   function addLegend() {
     var intro = document.querySelector(".confession-intro");
     if (!intro || intro.querySelector(".confession-type-legend")) return;
@@ -108,7 +116,7 @@
   function upgradeButtons() {
     document.querySelectorAll(".confession-btn").forEach(function (button) {
       var mini = text(".mini", button);
-      var label = button.firstElementChild ? button.firstElementChild.textContent.trim() : button.textContent.trim();
+      var label = buttonLabel(button);
       var klass = kindClass(mini, label);
       button.classList.remove("kind-creed", "kind-definition", "kind-confession", "kind-catechism", "kind-synod");
       button.classList.add("kind-" + klass);
