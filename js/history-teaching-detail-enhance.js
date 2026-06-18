@@ -214,7 +214,14 @@
     });
   }
 
-  function buildToc(body) {
+  function sectionSignature(body) {
+    var sections = Array.prototype.slice.call(body.children).filter(function (node) {
+      return node.classList && node.classList.contains("history-section") && !node.classList.contains("history-page-toc");
+    });
+    return sections.map(function (section) { return section.id || ""; }).join("|");
+  }
+
+  function buildToc(body, signature) {
     var sections = Array.prototype.slice.call(body.children).filter(function (node) {
       return node.classList && node.classList.contains("history-section") && !node.classList.contains("history-page-toc");
     });
@@ -228,7 +235,7 @@
     }).join("");
 
     return '' +
-      '<section class="history-section history-page-toc">' +
+      '<section class="history-section history-page-toc" data-history-toc-signature="' + esc(signature || "") + '">' +
         '<h4>이 페이지에서 배울 내용</h4>' +
         '<div class="history-page-toc-grid">' + buttons + '</div>' +
       '</section>';
@@ -286,12 +293,13 @@
 
     ensureSectionIds(body);
 
+    var tocSignature = sectionSignature(body);
     var toc = body.querySelector(".history-page-toc");
     if (!toc) {
-      body.insertAdjacentHTML("afterbegin", buildToc(body));
+      body.insertAdjacentHTML("afterbegin", buildToc(body, tocSignature));
       toc = body.querySelector(".history-page-toc");
-    } else {
-      toc.outerHTML = buildToc(body);
+    } else if (toc.dataset.historyTocSignature !== tocSignature) {
+      toc.outerHTML = buildToc(body, tocSignature);
       toc = body.querySelector(".history-page-toc");
     }
 
