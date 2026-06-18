@@ -1,0 +1,110 @@
+/* Render structured Barth study notes in the Books detail page without modifying the generic book renderer. */
+(function () {
+  function arr(value) { return Array.isArray(value) ? value : []; }
+  function esc(value) {
+    return String(value || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+  function injectStyles() {
+    if (document.querySelector("#barth-study-render-styles")) return;
+    var style = document.createElement("style");
+    style.id = "barth-study-render-styles";
+    style.textContent = "\n" +
+      ".barth-study-blocks{margin-top:16px;display:grid;gap:10px}\n" +
+      ".barth-study-inline{margin:10px 0 16px 0}\n" +
+      ".barth-study-card{border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:13px 14px}\n" +
+      ".barth-study-card h5{margin:0 0 7px;font-family:var(--font-mono);font-size:.76rem;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}\n" +
+      ".barth-study-card p{margin:0;color:var(--muted);line-height:1.75}\n" +
+      ".barth-study-card ol,.barth-study-card ul{margin:0;padding-left:20px;color:var(--muted)}\n" +
+      ".barth-study-card li{margin:6px 0;line-height:1.65}\n" +
+      ".barth-study-card b{color:var(--ink)}\n" +
+      ".barth-study-subtopics{display:grid;gap:8px}\n" +
+      ".barth-study-subtopics div{border:1px solid var(--line);border-radius:10px;background:var(--surface-2);padding:10px 11px}\n" +
+      ".barth-study-subtopics span{display:block;color:var(--ink);font-weight:700;margin-bottom:4px}\n" +
+      ".barth-study-subtopics .subtopic-summary{font-weight:600;color:var(--ink);margin-bottom:4px}\n" +
+      ".barth-study-subtopics .subtopic-note,.barth-study-subtopics .subtopic-role,.barth-study-subtopics .subtopic-contrast,.barth-study-subtopics .subtopic-prompt{color:var(--muted);margin-top:4px}\n" +
+      ".barth-study-subtopics em{font-style:normal;color:var(--ink);font-weight:700}\n";
+    document.head.appendChild(style);
+  }
+  function barthBook() {
+    return arr(window.__DATA__ && window.__DATA__.books).find(function (book) { return book.id === "barth-church-dogmatics"; });
+  }
+  function noteMap() {
+    var book = barthBook();
+    var map = {};
+    if (!book) return map;
+    arr(book.parts).forEach(function (part) {
+      arr(part.chapters).forEach(function (chapter) {
+        if (!chapter.studyNoteApplied) return;
+        map[chapter.ref] = chapter;
+      });
+    });
+    return map;
+  }
+  function card(title, html) {
+    return html ? '<section class="barth-study-card"><h5>' + esc(title) + '</h5>' + html + '</section>' : "";
+  }
+  function field(className, label, value) {
+    return value ? '<p class="' + className + '"><em>' + esc(label) + ':</em> ' + esc(value) + '</p>' : "";
+  }
+  function subtopicHTML(item) {
+    return "<div><span>" + esc(item.title) + "</span>" +
+      field("subtopic-summary", "요약", item.summary) +
+      field("subtopic-note", "설명", item.note) +
+      field("subtopic-role", "논증 역할", item.argumentRole) +
+      field("subtopic-contrast", "개혁파 비교", item.reformedContrast) +
+      field("subtopic-prompt", "학습 질문", item.studyPrompt) +
+      "</div>";
+  }
+  function render(chapter, extraClass) {
+    var blocks = [];
+    blocks.push(card("핵심 질문", chapter.question ? "<p>" + esc(chapter.question) + "</p>" : ""));
+    blocks.push(card("핵심 주장", chapter.thesis ? "<p>" + esc(chapter.thesis) + "</p>" : ""));
+    blocks.push(card("논증 흐름", arr(chapter.argumentFlow).length ? "<ol>" + arr(chapter.argumentFlow).map(function (item) { return "<li>" + esc(item) + "</li>"; }).join("") + "</ol>" : ""));
+    blocks.push(card("소주제 요약·설명", arr(chapter.subtopicNotes).length ? '<div class="barth-study-subtopics">' + arr(chapter.subtopicNotes).map(subtopicHTML).join("") + "</div>" : ""));
+    blocks.push(card("개혁파 정통과의 비교", chapter.reformedContrast ? "<p>" + esc(chapter.reformedContrast) + "</p>" : ""));
+    blocks.push(card("학습 질문", arr(chapter.studyQuestions).length ? "<ul>" + arr(chapter.studyQuestions).map(function (item) { return "<li>" + esc(item) + "</li>"; }).join("") + "</ul>" : ""));
+    return '<div class="barth-study-blocks ' + (extraClass || "") + '" data-barth-study-rendered="true">' + blocks.join("") + "</div>";
+  }
+  function apply() {
+    injectStyles();
+    var map = noteMap();
+    if (!Object.keys(map).length) return;
+    document.querySelectorAll(".chap-x").forEach(function (node) {
+      if (node.querySelector('[data-barth-study-rendered="true"]')) return;
+      var refNode = node.querySelector(".cref");
+      var detail = node.querySelector(".chap-detail");
+      if (!refNode || !detail) return;
+      var ref = refNode.textContent.trim();
+      var chapter = map[ref];
+      if (!chapter) return;
+      detail.insertAdjacentHTML("beforeend", render(chapter, ""));
+    });
+    document.querySelectorAll(".chap:not(.chap-sum)").forEach(function (node) {
+      if (node.closest(".chap-x")) return;
+      var next = node.nextElementSibling;
+      if (next && next.matches('[data-barth-study-rendered="true"]')) return;
+      var refNode = node.querySelector(".cref");
+      if (!refNode) return;
+      var ref = refNode.textContent.trim();
+      var chapter = map[ref];
+      if (!chapter) return;
+      node.insertAdjacentHTML("afterend", render(chapter, "barth-study-inline"));
+    });
+  }
+  var scheduled = false;
+  function schedule() {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(function () { scheduled = false; apply(); });
+  }
+  document.addEventListener("DOMContentLoaded", schedule);
+  window.addEventListener("hashchange", schedule);
+  var view = document.querySelector("#view");
+  if (view) new MutationObserver(schedule).observe(view, { childList: true, subtree: true });
+  schedule();
+})();

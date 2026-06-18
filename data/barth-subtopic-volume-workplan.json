@@ -1,0 +1,161 @@
+{
+  "id": "barth-subtopic-volume-workplan-v1",
+  "title": "Barth Church Dogmatics subtopic improvement plan by volume",
+  "language": "Korean",
+  "purpose": "바르트 『교회교의학』 책별·권별 소주제 해설 개선 작업을 한 번에 전부 작성하지 않고, 권별로 감사·개선·검수하기 위한 작업 계획입니다.",
+  "principles": [
+    "권별로 작업한다.",
+    "자동 보완문은 임시 fallback으로만 사용하고, 최종 해설은 권별 수작업 데이터로 대체한다.",
+    "한 회차 작업은 한 권 또는 한 권 안의 1~2개 § 단위로 제한한다.",
+    "각 소주제는 title, summary, note, argumentRole, studyPrompt를 갖는 것을 목표로 한다.",
+    "개혁파 정통과의 비교가 필요한 소주제에는 reformedContrast를 추가한다."
+  ],
+  "targetShape": {
+    "ref": "CD I/1 §1",
+    "chapterTitle": "교의학의 과제",
+    "subtopics": [
+      {
+        "title": "교회·신학·학문",
+        "summary": "한 문장 요약",
+        "note": "소주제 고유 설명",
+        "argumentRole": "해당 § 안에서 이 소주제가 맡는 논증 역할",
+        "reformedContrast": "필요할 경우 개혁파 정통과의 접점 또는 긴장점",
+        "studyPrompt": "학습 질문"
+      }
+    ]
+  },
+  "volumes": [
+    {
+      "volume": "I/1",
+      "title": "The Doctrine of the Word of God I",
+      "priority": 1,
+      "reason": "전체 Church Dogmatics의 방법론과 말씀론 입구이므로, 모든 뒤 권의 해석 기준을 결정한다.",
+      "status": "next",
+      "workFile": "data/barth-subtopics-i-1.json",
+      "scope": ["§1", "§2", "§3", "§4", "§5", "§6", "§7", "§8", "§9", "§10", "§11", "§12"],
+      "firstBatch": ["§1", "§2"],
+      "qualityTarget": "교의학의 과제, 교회 선포, 삼중 말씀, 말씀의 본성, 삼위일체론이 서로 어떻게 연결되는지 소주제별 논증 역할을 분명히 한다."
+    },
+    {
+      "volume": "I/2",
+      "title": "The Doctrine of the Word of God II",
+      "priority": 2,
+      "reason": "성육신, 성령, 성경, 교회 권위와 선포가 결합되는 구간으로 사이트의 성경론·선포론 품질을 결정한다.",
+      "status": "planned",
+      "workFile": "data/barth-subtopics-i-2.json",
+      "scope": ["§13", "§14", "§15", "§16", "§17", "§18", "§19", "§20", "§21", "§22", "§23", "§24"],
+      "firstBatch": ["§13", "§14", "§15", "§16"],
+      "qualityTarget": "계시의 객관적 현실과 주관적 현실, 종교 비판, 성경론, 교회 선포를 분리하지 않고 연결한다."
+    },
+    {
+      "volume": "II/1",
+      "title": "The Doctrine of God I",
+      "priority": 3,
+      "reason": "하나님 인식과 하나님의 완전성 구간은 자동 설명으로 처리하면 가장 얕아지는 영역이다.",
+      "status": "planned",
+      "workFile": "data/barth-subtopics-ii-1.json",
+      "scope": ["§25", "§26", "§27", "§28", "§29", "§30", "§31"],
+      "firstBatch": ["§25", "§26", "§27"],
+      "qualityTarget": "하나님의 계시 가능성, 숨겨짐, 하나님 지식의 진실성, 사랑과 자유의 완전성을 개혁파 속성론과 비교 가능하게 정리한다."
+    },
+    {
+      "volume": "II/2",
+      "title": "The Doctrine of God II",
+      "priority": 4,
+      "reason": "선택론과 명령론은 바르트와 개혁파 정통의 차이가 가장 선명하게 드러나는 구간이다.",
+      "status": "planned",
+      "workFile": "data/barth-subtopics-ii-2.json",
+      "scope": ["§32", "§33", "§34", "§35", "§36", "§37", "§38", "§39"],
+      "firstBatch": ["§32", "§33", "§34", "§35"],
+      "qualityTarget": "예수 그리스도의 선택, 공동체의 선택, 개인의 선택, 하나님의 명령을 예정론과 윤리의 연결 구조로 정리한다."
+    },
+    {
+      "volume": "III/1",
+      "title": "The Doctrine of Creation I",
+      "priority": 5,
+      "reason": "창조와 언약의 관계는 III권 전체의 문법을 정한다.",
+      "status": "planned",
+      "workFile": "data/barth-subtopics-iii-1.json",
+      "scope": ["§40", "§41", "§42"],
+      "firstBatch": ["§40", "§41", "§42"],
+      "qualityTarget": "창조를 독립된 자연철학이 아니라 언약의 외적 근거이자 하나님의 긍정으로 읽게 한다."
+    },
+    {
+      "volume": "III/2",
+      "title": "The Doctrine of Creation II",
+      "priority": 6,
+      "reason": "인간론 구간은 신학적 인간 이해, 관계성, 영혼과 몸, 시간 이해가 집중되어 있다.",
+      "status": "planned",
+      "workFile": "data/barth-subtopics-iii-2.json",
+      "scope": ["§43", "§44", "§45", "§46", "§47"],
+      "firstBatch": ["§43", "§44", "§45"],
+      "qualityTarget": "예수 그리스도 안의 참 인간성, 언약 파트너로서의 인간, 영혼과 몸, 자기 시간 안의 인간을 소주제별로 구분한다."
+    },
+    {
+      "volume": "III/3",
+      "title": "The Doctrine of Creation III",
+      "priority": 7,
+      "reason": "섭리, 무, 천사론은 학습자에게 난해한 구간이므로 소주제별 안내가 필요하다.",
+      "status": "planned",
+      "workFile": "data/barth-subtopics-iii-3.json",
+      "scope": ["§48", "§49", "§50", "§51"],
+      "firstBatch": ["§48", "§49"],
+      "qualityTarget": "섭리를 운명론과 구별하고, 무와 천사론을 창조주 하나님의 주권 아래 해석한다."
+    },
+    {
+      "volume": "III/4",
+      "title": "The Doctrine of Creation IV",
+      "priority": 8,
+      "reason": "창조윤리는 목회·교육 현장에 직접 활용 가능한 구간이므로 실제 적용 가능한 설명이 필요하다.",
+      "status": "planned",
+      "workFile": "data/barth-subtopics-iii-4.json",
+      "scope": ["§52", "§53", "§54", "§55", "§56"],
+      "firstBatch": ["§52", "§53"],
+      "qualityTarget": "하나님 앞의 자유, 교제 안의 자유, 생명을 위한 자유, 제한 안의 자유를 윤리적 소주제로 구체화한다."
+    },
+    {
+      "volume": "IV/1",
+      "title": "The Doctrine of Reconciliation I",
+      "priority": 9,
+      "reason": "화해론의 첫 형식인 칭의와 하나님의 아들의 낮아지심을 다루는 핵심 권이다.",
+      "status": "planned",
+      "workFile": "data/barth-subtopics-iv-1.json",
+      "scope": ["§57", "§58", "§59", "§60", "§61", "§62", "§63"],
+      "firstBatch": ["§57", "§58", "§59"],
+      "qualityTarget": "낮아지신 하나님의 아들, 인간의 교만과 타락, 칭의, 공동체의 모임, 신앙을 하나의 화해론 흐름으로 정리한다."
+    },
+    {
+      "volume": "IV/2",
+      "title": "The Doctrine of Reconciliation II",
+      "priority": 10,
+      "reason": "성화, 공동체의 세움, 그리스도교 사랑을 다루는 권으로 교회론·윤리와 연결된다.",
+      "status": "planned",
+      "workFile": "data/barth-subtopics-iv-2.json",
+      "scope": ["§64", "§65", "§66", "§67", "§68"],
+      "firstBatch": ["§64", "§65", "§66"],
+      "qualityTarget": "높임받은 인자, 인간의 게으름과 비참, 성화, 공동체의 세움, 사랑을 구분해 설명한다."
+    },
+    {
+      "volume": "IV/3",
+      "title": "The Doctrine of Reconciliation III",
+      "priority": 11,
+      "reason": "참된 증인, 소명, 공동체의 파송, 소망을 통해 바르트의 선교적 교회론이 드러난다.",
+      "status": "planned",
+      "workFile": "data/barth-subtopics-iv-3.json",
+      "scope": ["§69", "§70", "§71", "§72", "§73"],
+      "firstBatch": ["§69", "§70", "§71"],
+      "qualityTarget": "증언, 거짓, 정죄, 소명, 파송, 소망을 그리스도와 공동체의 증언 구조로 정리한다."
+    },
+    {
+      "volume": "IV/4",
+      "title": "The Doctrine of Reconciliation IV fragment",
+      "priority": 12,
+      "reason": "성령 세례와 물 세례는 바르트의 세례론 논쟁과 개혁파 세례 이해를 비교하기 좋다.",
+      "status": "planned",
+      "workFile": "data/barth-subtopics-iv-4.json",
+      "scope": ["성령 세례", "물 세례"],
+      "firstBatch": ["성령 세례", "물 세례"],
+      "qualityTarget": "성령 세례와 물 세례를 은혜와 응답, 하나님의 행위와 인간 행위의 구별 안에서 설명한다."
+    }
+  ]
+}

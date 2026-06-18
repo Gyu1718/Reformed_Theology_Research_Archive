@@ -1,0 +1,160 @@
+{
+  "id": "barth-content-packs-v1",
+  "title": "Barth Church Dogmatics content pack manifest",
+  "description": "권별 또는 대주제별 바르트 『교회교의학』 정리 파일을 자동 로드하기 위한 manifest입니다. GitHub Pages 정적 환경에서는 폴더 안의 임의 파일을 브라우저가 자동 탐색할 수 없으므로, 로더는 이 파일에 등록된 경로를 읽습니다. 미리 등록된 권별 파일은 나중에 해당 파일만 업로드해도 자동 적용됩니다.",
+  "rules": {
+    "packFilesAreLoadedInOrder": true,
+    "curatedPacksReplaceGeneratedSubtopics": true,
+    "missingOptionalPackIsIgnored": true,
+    "newMajorThemePackRequiresManifestEntry": true,
+    "recommendedPackShape": {
+      "id": "string",
+      "title": "string",
+      "volume": "I/1 | I/2 | II/1 ...",
+      "chapters": [
+        {
+          "ref": "CD I/1 §1",
+          "chapterTitle": "string",
+          "subtopics": [
+            {
+              "title": "string",
+              "summary": "string",
+              "note": "string",
+              "argumentRole": "string",
+              "reformedContrast": "string",
+              "studyPrompt": "string"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "packs": [
+    {
+      "id": "cd-i-1-word-dogmatics",
+      "type": "volume-section",
+      "volume": "I/1",
+      "theme": "교의학 방법론과 말씀론",
+      "path": "./data/barth-subtopics-i-1.json",
+      "required": true,
+      "active": true
+    },
+    {
+      "id": "cd-i-1-revelation-trinity",
+      "type": "volume-section",
+      "volume": "I/1",
+      "theme": "계시와 삼위일체론",
+      "path": "./data/barth-subtopics-i-1-trinity.json",
+      "required": true,
+      "active": true
+    },
+    {
+      "id": "cd-i-2-incarnation-spirit",
+      "type": "volume-section",
+      "volume": "I/2",
+      "theme": "성육신과 성령의 부으심",
+      "path": "./data/barth-subtopics-i-2-incarnation-spirit.json",
+      "required": true,
+      "active": true
+    },
+    {
+      "id": "cd-i-2-scripture-proclamation",
+      "type": "volume-section",
+      "volume": "I/2",
+      "theme": "성경과 교회 선포",
+      "path": "./data/barth-subtopics-i-2-scripture-proclamation.json",
+      "required": true,
+      "active": true
+    },
+    {
+      "id": "cd-ii-1-god-knowledge-perfections",
+      "type": "volume",
+      "volume": "II/1",
+      "theme": "하나님 인식과 하나님의 완전성",
+      "path": "./data/barth-subtopics-ii-1.json",
+      "required": true,
+      "active": true
+    },
+    {
+      "id": "cd-ii-2-election-command",
+      "type": "volume",
+      "volume": "II/2",
+      "theme": "선택론과 하나님의 명령",
+      "path": "./data/barth-subtopics-ii-2.json",
+      "required": false,
+      "active": true
+    },
+    {
+      "id": "cd-iii-1-creation-covenant",
+      "type": "volume",
+      "volume": "III/1",
+      "theme": "창조와 언약",
+      "path": "./data/barth-subtopics-iii-1.json",
+      "required": false,
+      "active": true
+    },
+    {
+      "id": "cd-iii-2-humanity",
+      "type": "volume",
+      "volume": "III/2",
+      "theme": "인간론",
+      "path": "./data/barth-subtopics-iii-2.json",
+      "required": false,
+      "active": true
+    },
+    {
+      "id": "cd-iii-3-providence-nothingness",
+      "type": "volume",
+      "volume": "III/3",
+      "theme": "섭리, 무, 천사론",
+      "path": "./data/barth-subtopics-iii-3.json",
+      "required": false,
+      "active": true
+    },
+    {
+      "id": "cd-iii-4-creation-ethics",
+      "type": "volume",
+      "volume": "III/4",
+      "theme": "창조윤리",
+      "path": "./data/barth-subtopics-iii-4.json",
+      "required": false,
+      "active": true
+    },
+    {
+      "id": "cd-iv-1-reconciliation-justification",
+      "type": "volume",
+      "volume": "IV/1",
+      "theme": "화해론 I: 낮아지신 주님과 칭의",
+      "path": "./data/barth-subtopics-iv-1.json",
+      "required": false,
+      "active": true
+    },
+    {
+      "id": "cd-iv-2-reconciliation-sanctification",
+      "type": "volume",
+      "volume": "IV/2",
+      "theme": "화해론 II: 높아지신 종과 성화",
+      "path": "./data/barth-subtopics-iv-2.json",
+      "required": false,
+      "active": true
+    },
+    {
+      "id": "cd-iv-3-reconciliation-witness",
+      "type": "volume",
+      "volume": "IV/3",
+      "theme": "화해론 III: 참된 증인과 교회의 파송",
+      "path": "./data/barth-subtopics-iv-3.json",
+      "required": false,
+      "active": true
+    },
+    {
+      "id": "cd-iv-4-baptism-fragment",
+      "type": "volume",
+      "volume": "IV/4",
+      "theme": "세례와 그리스도인의 삶",
+      "path": "./data/barth-subtopics-iv-4.json",
+      "required": false,
+      "active": true
+    }
+  ]
+}
