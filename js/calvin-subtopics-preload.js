@@ -15,6 +15,10 @@
     return null;
   }
 
+  function arr(value) {
+    return Array.isArray(value) ? value : [];
+  }
+
   function normalizeRef(ref) {
     return String(ref || "").trim();
   }
@@ -24,7 +28,12 @@
     if (typeof value === "string" || typeof value === "number" || typeof value === "boolean") return String(value).trim();
     if (Array.isArray(value)) return value.map(function (item) { return text(item); }).filter(Boolean).join(" · ");
     if (typeof value === "object") {
-      return text(value.title || value.label || value.name || value.text || value.summary || value.displaySummary || value.explanation || value.note || value.description || value.thesis, fallback);
+      return text(
+        value.title || value.label || value.name || value.text || value.displaySummary || value.summary ||
+        value.explanation || value.note || value.description || value.thesis || value.keyQuestion ||
+        value.question || value.studyPrompt || value.doctrinalFunction || value.argumentRole,
+        fallback
+      );
     }
     return fallback || "";
   }
@@ -49,6 +58,10 @@
     return raw.replace(/[^a-z0-9가-힣]+/g, "-").replace(/^-+|-+$/g, "") || (fallback || "subtopic");
   }
 
+  function normalizeTitleKey(value) {
+    return text(value).replace(/\s+/g, "").replace(/[·ㆍ,，:：;；()\[\]{}]/g, "").toLowerCase();
+  }
+
   function normalizeSubtopic(item, index, ref) {
     var displaySummary = text(item && (item.displaySummary || item.summary));
     var explanation = text(item && (item.explanation || item.note || item.description)) || displaySummary;
@@ -57,7 +70,8 @@
     var doctrinalFunction = text(item && (item.doctrinalFunction || item.argumentRole || item.function));
     var reformedContrast = text(item && item.reformedContrast);
     var caution = text(item && item.caution);
-    var connections = unique(textArray(item && (item.connections || item.tags || item.concepts || item.refs || item.chapters)));
+    var connections = unique(textArray(item && (item.connections || item.tags || item.concepts)));
+    var refs = unique(textArray(item && (item.refs || item.chapters)));
     var quoteTargets = unique(textArray(item && item.quoteTargets));
 
     return {
@@ -73,6 +87,7 @@
       argumentRole: doctrinalFunction,
       reformedContrast: reformedContrast,
       connections: connections,
+      refs: refs,
       quoteTargets: quoteTargets,
       caution: caution,
       _normalized: true
@@ -105,6 +120,43 @@
       concepts: unique(textArray(note.concepts)),
       _source: "data/books/calvin-study-notes-book-*.json"
     };
+  }
+
+  function mergeSubtopicObjects(base, extra) {
+    var merged = Object.assign({}, base || {}, extra || {});
+    ["summary", "displaySummary", "explanation", "note", "keyQuestion", "question", "doctrinalFunction", "argumentRole", "reformedContrast", "caution"].forEach(function (key) {
+      merged[key] = text((extra && extra[key]) || (base && base[key]));
+    });
+    merged.connections = unique(arr(base && base.connections).concat(arr(extra && extra.connections)));
+    merged.refs = unique(arr(base && base.refs).concat(arr(extra && extra.refs)));
+    merged.quoteTargets = unique(arr(base && base.quoteTargets).concat(arr(extra && extra.quoteTargets)));
+    merged.id = text((base && base.id) || (extra && extra.id)) || slug(merged.title || "subtopic", "subtopic");
+    merged.title = text((extra && extra.title) || (base && base.title)) || "소주제";
+    return merged;
+  }
+
+  function mergeSubtopics(patchSubtopics, noteSubtopics) {
+    var merged = [];
+    var byTitle = {};
+
+    arr(patchSubtopics).forEach(function (item) {
+      var key = normalizeTitleKey(item.title);
+      if (!key) return;
+      byTitle[key] = merged.length;
+      merged.push(item);
+    });
+
+    arr(noteSubtopics).forEach(function (item) {
+      var key = normalizeTitleKey(item.title);
+      if (key && byTitle[key] != null) {
+        merged[byTitle[key]] = mergeSubtopicObjects(merged[byTitle[key]], item);
+      } else {
+        byTitle[key] = merged.length;
+        merged.push(item);
+      }
+    });
+
+    return merged.filter(function (item) { return item && item.title; });
   }
 
   function loadStudyNotes() {
@@ -146,18 +198,21 @@
       var studyNote = noteMap[ref];
       if (!patch && !studyNote) return;
 
+      var mergedSubtopics = mergeSubtopics((patch && patch.subtopics) || [], (studyNote && studyNote.subtopicNotes) || []);
       chapter.studyNote = studyNote || null;
       chapter.chapterFunction = (studyNote && studyNote.thesis) || (patch && patch.chapterFunction) || chapter.chapterFunction || "";
-      chapter.detail = (studyNote && studyNote.thesis) || chapter.detail || chapter.summary || "";
+      chapter.detail = (studyNote && studyNote.thesis) || (patch && patch.chapterFunction) || chapter.detail || chapter.summary || "";
       chapter.keyPoints = unique((studyNote && studyNote.argumentFlow && studyNote.argumentFlow.length ? studyNote.argumentFlow : chapter.keyPoints || []));
-      chapter.subtopics = (studyNote && studyNote.subtopicNotes && studyNote.subtopicNotes.length)
-        ? studyNote.subtopicNotes
-        : (patch && patch.subtopics) || [];
-      chapter.subtopicCount = chapter.subtopics.length;
-      chapter.subtopicSource = studyNote ? "data/books/calvin-study-notes-book-1-4.json" : "data/books-calvin-subtopics-expanded-v3.json";
+      chapter.subtopicsRaw = mergedSubtopics;
+      chapter.subtopics = mergedSubtopics;
+      chapter.subtopicCount = mergedSubtopics.length;
+      chapter.subtopicSource = [
+        patch ? "data/books-calvin-subtopics-expanded-v3.json" : "",
+        studyNote ? "data/books/calvin-study-notes-book-1-4.json" : ""
+      ].filter(Boolean).join(" + ");
 
       var connectionTerms = [];
-      chapter.subtopics.forEach(function (subtopic) {
+      mergedSubtopics.forEach(function (subtopic) {
         connectionTerms = connectionTerms.concat(subtopic.connections || []);
       });
       chapter.concepts = unique((chapter.concepts || []).concat((studyNote && studyNote.concepts) || []).concat(connectionTerms).slice(0, 14));
