@@ -23,11 +23,21 @@
     return Array.isArray(value) ? value : [];
   }
 
+  function uniq(items) {
+    var seen = {};
+    return arr(items).filter(function (item) {
+      if (!item || seen[item]) return false;
+      seen[item] = true;
+      return true;
+    });
+  }
+
   var books = loadJson("./data/books.json", []);
   var authors = loadJson("./data/authors.json", []);
   var topics = loadJson("./data/topics.json", []);
   var topicHistoryLinks = loadJson("./data/topic-history-links.json", []);
   var authorHistoryLinks = loadJson("./data/author-history-links.json", []);
+  var bookTopicLinks = loadJson("./data/book-topic-links.json", []);
   var historyItems = [].concat(
     loadJson("./data/tradition-history.json", []),
     loadJson("./data/neo-orthodoxy-history.json", []),
@@ -83,6 +93,7 @@
   var historyMap = {};
   var topicHistoryMap = {};
   var authorHistoryMap = {};
+  var bookTopicMap = {};
 
   books.forEach(function (book) {
     if (book && book.id) bookMap[book.id] = book;
@@ -112,6 +123,9 @@
   });
   authorHistoryLinks.forEach(function (entry) {
     if (entry && entry.authorId) authorHistoryMap[entry.authorId] = entry;
+  });
+  bookTopicLinks.forEach(function (entry) {
+    if (entry && entry.bookId) bookTopicMap[entry.bookId] = entry;
   });
 
   function rawHash() {
@@ -200,7 +214,7 @@
     return labels.filter(Boolean).map(String);
   }
 
-  function resolveTopicIdsForBook(book) {
+  function autoTopicIdsForBook(book) {
     var seen = {};
     var result = [];
     bookLabels(book).forEach(function (label) {
@@ -215,20 +229,29 @@
         }
       });
     });
-    return result.slice(0, 8);
+    return result;
   }
 
-  function historyIdsForTopicIds(topicIds) {
+  function resolveTopicIdsForBook(book) {
+    var manual = bookTopicMap[book.id];
+    var manualIds = uniq(arr(manual && manual.topicIds)).filter(function (id) { return topicMap[id]; });
+    var autoIds = autoTopicIdsForBook(book).filter(function (id) { return manualIds.indexOf(id) < 0; });
+    return manualIds.concat(autoIds).slice(0, 8);
+  }
+
+  function historyIdsForBook(book, topicIds) {
     var seen = {};
     var ids = [];
+    function add(id) {
+      if (!id || seen[id] || !historyMap[id]) return;
+      seen[id] = true;
+      ids.push(id);
+    }
+    var manual = bookTopicMap[book.id];
+    arr(manual && manual.historyIds).forEach(add);
     topicIds.forEach(function (topicId) {
       var entry = topicHistoryMap[topicId];
-      arr(entry && entry.historyIds).forEach(function (id) {
-        if (!seen[id] && historyMap[id]) {
-          seen[id] = true;
-          ids.push(id);
-        }
-      });
+      arr(entry && entry.historyIds).forEach(add);
     });
     return ids.slice(0, 6);
   }
@@ -240,14 +263,15 @@
     var detailMain = document.querySelector("#view .detail-page .detail-main");
     if (!book || !detailMain || detailMain.querySelector(".book-relation-section")) return;
 
+    var link = bookTopicMap[book.id];
     var topicIds = resolveTopicIdsForBook(book);
-    var historyIds = historyIdsForTopicIds(topicIds);
+    var historyIds = historyIdsForBook(book, topicIds);
     if (!topicIds.length && !historyIds.length) return;
 
     var topicCards = topicIds.map(topicCard).filter(Boolean).join("");
     var historyCards = historyIds.map(historyCard).filter(Boolean).join("");
     var html = '<section class="topic-section book-relation-section"><h4>이 책과 연결된 교리·역사</h4>' +
-      '<p class="relation-note">책의 주제어와 장별 개념을 바탕으로 함께 읽을 교리 페이지와 역사 항목을 묶었습니다.</p>' +
+      '<p class="relation-note">' + esc((link && link.note) || "책의 주제어와 장별 개념을 바탕으로 함께 읽을 교리 페이지와 역사 항목을 묶었습니다.") + '</p>' +
       (topicCards ? '<div class="book-relation-block"><h5>관련 교리 페이지</h5><div class="relation-card-grid">' + topicCards + '</div></div>' : '') +
       (historyCards ? '<div class="book-relation-block"><h5>관련 역사 항목</h5><div class="relation-card-grid">' + historyCards + '</div></div>' : '') +
     '</section>';
