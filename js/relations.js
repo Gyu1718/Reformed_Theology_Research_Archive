@@ -95,9 +95,7 @@
   var authorHistoryMap = {};
   var bookTopicMap = {};
 
-  books.forEach(function (book) {
-    if (book && book.id) bookMap[book.id] = book;
-  });
+  books.forEach(function (book) { if (book && book.id) bookMap[book.id] = book; });
   authors.forEach(function (author) {
     if (!author || !author.id) return;
     if (author.koreanName) authorIdByLabel[author.koreanName.trim()] = author.id;
@@ -115,32 +113,18 @@
   Object.keys(TOPIC_ALIASES).forEach(function (label) {
     if (topicMap[TOPIC_ALIASES[label]]) topicIdByLabel[label] = TOPIC_ALIASES[label];
   });
-  historyItems.forEach(function (item) {
-    if (item && item.id) historyMap[item.id] = item;
-  });
-  topicHistoryLinks.forEach(function (entry) {
-    if (entry && entry.topicId) topicHistoryMap[entry.topicId] = entry;
-  });
-  authorHistoryLinks.forEach(function (entry) {
-    if (entry && entry.authorId) authorHistoryMap[entry.authorId] = entry;
-  });
-  bookTopicLinks.forEach(function (entry) {
-    if (entry && entry.bookId) bookTopicMap[entry.bookId] = entry;
-  });
+  historyItems.forEach(function (item) { if (item && item.id) historyMap[item.id] = item; });
+  topicHistoryLinks.forEach(function (entry) { if (entry && entry.topicId) topicHistoryMap[entry.topicId] = entry; });
+  authorHistoryLinks.forEach(function (entry) { if (entry && entry.authorId) authorHistoryMap[entry.authorId] = entry; });
+  bookTopicLinks.forEach(function (entry) { if (entry && entry.bookId) bookTopicMap[entry.bookId] = entry; });
 
-  function rawHash() {
-    return decodeURIComponent((location.hash || "").replace(/^#/, ""));
-  }
-
+  function rawHash() { return decodeURIComponent((location.hash || "").replace(/^#/, "")); }
   function route(type) {
     var raw = rawHash();
     if (raw.indexOf(type + "=") !== 0) return null;
     return raw.split("=")[1] || null;
   }
-
-  function go(type, id) {
-    if (id) location.hash = type + "=" + encodeURIComponent(id);
-  }
+  function go(type, id) { if (id) location.hash = type + "=" + encodeURIComponent(id); }
 
   function relationButton(kind, id, label, sub, className) {
     return '<button type="button" class="' + esc(className || "relation-btn") + '" data-relation-kind="' + esc(kind) + '" data-relation-id="' + esc(id) + '"><span>' + esc(sub || kind) + '</span><b>' + esc(label) + '</b></button>';
@@ -182,9 +166,7 @@
 
   function wire(scope) {
     (scope || document).querySelectorAll("[data-relation-kind][data-relation-id]").forEach(function (button) {
-      button.onclick = function () {
-        go(button.getAttribute("data-relation-kind"), button.getAttribute("data-relation-id"));
-      };
+      button.onclick = function () { go(button.getAttribute("data-relation-kind"), button.getAttribute("data-relation-id")); };
     });
   }
 
@@ -198,6 +180,17 @@
     return '<section class="' + esc(sectionClass || "history-relation-section") + '"><h4>' + esc(title || "관련 역사 항목") + '</h4>' +
       (entry.note ? '<p class="relation-note">' + esc(entry.note) + '</p>' : '') +
       '<div class="' + (isCard ? 'history-relation-card-grid' : 'relation-grid') + '">' + body + '</div></section>';
+  }
+
+  function compactHistorySection(entry, sectionClass, title) {
+    var ids = arr(entry && entry.historyIds).filter(function (id) { return historyMap[id]; });
+    if (!ids.length) return "";
+    var buttons = ids.map(function (id) { return historyButton(id, "compact-relation-btn history-link-btn"); }).join("");
+    return '<details class="' + esc(sectionClass || "topic-history-section") + ' book-relation-compact relation-compact-section">' +
+      '<summary><span>' + esc(title || "관련 역사 항목") + '</span><b>' + ids.length + '개</b></summary>' +
+      (entry.note ? '<p class="relation-note">' + esc(entry.note) + '</p>' : '') +
+      '<div class="compact-relation-block"><div class="compact-relation-grid">' + buttons + '</div></div>' +
+    '</details>';
   }
 
   function bookLabels(book) {
@@ -228,10 +221,7 @@
         if (!candidate || seen[topicIdByLabel[candidate]]) return;
         if (label === candidate || label.indexOf(candidate) >= 0) {
           var id = topicIdByLabel[candidate];
-          if (topicMap[id]) {
-            seen[id] = true;
-            result.push(id);
-          }
+          if (topicMap[id]) { seen[id] = true; result.push(id); }
         }
       });
     });
@@ -248,11 +238,7 @@
   function historyIdsForBook(book, topicIds) {
     var seen = {};
     var ids = [];
-    function add(id) {
-      if (!id || seen[id] || !historyMap[id]) return;
-      seen[id] = true;
-      ids.push(id);
-    }
+    function add(id) { if (!id || seen[id] || !historyMap[id]) return; seen[id] = true; ids.push(id); }
     var manual = bookTopicMap[book.id];
     arr(manual && manual.historyIds).forEach(add);
     topicIds.forEach(function (topicId) {
@@ -301,14 +287,14 @@
       .relation-card button,.history-relation-card button{border:1px solid var(--line-strong);background:var(--surface-2);border-radius:999px;padding:8px 11px;cursor:pointer;color:var(--ink);font-size:.84rem;}\
       .relation-card button:hover,.history-relation-card button:hover{border-color:var(--ink);background:var(--surface);}\
       .book-relation-section{margin:22px 0 0;}\
-      .book-relation-compact{border:1px dashed var(--line);background:var(--surface-2);border-radius:14px;padding:0;}\
-      .book-relation-compact summary{display:flex;align-items:center;justify-content:space-between;gap:12px;cursor:pointer;padding:12px 14px;list-style:none;}\
-      .book-relation-compact summary::-webkit-details-marker{display:none;}\
-      .book-relation-compact summary span{font-family:var(--font-display);font-weight:700;}\
-      .book-relation-compact summary b{font-family:var(--font-mono);font-size:.76rem;color:var(--muted);font-weight:500;}\
-      .book-relation-compact[open]{padding-bottom:12px;}\
-      .book-relation-compact[open] summary{border-bottom:1px solid var(--line);margin-bottom:12px;}\
-      .book-relation-compact .relation-note{font-size:.9rem;margin:0 14px 12px;}\
+      .book-relation-compact,.relation-compact-section{border:1px dashed var(--line);background:var(--surface-2);border-radius:14px;padding:0;}\
+      .book-relation-compact summary,.relation-compact-section summary{display:flex;align-items:center;justify-content:space-between;gap:12px;cursor:pointer;padding:12px 14px;list-style:none;}\
+      .book-relation-compact summary::-webkit-details-marker,.relation-compact-section summary::-webkit-details-marker{display:none;}\
+      .book-relation-compact summary span,.relation-compact-section summary span{font-family:var(--font-display);font-weight:700;}\
+      .book-relation-compact summary b,.relation-compact-section summary b{font-family:var(--font-mono);font-size:.76rem;color:var(--muted);font-weight:500;}\
+      .book-relation-compact[open],.relation-compact-section[open]{padding-bottom:12px;}\
+      .book-relation-compact[open] summary,.relation-compact-section[open] summary{border-bottom:1px solid var(--line);margin-bottom:12px;}\
+      .book-relation-compact .relation-note,.relation-compact-section .relation-note{font-size:.9rem;margin:0 14px 12px;}\
       .book-relation-block{margin-top:14px;}\
       .book-relation-block h5{font-family:var(--font-display);font-size:.98rem;margin:0 0 10px;}\
       .compact-relation-block{margin:10px 14px 0;}\
@@ -320,7 +306,7 @@
       .relation-grid{display:flex;gap:8px;flex-wrap:wrap;}\
       .relation-grid .history-link-btn{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:8px 12px;cursor:pointer;color:var(--ink);}\
       .relation-grid .history-link-btn span{font-family:var(--font-mono);font-size:.68rem;color:var(--muted);margin-right:6px;}\
-      @media(max-width:820px){.history-relation-card-grid,.relation-card-grid{grid-template-columns:1fr;}.book-relation-compact summary{align-items:flex-start;flex-direction:column;gap:4px;}}\
+      @media(max-width:820px){.history-relation-card-grid,.relation-card-grid{grid-template-columns:1fr;}.book-relation-compact summary,.relation-compact-section summary{align-items:flex-start;flex-direction:column;gap:4px;}}\
     ";
     document.head.appendChild(style);
   }
@@ -330,7 +316,7 @@
     if (topicId) {
       var detailBody = document.querySelector("#view .topic-detail-body");
       if (detailBody && !detailBody.querySelector(".topic-history-section")) {
-        var html = historySection(topicHistoryMap[topicId], "topic-section topic-history-section", "관련 역사 항목", "card");
+        var html = compactHistorySection(topicHistoryMap[topicId], "topic-section topic-history-section", "관련 역사 항목");
         if (html) {
           var refs = detailBody.querySelector(".refs");
           if (refs) refs.insertAdjacentHTML("beforebegin", html);
@@ -348,10 +334,7 @@
     var label = title.childNodes && title.childNodes.length ? title.childNodes[0].textContent.trim() : title.textContent.trim();
     var id = topicIdByLabel[label];
     var html = historySection(topicHistoryMap[id], "topic-history-section", "관련 역사 항목", "button");
-    if (html) {
-      compareHead.insertAdjacentHTML("beforeend", html);
-      wire(compareHead);
-    }
+    if (html) { compareHead.insertAdjacentHTML("beforeend", html); wire(compareHead); }
   }
 
   function installAuthorHistory() {
@@ -363,10 +346,7 @@
       if (!title) return;
       var authorId = authorIdByLabel[title.textContent.trim()];
       var html = historySection(authorHistoryMap[authorId], "author-history-section", "관련 역사 항목", "button");
-      if (html) {
-        card.insertAdjacentHTML("beforeend", html);
-        wire(card);
-      }
+      if (html) { card.insertAdjacentHTML("beforeend", html); wire(card); }
     });
   }
 
