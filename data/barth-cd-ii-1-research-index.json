@@ -1,0 +1,312 @@
+{
+  "id": "barth-cd-ii-1-research-index",
+  "bookId": "barth-church-dogmatics",
+  "volume": "CD II/1",
+  "title": "Church Dogmatics II/1 — The Doctrine of God",
+  "titleKo": "교회교의학 II/1 — 하나님 교리 1부",
+  "author": "Karl Barth",
+  "publicRepoPolicy": "원문 전문, EPUB 원본, 긴 인용문은 포함하지 않는다. 이 파일은 연구용 목차, 위치 정보, 한국어 요약, 비교 축만 제공한다.",
+  "status": "started",
+  "updatedAt": "2026-06-18",
+  "chapters": [
+    {
+      "chapter": "Chapter 5",
+      "titleEn": "The Knowledge of God",
+      "titleKo": "하나님 지식",
+      "summaryKo": "바르트는 하나님 지식을 인간의 종교적 능력이나 일반 인식론에서 출발시키지 않고, 하나님이 자신을 알려 주시는 사건에서 출발시킨다. 하나님은 인식의 대상이 되기 전에 말씀하시고 현존하시는 주체이며, 인간의 지식은 그 계시 안에서만 참되다.",
+      "sections": [
+        {
+          "ref": "CD II/1 §25",
+          "titleEn": "The Fulfilment of the Knowledge of God",
+          "titleKo": "하나님 지식의 성취",
+          "cdPageStart": 3,
+          "kdPageStart": 1,
+          "epubLocation": "OEBPS/Text/index_split_014_0001_0002.html#sigil_toc_id_30",
+          "summaryKo": "하나님을 아는 일은 인간이 하나님을 사유 대상으로 확보하는 과정이 아니라, 하나님 앞에서 인간이 부름받고 하나님이 인간 앞에 자신을 드러내시는 사건이다.",
+          "subsections": [
+            {
+              "no": "1",
+              "titleEn": "Man before God",
+              "titleKo": "하나님 앞의 인간",
+              "cdPageStart": 3,
+              "kdPageStart": 1,
+              "epubLocation": "OEBPS/Text/index_split_014_0001_0002.html#filepos5025462"
+            },
+            {
+              "no": "2",
+              "titleEn": "God before Man",
+              "titleKo": "인간 앞의 하나님",
+              "cdPageStart": 31,
+              "kdPageStart": 33,
+              "epubLocation": "OEBPS/Text/index_split_014_0001_0002.html#sigil_toc_id_31"
+            }
+          ],
+          "concepts": [
+            "하나님 지식",
+            "계시",
+            "하나님 앞의 인간",
+            "하나님의 주체성"
+          ],
+          "comparisonAxes": [
+            "칼빈의 하나님 지식과 자기 지식",
+            "개혁파 자연신학 전통",
+            "바르트의 계시 중심 인식론"
+          ]
+        },
+        {
+          "ref": "CD II/1 §26",
+          "titleEn": "The Knowability of God",
+          "titleKo": "하나님의 인식 가능성",
+          "cdPageStart": 63,
+          "kdPageStart": 68,
+          "epubLocation": "OEBPS/Text/index_split_015.html#sigil_toc_id_32",
+          "summaryKo": "하나님이 알려질 수 있다는 말은 인간 안에 하나님을 포착할 능력이 있다는 뜻이 아니라, 하나님 자신이 인식 가능성을 준비하시고 인간의 준비도 그 계시 안에서 창조하신다는 뜻이다.",
+          "subsections": [
+            {
+              "no": "1",
+              "titleEn": "The Readiness of God",
+              "titleKo": "하나님의 준비",
+              "cdPageStart": 63,
+              "kdPageStart": 68,
+              "epubLocation": "OEBPS/Text/index_split_015.html#filepos5244582"
+            },
+            {
+              "no": "2",
+              "titleEn": "The Readiness of Man",
+              "titleKo": "인간의 준비",
+              "cdPageStart": 128,
+              "kdPageStart": 141,
+              "epubLocation": "OEBPS/Text/index_split_015.html#sigil_toc_id_33"
+            }
+          ],
+          "concepts": [
+            "인식 가능성",
+            "하나님의 준비",
+            "인간의 준비",
+            "성령과 믿음"
+          ],
+          "comparisonAxes": [
+            "일반계시와 특별계시",
+            "analogia entis 비판",
+            "믿음의 인식론"
+          ]
+        },
+        {
+          "ref": "CD II/1 §27",
+          "titleEn": "The Limits of the Knowledge of God",
+          "titleKo": "하나님 지식의 한계",
+          "cdPageStart": 179,
+          "kdPageStart": 200,
+          "epubLocation": "OEBPS/Text/index_split_016.html#sigil_toc_id_34",
+          "summaryKo": "하나님은 계시 안에서 실제로 알려지지만, 그 지식은 하나님을 소유하거나 포괄하는 지식이 아니다. 하나님의 숨겨짐과 인간 지식의 진실성은 서로 배제되지 않는다.",
+          "subsections": [
+            {
+              "no": "1",
+              "titleEn": "The Hiddenness of God",
+              "titleKo": "하나님의 숨겨짐",
+              "cdPageStart": 179,
+              "kdPageStart": 200,
+              "epubLocation": "OEBPS/Text/index_split_016.html#filepos5671153"
+            },
+            {
+              "no": "2",
+              "titleEn": "The Veracity of Man’s Knowledge of God",
+              "titleKo": "인간 하나님 지식의 진실성",
+              "cdPageStart": 204,
+              "kdPageStart": 229,
+              "epubLocation": "OEBPS/Text/index_split_016.html#sigil_toc_id_35"
+            }
+          ],
+          "concepts": [
+            "하나님의 숨겨짐",
+            "유비",
+            "계시와 한계",
+            "참된 유한 지식"
+          ],
+          "comparisonAxes": [
+            "부정신학",
+            "스콜라 신인식론",
+            "바빙크의 하나님 지식론"
+          ]
+        }
+      ]
+    },
+    {
+      "chapter": "Chapter 6",
+      "titleEn": "The Reality of God",
+      "titleKo": "하나님의 현실성",
+      "summaryKo": "바르트는 하나님의 존재를 추상적 본질이나 속성 목록으로부터 전개하지 않고, 하나님이 자유 안에서 사랑하시는 살아 계신 분이라는 명제에서 전개한다. 하나님의 완전성은 사랑의 완전성과 자유의 완전성으로 배열된다.",
+      "sections": [
+        {
+          "ref": "CD II/1 §28",
+          "titleEn": "The Being of God as the One Who Loves in Freedom",
+          "titleKo": "자유 안에서 사랑하시는 하나님의 존재",
+          "cdPageStart": 257,
+          "kdPageStart": 288,
+          "epubLocation": "OEBPS/Text/index_split_017_0001.html#sigil_toc_id_36",
+          "summaryKo": "하나님의 존재는 행위 안에서, 사랑 안에서, 자유 안에서 알려진다. 이 단락은 II/1의 중심 공식인 사랑 안의 자유와 자유 안의 사랑을 여는 핵심 지점이다.",
+          "subsections": [
+            {
+              "no": "1",
+              "titleEn": "The Being of God in Act",
+              "titleKo": "행위 안의 하나님의 존재",
+              "cdPageStart": 257,
+              "kdPageStart": 288,
+              "epubLocation": "OEBPS/Text/index_split_017_0001.html#filepos5957493"
+            },
+            {
+              "no": "2",
+              "titleEn": "The Being of God as the One who loves",
+              "titleKo": "사랑하시는 분으로서의 하나님의 존재",
+              "cdPageStart": 272,
+              "kdPageStart": 306,
+              "epubLocation": "OEBPS/Text/index_split_017_0001.html#filepos6015132"
+            },
+            {
+              "no": "3",
+              "titleEn": "The Being of God in Freedom",
+              "titleKo": "자유 안의 하나님의 존재",
+              "cdPageStart": 297,
+              "kdPageStart": 334,
+              "epubLocation": "OEBPS/Text/index_split_017_0001.html#filepos6116078"
+            }
+          ],
+          "concepts": [
+            "하나님의 존재",
+            "행위 안의 존재",
+            "사랑",
+            "자유"
+          ],
+          "comparisonAxes": [
+            "고전적 신론의 존재론",
+            "하나님의 단순성",
+            "관계적 신론과의 비교"
+          ]
+        },
+        {
+          "ref": "CD II/1 §29",
+          "titleEn": "The Perfections of God",
+          "titleKo": "하나님의 완전성",
+          "cdPageStart": 322,
+          "kdPageStart": 362,
+          "epubLocation": "OEBPS/Text/index_split_017_0001.html#sigil_toc_id_37",
+          "summaryKo": "하나님의 완전성은 분리된 속성의 목록이 아니라, 살아 계신 한 분 하나님의 존재와 행위가 충만하게 드러나는 방식이다. 이후 사랑의 완전성과 자유의 완전성을 해석하는 문턱 역할을 한다.",
+          "subsections": [],
+          "concepts": [
+            "하나님의 완전성",
+            "속성론",
+            "단순성",
+            "충만성"
+          ],
+          "comparisonAxes": [
+            "고전적 신속성론",
+            "아퀴나스와 개혁파 정통",
+            "바르트의 계시적 속성론"
+          ]
+        },
+        {
+          "ref": "CD II/1 §30",
+          "titleEn": "The Perfections of the Divine Loving",
+          "titleKo": "하나님의 사랑의 완전성",
+          "cdPageStart": 351,
+          "kdPageStart": 394,
+          "epubLocation": "OEBPS/Text/index_split_018.html#sigil_toc_id_38",
+          "summaryKo": "바르트는 하나님의 사랑을 은혜와 거룩, 자비와 의, 인내와 지혜의 쌍으로 전개한다. 각 항목은 서로 대립하는 성질이 아니라 하나님의 한 사랑이 구체적으로 드러나는 방식이다.",
+          "subsections": [
+            {
+              "no": "1",
+              "titleEn": "The Grace and Holiness of God",
+              "titleKo": "하나님의 은혜와 거룩",
+              "cdPageStart": 351,
+              "kdPageStart": 394,
+              "epubLocation": "OEBPS/Text/index_split_018.html#filepos6321259"
+            },
+            {
+              "no": "2",
+              "titleEn": "The Mercy and Righteousness of God",
+              "titleKo": "하나님의 자비와 의",
+              "cdPageStart": 368,
+              "kdPageStart": 413,
+              "epubLocation": "OEBPS/Text/index_split_018.html#sigil_toc_id_39"
+            },
+            {
+              "no": "3",
+              "titleEn": "The Patience and Wisdom of God",
+              "titleKo": "하나님의 인내와 지혜",
+              "cdPageStart": 406,
+              "kdPageStart": 457,
+              "epubLocation": "OEBPS/Text/index_split_019.html#filepos6556007"
+            }
+          ],
+          "concepts": [
+            "은혜",
+            "거룩",
+            "자비",
+            "의",
+            "인내",
+            "지혜"
+          ],
+          "comparisonAxes": [
+            "하나님의 사랑과 심판",
+            "칭의론과 신론의 연결",
+            "성경적 속성론"
+          ]
+        },
+        {
+          "ref": "CD II/1 §31",
+          "titleEn": "The Perfections of the Divine Freedom",
+          "titleKo": "하나님의 자유의 완전성",
+          "cdPageStart": 440,
+          "kdPageStart": 495,
+          "epubLocation": "OEBPS/Text/index_split_019.html#sigil_toc_id_40",
+          "summaryKo": "하나님의 자유는 통일성과 무소부재, 불변성과 전능, 영원성과 영광으로 전개된다. 이는 하나님이 자기 자신과 일치하시며 피조 세계에 의해 제한되지 않는 분임을 말한다.",
+          "subsections": [
+            {
+              "no": "1",
+              "titleEn": "The Unity and Omnipresence of God",
+              "titleKo": "하나님의 통일성과 무소부재",
+              "cdPageStart": 440,
+              "kdPageStart": 495,
+              "epubLocation": "OEBPS/Text/index_split_019.html#filepos6696708"
+            },
+            {
+              "no": "2",
+              "titleEn": "The Constancy and Omnipotence of God",
+              "titleKo": "하나님의 불변성과 전능",
+              "cdPageStart": 490,
+              "kdPageStart": 551,
+              "epubLocation": "OEBPS/Text/index_split_020.html#filepos6909100"
+            },
+            {
+              "no": "3",
+              "titleEn": "The Eternity and Glory of God",
+              "titleKo": "하나님의 영원성과 영광",
+              "cdPageStart": 608,
+              "kdPageStart": 685,
+              "epubLocation": "OEBPS/Text/index_split_021.html#sigil_toc_id_41"
+            }
+          ],
+          "concepts": [
+            "통일성",
+            "무소부재",
+            "불변성",
+            "전능",
+            "영원성",
+            "영광"
+          ],
+          "comparisonAxes": [
+            "고전적 무소부재·전능·영원성",
+            "하나님의 자유와 언약",
+            "계시 안의 속성론"
+          ]
+        }
+      ]
+    }
+  ],
+  "nextWork": [
+    "§25-27은 하나님 지식론의 논지 흐름을 장문 요약으로 확장한다.",
+    "§28은 II/1의 중심 공식이므로 칼빈·바빙크·벌코프와의 비교축을 별도 노트로 작성한다.",
+    "§30-31의 신속성 쌍은 주제 색인 topics.json과 연결할 후보를 추출한다.",
+    "긴 원문 인용 대신 90자 이하의 짧은 연구용 위치 표시만 별도 quote pack에 추가할지 검토한다."
+  ]
+}
