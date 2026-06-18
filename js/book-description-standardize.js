@@ -25,7 +25,7 @@
     var seen = {};
     return arr(items).map(function (item) { return text(item); }).filter(function (item) {
       var key = item.trim();
-      if (!key || seen[key]) return false;
+      if (!key || key === "[object Object]" || seen[key]) return false;
       seen[key] = true;
       return true;
     });
@@ -58,7 +58,7 @@
   function standardSubtopicTitles(chapter) {
     return arr(chapter.subtopics).map(function (item, index) {
       return subtopicTitle(item, index);
-    }).filter(Boolean);
+    }).filter(function (item) { return item && item !== "[object Object]"; });
   }
 
   function normalizeChapter(chapter) {
@@ -82,7 +82,7 @@
           title: subtopicTitle(item, index),
           explanation: subtopicExplanation(item, index, chapter)
         };
-      });
+      }).filter(function (item) { return item.title && item.title !== "[object Object]"; });
     }
 
     if (rawSubtopics.length) {
