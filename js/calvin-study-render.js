@@ -2,7 +2,8 @@
    The notes are editorial summaries only; no source full text is embedded. */
 (function () {
   var NOTE_URLS = [
-    "data/books/calvin-study-notes-book-1.json"
+    "data/books/calvin-study-notes-book-1.json",
+    "data/books/calvin-study-notes-book-2.json"
   ];
   var notesByRef = {};
   var loaded = false;
