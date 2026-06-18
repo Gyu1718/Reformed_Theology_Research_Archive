@@ -24,6 +24,23 @@
   function mergeUnique(a, b) {
     return arr(a).concat(arr(b)).filter(function (item, idx, list) { return item && list.indexOf(item) === idx; });
   }
+  function loadStudyNotes() {
+    var packs = [
+      loadJson("./data/barth-study-notes.json", null),
+      loadJson("./data/barth-study-notes-expanded.json", null)
+    ];
+    var seen = {};
+    var notes = [];
+    packs.forEach(function (pack) {
+      arr(pack && pack.notes).forEach(function (note) {
+        if (!note || !note.ref) return;
+        if (seen[note.ref]) return;
+        seen[note.ref] = true;
+        notes.push(note);
+      });
+    });
+    return notes;
+  }
   function attachNotes(book, notes) {
     book.parts.forEach(function (part) {
       arr(part.chapters).forEach(function (chapter) {
@@ -58,8 +75,7 @@
     });
   }
 
-  var notePack = loadJson("./data/barth-study-notes.json", null);
-  var notes = notePack && Array.isArray(notePack.notes) ? notePack.notes : [];
+  var notes = loadStudyNotes();
   window.__DATA__.books.forEach(function (book) {
     if (!book || book.id !== "barth-church-dogmatics" || !Array.isArray(book.parts)) return;
     cleanQuotes(book);
