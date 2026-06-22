@@ -1,0 +1,433 @@
+{
+  "id": "berkhof-epub-to-profile-map-v1",
+  "book": "berkhof-systematic-theology",
+  "purpose": "업로드된 영어판 Berkhof Systematic Theology EPUB의 70개 실제 장(BT-002–BT-071)을 기존 39개 한국어 장별 설명 프로필에 연결하는 매핑 데이터입니다. 원문 전문은 포함하지 않습니다.",
+  "sourceBasis": "data/books/berkhof-detailed-toc.json의 영어 EPUB 상세 목차와 data/books/berkhof-chapter-profiles.json의 기존 한국어 장별 설명 프로필을 연결합니다.",
+  "stats": {
+    "epubChapters": 70,
+    "profileChapters": 39,
+    "mappedChapters": 70
+  },
+  "chapterMap": {
+    "BT-002": {
+      "profileRef": "II.1",
+      "titleKo": "하나님의 존재",
+      "matchQuality": "strong",
+      "relationNote": "하나님의 존재 논증과 하나님 지식 항목으로 연결합니다."
+    },
+    "BT-003": {
+      "profileRef": "II.1",
+      "titleKo": "하나님 인식 가능성",
+      "matchQuality": "strong",
+      "relationNote": "하나님을 알 수 있는 가능성과 한계를 다루므로 하나님 지식 프로필에 연결합니다."
+    },
+    "BT-004": {
+      "profileRef": "II.2",
+      "titleKo": "하나님의 존재와 속성의 관계",
+      "matchQuality": "strong",
+      "relationNote": "하나님의 존재와 속성 분류를 다루므로 이름과 속성 프로필에 연결합니다."
+    },
+    "BT-005": {
+      "profileRef": "II.2",
+      "titleKo": "하나님의 이름들",
+      "matchQuality": "strong",
+      "relationNote": "하나님의 이름과 속성 프로필에 직접 연결합니다."
+    },
+    "BT-006": {
+      "profileRef": "II.2",
+      "titleKo": "하나님의 속성 일반",
+      "matchQuality": "strong",
+      "relationNote": "속성론 일반 항목입니다."
+    },
+    "BT-007": {
+      "profileRef": "II.2",
+      "titleKo": "비공유적 속성",
+      "matchQuality": "strong",
+      "relationNote": "속성론의 세부 항목입니다."
+    },
+    "BT-008": {
+      "profileRef": "II.2",
+      "titleKo": "공유적 속성",
+      "matchQuality": "strong",
+      "relationNote": "속성론의 세부 항목입니다."
+    },
+    "BT-009": {
+      "profileRef": "II.3",
+      "titleKo": "삼위일체",
+      "matchQuality": "strong",
+      "relationNote": "삼위일체 프로필에 직접 연결합니다."
+    },
+    "BT-010": {
+      "profileRef": "II.4",
+      "titleKo": "하나님의 작정 일반",
+      "matchQuality": "strong",
+      "relationNote": "하나님의 작정 프로필에 연결합니다."
+    },
+    "BT-011": {
+      "profileRef": "II.4",
+      "titleKo": "예정",
+      "matchQuality": "strong",
+      "relationNote": "예정은 작정론의 핵심 세부 항목입니다."
+    },
+    "BT-012": {
+      "profileRef": "II.5",
+      "titleKo": "창조 일반",
+      "matchQuality": "strong",
+      "relationNote": "창조 프로필에 연결합니다."
+    },
+    "BT-013": {
+      "profileRef": "II.5",
+      "titleKo": "영적 세계의 창조",
+      "matchQuality": "partial",
+      "relationNote": "천사론을 창조론의 세부 항목으로 연결합니다."
+    },
+    "BT-014": {
+      "profileRef": "II.5",
+      "titleKo": "물질 세계의 창조",
+      "matchQuality": "strong",
+      "relationNote": "창조 프로필에 연결합니다."
+    },
+    "BT-015": {
+      "profileRef": "II.6",
+      "titleKo": "섭리",
+      "matchQuality": "strong",
+      "relationNote": "섭리 프로필에 직접 연결합니다."
+    },
+    "BT-016": {
+      "profileRef": "III.1",
+      "titleKo": "인간의 기원",
+      "matchQuality": "strong",
+      "relationNote": "인간 창조와 하나님의 형상 프로필에 연결합니다."
+    },
+    "BT-017": {
+      "profileRef": "III.2",
+      "titleKo": "인간의 구성적 본질",
+      "matchQuality": "strong",
+      "relationNote": "인간의 구성과 상태 프로필에 연결합니다."
+    },
+    "BT-018": {
+      "profileRef": "III.1",
+      "titleKo": "하나님의 형상으로서의 인간",
+      "matchQuality": "strong",
+      "relationNote": "하나님의 형상 항목입니다."
+    },
+    "BT-019": {
+      "profileRef": "III.3",
+      "titleKo": "행위언약 안의 인간",
+      "matchQuality": "strong",
+      "relationNote": "행위언약 프로필에 직접 연결합니다."
+    },
+    "BT-020": {
+      "profileRef": "III.4",
+      "titleKo": "죄의 기원",
+      "matchQuality": "strong",
+      "relationNote": "죄의 기원과 본질 프로필에 연결합니다."
+    },
+    "BT-021": {
+      "profileRef": "III.4",
+      "titleKo": "죄의 본질적 성격",
+      "matchQuality": "strong",
+      "relationNote": "죄론의 본질 항목입니다."
+    },
+    "BT-022": {
+      "profileRef": "III.5",
+      "titleKo": "죄의 전이",
+      "matchQuality": "strong",
+      "relationNote": "원죄와 전가 프로필에 연결합니다."
+    },
+    "BT-023": {
+      "profileRef": "III.5",
+      "titleKo": "인류 삶 속의 죄",
+      "matchQuality": "partial",
+      "relationNote": "실제 죄와 원죄의 전개를 원죄와 전가 프로필에 연결합니다."
+    },
+    "BT-024": {
+      "profileRef": "III.6",
+      "titleKo": "죄의 형벌",
+      "matchQuality": "strong",
+      "relationNote": "죄의 결과 프로필에 연결합니다."
+    },
+    "BT-025": {
+      "profileRef": "III.3",
+      "titleKo": "언약의 명칭과 개념",
+      "matchQuality": "partial",
+      "relationNote": "은혜언약 장이지만 기존 39장 구조에서는 언약론 설명이 행위언약 프로필에 가장 가깝습니다."
+    },
+    "BT-026": {
+      "profileRef": "III.3",
+      "titleKo": "구속 언약",
+      "matchQuality": "partial",
+      "relationNote": "구속 언약을 기존 언약론 프로필에 임시 연결합니다."
+    },
+    "BT-027": {
+      "profileRef": "III.3",
+      "titleKo": "은혜 언약의 성질",
+      "matchQuality": "partial",
+      "relationNote": "은혜언약을 기존 언약론 프로필에 임시 연결합니다."
+    },
+    "BT-028": {
+      "profileRef": "III.3",
+      "titleKo": "언약의 이중 국면",
+      "matchQuality": "partial",
+      "relationNote": "언약론 세부 항목으로 연결합니다."
+    },
+    "BT-029": {
+      "profileRef": "III.3",
+      "titleKo": "언약의 여러 세대",
+      "matchQuality": "partial",
+      "relationNote": "언약론 세부 항목으로 연결합니다."
+    },
+    "BT-030": {
+      "profileRef": "IV.1",
+      "titleKo": "기독론의 역사",
+      "matchQuality": "partial",
+      "relationNote": "기독론 입문 성격이므로 그리스도의 이름과 본성 프로필에 연결합니다."
+    },
+    "BT-031": {
+      "profileRef": "IV.1",
+      "titleKo": "그리스도의 이름과 본성",
+      "matchQuality": "strong",
+      "relationNote": "기존 프로필에 직접 연결합니다."
+    },
+    "BT-032": {
+      "profileRef": "IV.2",
+      "titleKo": "그리스도의 일위성",
+      "matchQuality": "strong",
+      "relationNote": "그리스도의 인격과 두 본성 프로필에 연결합니다."
+    },
+    "BT-033": {
+      "profileRef": "IV.3",
+      "titleKo": "그리스도의 비하",
+      "matchQuality": "strong",
+      "relationNote": "비하와 승귀 프로필에 연결합니다."
+    },
+    "BT-034": {
+      "profileRef": "IV.3",
+      "titleKo": "그리스도의 승귀",
+      "matchQuality": "strong",
+      "relationNote": "비하와 승귀 프로필에 연결합니다."
+    },
+    "BT-035": {
+      "profileRef": "IV.4",
+      "titleKo": "선지자직",
+      "matchQuality": "strong",
+      "relationNote": "그리스도의 삼중직 프로필에 연결합니다."
+    },
+    "BT-036": {
+      "profileRef": "IV.4",
+      "titleKo": "제사장직",
+      "matchQuality": "strong",
+      "relationNote": "그리스도의 삼중직 프로필에 연결합니다."
+    },
+    "BT-037": {
+      "profileRef": "IV.5",
+      "titleKo": "속죄의 원인과 필요성",
+      "matchQuality": "strong",
+      "relationNote": "속죄의 필요성과 본질 프로필에 연결합니다."
+    },
+    "BT-038": {
+      "profileRef": "IV.5",
+      "titleKo": "속죄의 본질",
+      "matchQuality": "strong",
+      "relationNote": "속죄 프로필에 직접 연결합니다."
+    },
+    "BT-039": {
+      "profileRef": "IV.5",
+      "titleKo": "속죄 이론들",
+      "matchQuality": "partial",
+      "relationNote": "속죄론의 반대 견해와 역사적 이론을 속죄 프로필에 연결합니다."
+    },
+    "BT-040": {
+      "profileRef": "IV.5",
+      "titleKo": "속죄의 목적과 범위",
+      "matchQuality": "strong",
+      "relationNote": "속죄론 세부 항목으로 연결합니다."
+    },
+    "BT-041": {
+      "profileRef": "IV.6",
+      "titleKo": "그리스도의 중보 사역",
+      "matchQuality": "strong",
+      "relationNote": "중보 사역 프로필에 직접 연결합니다."
+    },
+    "BT-042": {
+      "profileRef": "IV.4",
+      "titleKo": "왕직",
+      "matchQuality": "strong",
+      "relationNote": "그리스도의 삼중직 프로필에 연결합니다."
+    },
+    "BT-043": {
+      "profileRef": "V.1",
+      "titleKo": "구원론 일반",
+      "matchQuality": "strong",
+      "relationNote": "구원의 적용과 성령 프로필에 연결합니다."
+    },
+    "BT-044": {
+      "profileRef": "V.1",
+      "titleKo": "성령의 사역 일반",
+      "matchQuality": "strong",
+      "relationNote": "구원의 적용과 성령 프로필에 연결합니다."
+    },
+    "BT-045": {
+      "profileRef": "V.1",
+      "titleKo": "보통 은혜",
+      "matchQuality": "partial",
+      "relationNote": "보통 은혜는 기존 39장 구조에 독립 프로필이 없어 성령의 일반 사역 항목에 연결합니다."
+    },
+    "BT-046": {
+      "profileRef": "V.1",
+      "titleKo": "신비적 연합",
+      "matchQuality": "partial",
+      "relationNote": "그리스도와의 연합을 구원의 적용 전체 프로필에 연결합니다."
+    },
+    "BT-047": {
+      "profileRef": "V.2",
+      "titleKo": "소명 일반과 외적 소명",
+      "matchQuality": "strong",
+      "relationNote": "소명과 중생 프로필에 연결합니다."
+    },
+    "BT-048": {
+      "profileRef": "V.2",
+      "titleKo": "중생과 유효한 소명",
+      "matchQuality": "strong",
+      "relationNote": "소명과 중생 프로필에 직접 연결합니다."
+    },
+    "BT-049": {
+      "profileRef": "V.3",
+      "titleKo": "회심",
+      "matchQuality": "strong",
+      "relationNote": "회심과 믿음 프로필에 연결합니다."
+    },
+    "BT-050": {
+      "profileRef": "V.3",
+      "titleKo": "믿음",
+      "matchQuality": "strong",
+      "relationNote": "회심과 믿음 프로필에 연결합니다."
+    },
+    "BT-051": {
+      "profileRef": "V.4",
+      "titleKo": "칭의",
+      "matchQuality": "strong",
+      "relationNote": "칭의 프로필에 직접 연결합니다."
+    },
+    "BT-052": {
+      "profileRef": "V.5",
+      "titleKo": "성화",
+      "matchQuality": "strong",
+      "relationNote": "성화 프로필에 직접 연결합니다."
+    },
+    "BT-053": {
+      "profileRef": "V.6",
+      "titleKo": "성도의 견인",
+      "matchQuality": "strong",
+      "relationNote": "성도의 견인 프로필에 직접 연결합니다."
+    },
+    "BT-054": {
+      "profileRef": "VI.1",
+      "titleKo": "교회의 명칭과 교회론 역사",
+      "matchQuality": "strong",
+      "relationNote": "교회의 본질과 속성 프로필에 연결합니다."
+    },
+    "BT-055": {
+      "profileRef": "VI.1",
+      "titleKo": "교회의 본질",
+      "matchQuality": "strong",
+      "relationNote": "교회의 본질과 속성 프로필에 직접 연결합니다."
+    },
+    "BT-056": {
+      "profileRef": "VI.2",
+      "titleKo": "교회의 정치",
+      "matchQuality": "strong",
+      "relationNote": "교회의 정치와 권세 프로필에 연결합니다."
+    },
+    "BT-057": {
+      "profileRef": "VI.2",
+      "titleKo": "교회의 권세",
+      "matchQuality": "strong",
+      "relationNote": "교회의 정치와 권세 프로필에 연결합니다."
+    },
+    "BT-058": {
+      "profileRef": "VI.3",
+      "titleKo": "은혜의 방편 일반",
+      "matchQuality": "strong",
+      "relationNote": "은혜의 방편 프로필에 연결합니다."
+    },
+    "BT-059": {
+      "profileRef": "VI.4",
+      "titleKo": "은혜의 방편으로서의 말씀",
+      "matchQuality": "strong",
+      "relationNote": "말씀의 사역 프로필에 연결합니다."
+    },
+    "BT-060": {
+      "profileRef": "VI.5",
+      "titleKo": "성례 일반",
+      "matchQuality": "strong",
+      "relationNote": "성례 일반 프로필에 연결합니다."
+    },
+    "BT-061": {
+      "profileRef": "VI.6",
+      "titleKo": "기독교 세례",
+      "matchQuality": "strong",
+      "relationNote": "세례와 성찬 프로필에 연결합니다."
+    },
+    "BT-062": {
+      "profileRef": "VI.6",
+      "titleKo": "성찬",
+      "matchQuality": "strong",
+      "relationNote": "세례와 성찬 프로필에 연결합니다."
+    },
+    "BT-063": {
+      "profileRef": "VII.1",
+      "titleKo": "종말론 서론",
+      "matchQuality": "strong",
+      "relationNote": "개인적 종말론 프로필에 연결해 종말론 전체 도입으로 사용합니다."
+    },
+    "BT-064": {
+      "profileRef": "VII.2",
+      "titleKo": "육체적 죽음",
+      "matchQuality": "strong",
+      "relationNote": "죽음과 중간상태 프로필에 연결합니다."
+    },
+    "BT-065": {
+      "profileRef": "VII.1",
+      "titleKo": "영혼의 불멸성",
+      "matchQuality": "partial",
+      "relationNote": "개인적 종말론의 기본 전제 항목으로 연결합니다."
+    },
+    "BT-066": {
+      "profileRef": "VII.2",
+      "titleKo": "중간 상태",
+      "matchQuality": "strong",
+      "relationNote": "죽음과 중간상태 프로필에 연결합니다."
+    },
+    "BT-067": {
+      "profileRef": "VII.3",
+      "titleKo": "그리스도의 재림",
+      "matchQuality": "strong",
+      "relationNote": "재림 프로필에 직접 연결합니다."
+    },
+    "BT-068": {
+      "profileRef": "VII.3",
+      "titleKo": "천년왕국 견해들",
+      "matchQuality": "partial",
+      "relationNote": "재림 논의의 세부 항목으로 연결합니다."
+    },
+    "BT-069": {
+      "profileRef": "VII.4",
+      "titleKo": "죽은 자의 부활",
+      "matchQuality": "strong",
+      "relationNote": "부활과 최후 심판 프로필에 연결합니다."
+    },
+    "BT-070": {
+      "profileRef": "VII.4",
+      "titleKo": "최후의 심판",
+      "matchQuality": "strong",
+      "relationNote": "부활과 최후 심판 프로필에 연결합니다."
+    },
+    "BT-071": {
+      "profileRef": "VII.5",
+      "titleKo": "최후의 상태",
+      "matchQuality": "strong",
+      "relationNote": "최종 상태 프로필에 연결합니다."
+    }
+  }
+}
