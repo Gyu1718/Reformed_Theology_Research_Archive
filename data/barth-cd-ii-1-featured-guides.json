@@ -1,0 +1,49 @@
+{
+  "id": "barth-cd-ii-1-featured-guides",
+  "bookId": "barth-church-dogmatics",
+  "volume": "CD II/1",
+  "updatedAt": "2026-06-18",
+  "publicRepoPolicy": "원문 전문, EPUB 원본, 긴 인용문은 포함하지 않고 공개 저장소용 해설 연결 데이터만 제공한다.",
+  "guides": [
+    {
+      "ref": "CD II/1 §28",
+      "titleKo": "자유 안에서 사랑하시는 하나님의 존재",
+      "titleEn": "The Being of God as the One Who Loves in Freedom",
+      "doc": "docs/barth-cd-ii-1-section-28-love-in-freedom.md",
+      "role": "II/1의 중심 공식과 §29–§31 신속성론의 배열 원리",
+      "coreFormulaKo": "하나님은 사랑 안에서 자유로우시고, 자유 안에서 사랑하신다.",
+      "summaryKo": "§28은 하나님 지식론에서 하나님의 현실성론으로 넘어가는 문턱이다. 바르트는 하나님의 존재를 추상적 본질로부터가 아니라 행위 안에서, 사랑 안에서, 자유 안에서 알려지는 살아 계신 하나님의 현실로 설명한다.",
+      "subsections": [
+        {
+          "ref": "CD II/1 §28.1",
+          "titleKo": "행위 안의 하나님의 존재",
+          "pointKo": "하나님이 누구신지는 하나님 자신의 계시 행위 안에서 참되게 알려진다."
+        },
+        {
+          "ref": "CD II/1 §28.2",
+          "titleKo": "사랑하시는 분으로서의 하나님의 존재",
+          "pointKo": "하나님의 사랑은 결핍의 보충이 아니라 하나님의 충만함에서 나오는 자유로운 자기주심이다."
+        },
+        {
+          "ref": "CD II/1 §28.3",
+          "titleKo": "자유 안의 하나님의 존재",
+          "pointKo": "하나님의 사랑은 필요나 의존이 아니라 주권적 자유 안에서 이루어지는 은혜다."
+        }
+      ],
+      "linkedTopics": [
+        "doctrine-of-god",
+        "being-of-god-in-act",
+        "divine-perfections",
+        "divine-loving",
+        "divine-freedom",
+        "god-knowledge",
+        "natural-theology"
+      ],
+      "researchQuestions": [
+        "바르트의 ‘행위 안의 존재’는 고전적 하나님의 단순성과 충돌하는가, 아니면 계시론적으로 재배열하는가?",
+        "하나님의 사랑을 존재 규정으로 말할 때 하나님의 자족성과 자유는 어떻게 보존되는가?",
+        "§28의 사랑과 자유 공식은 §30–§31의 신속성 쌍을 어떻게 배열하는가?"
+      ]
+    }
+  ]
+}
